@@ -1,0 +1,2 @@
+serviceClass: com.mame.impression.client.GreetingService
+path: B5A0C7917D54432528DCBD9E0B627A2D.gwt.rpc

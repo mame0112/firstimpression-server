@@ -1,0 +1,163 @@
+package com.mame.impression.datastore;
+
+import java.util.List;
+
+import com.google.appengine.api.datastore.Entity;
+import com.mame.impression.constant.Constants;
+import com.mame.impression.data.QuestionData;
+import com.mame.impression.data.QuestionDataBuilder;
+import com.mame.impression.data.UserData;
+import com.mame.impression.data.QuestionData.Category;
+import com.mame.impression.data.UserData.AGE;
+import com.mame.impression.data.UserData.GENDER;
+import com.mame.impression.data.UserDataBuilder;
+import com.mame.impression.util.LogUtil;
+
+public class ImpressionDatastoreHelper {
+
+	private static final String TAG = Constants.TAG
+			+ ImpressionDatastoreHelper.class.getSimpleName();
+
+	public Entity putUserDataToEntity(UserData data, Entity e) {
+		LogUtil.d(TAG, "putUserDataToEntity");
+
+		if (data == null) {
+			throw new IllegalArgumentException("UserData cannot be null");
+		}
+
+		if (e == null) {
+			throw new IllegalArgumentException("Entity cannot be null");
+		}
+
+		e.setProperty(DbConstant.ENTITY_USER_ID, data.getUserId());
+		e.setProperty(DbConstant.ENTITY_USER_NAME, data.getUserName());
+		e.setProperty(DbConstant.ENTITY_USER_PASSWORD, data.getPassword());
+		e.setProperty(DbConstant.ENTITY_USER_THUMBNAIL, data.getThumbnailUrl());
+		e.setProperty(DbConstant.ENTITY_USER_AGE, data.getAge().name());
+		e.setProperty(DbConstant.ENTITY_USER_GENDER, data.getGender().name());
+		e.setProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID,
+				data.getCreatedQuestionIds());
+
+		return e;
+	}
+
+	public UserData createUserDataFromEntity(Entity e) {
+		LogUtil.d(TAG, "createUserDataFromEntity");
+
+		if (e == null) {
+			throw new IllegalArgumentException("Entity cannot be null");
+		}
+
+		UserDataBuilder builder = new UserDataBuilder();
+
+		long userId = (Long) e.getProperty(DbConstant.ENTITY_USER_ID);
+		String userName = (String) e.getProperty(DbConstant.ENTITY_USER_NAME);
+		AGE age = AGE.valueOf((String) e
+				.getProperty(DbConstant.ENTITY_USER_AGE));
+		GENDER gender = GENDER.valueOf((String) e
+				.getProperty(DbConstant.ENTITY_USER_GENDER));
+		String password = (String) e
+				.getProperty(DbConstant.ENTITY_USER_PASSWORD);
+		String thumbUrl = (String) e
+				.getProperty(DbConstant.ENTITY_USER_THUMBNAIL);
+		List<Long> createdIds = (List) e
+				.getProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID);
+
+		return builder.setUserId(userId).setUserName(userName)
+				.setPassword(password).setThumbnailUrl(thumbUrl).setAge(age)
+				.setGender(gender).setCreatedQuestionIds(createdIds)
+				.getResult();
+
+	}
+
+	public Entity putQuestionDataToEntity(QuestionData data, Entity e) {
+		LogUtil.d(TAG, "putQuestionDataToEntity");
+
+		if (data == null) {
+			throw new IllegalArgumentException("QuestionData cannot be null");
+		}
+
+		if (e == null) {
+			throw new IllegalArgumentException("Entity cannot be null");
+		}
+
+		LogUtil.d(TAG, "data.getCategory().name(): "
+				+ data.getCategory().name());
+
+		try {
+			e.setProperty(DbConstant.ENTITY_QUESTION_ID, data.getQuestionId());
+			e.setProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION,
+					data.getDescription());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CATEGORY, data
+					.getCategory().name());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_A,
+					data.getChoiceA());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_B,
+					data.getChoiceB());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME,
+					data.getCreatedUserName());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID,
+					data.getCreatedUserId());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CREATED_USER_THUMB,
+					data.getThumbnail());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_A_RESP,
+					data.getChoiceAResponseNum());
+			e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_B_RESP,
+					data.getChoiceBResponseNum());
+			e.setProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_QUESTION,
+					data.getAdditionalQuestion());
+			e.setProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_ANSWER,
+					data.getAdditionalAnswer());
+		} catch (IllegalArgumentException e1) {
+			LogUtil.d(TAG, "IllegalArgumentException: " + e1.getMessage());
+		}
+
+		return e;
+
+	}
+
+	public QuestionData createQuestionDataFromEntity(Entity e) {
+
+		LogUtil.d(TAG, "createQuestionDataFromEntity");
+
+		if (e == null) {
+			throw new IllegalArgumentException("Entity cannot be null");
+		}
+
+		QuestionDataBuilder builder = new QuestionDataBuilder();
+
+		long questionId = (Long) e.getProperty(DbConstant.ENTITY_QUESTION_ID);
+		String description = (String) e
+				.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
+		Category category = Category.valueOf((String) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CATEGORY));
+		String choiceA = (String) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_A);
+		String choiceB = (String) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_B);
+		String createdUserName = (String) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
+		long createdUserId = (Long) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
+		String thumbnail = (String) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USER_THUMB);
+		int choiceAResponse = (Integer) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_A_RESP);
+		int choiceBResponse = (Integer) e
+				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_B_RESP);
+		String additionalQuestion = (String) e
+				.getProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_QUESTION);
+		List<String> additionalAnswer = (List) e
+				.getProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_ANSWER);
+
+		return builder.setQuestionId(questionId).setDescription(description)
+				.setCategory(category).setChoiceA(choiceA).setChoiceB(choiceB)
+				.setCreatedUserName(createdUserName)
+				.setCreatedUserId(createdUserId).setThumbnail(thumbnail)
+				.setChoiceAResponseNum(choiceAResponse)
+				.setChoiceBResponseNum(choiceBResponse)
+				.setAdditionalQuestion(additionalQuestion)
+				.setAdditionalAnswer(additionalAnswer).getResult();
+
+	}
+}

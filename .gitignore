@@ -1,0 +1,8 @@
+_Store
+/build
+/captures
+.DS_Store
+.gwt/
+.settings/
+gwt-unitCache/
+
