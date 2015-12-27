@@ -1,6 +1,9 @@
 package com.mame.impression.action;
 
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,7 +60,20 @@ public class RequestQuestionListAction implements Action {
 		String responseId = request.getParameter(ActionConstants.ID);
 		String param = request.getParameter(ActionConstants.PARAM);
 
+		Map map = request.getParameterMap();
+		Iterator it = map.keySet().iterator();
+		while (it.hasNext()) {
+			String name = (String) it.next();
+			String[] val = (String[]) map.get(name);
+			for (int i = 0; i < val.length; i++) {
+//				out.println(name + "=" + val[i] + "<br>");
+				LogUtil.d(TAG, "name; " + name + " val[i]: " + val[i]);
+			}
+		}
+
 		if (param != null) {
+
+			LogUtil.d(TAG, "param: " + param.toString());
 
 			JSONObject obj = new JSONObject(param);
 			int start = obj.getInt(ActionConstants.QUESTION_START_POS);
@@ -77,6 +93,14 @@ public class RequestQuestionListAction implements Action {
 
 			LogUtil.d(TAG, "resultJson: " + resultJson.toString());
 			return resultJson.toString();
+		} else {
+			LogUtil.d(TAG, "param is null");
+		}
+
+		if (responseId != null) {
+			LogUtil.d(TAG, "id is not null");
+		} else {
+			LogUtil.d(TAG, "id is null");
 		}
 
 		return null;
