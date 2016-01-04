@@ -57,7 +57,9 @@ public class RequestQuestionListAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		String responseId = request.getParameter(ActionConstants.ID);
+		//TOOD
+//		String responseId = request.getParameter(ActionConstants.ID);
+		String responseId = "1";
 		String param = request.getParameter(ActionConstants.PARAM);
 
 		Map map = request.getParameterMap();
@@ -95,12 +97,6 @@ public class RequestQuestionListAction implements Action {
 			return resultJson.toString();
 		} else {
 			LogUtil.d(TAG, "param is null");
-		}
-
-		if (responseId != null) {
-			LogUtil.d(TAG, "id is not null");
-		} else {
-			LogUtil.d(TAG, "id is null");
 		}
 
 		return null;

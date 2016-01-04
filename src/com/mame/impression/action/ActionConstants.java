@@ -78,6 +78,8 @@ public class ActionConstants {
 	public final static String QUESTION_DESCRIPTION = "description";
 
 	public final static String QUESTION_CATEGORY = "category";
+	
+	public final static String QUESTION_CHOICE = "choice";
 
 	public final static String QUESTION_CHOICE_A = "choice_a";
 

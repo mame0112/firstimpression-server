@@ -3,7 +3,11 @@ package com.mame.impression.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.mame.impression.Result;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.manager.ImpressionDataManager;
 import com.mame.impression.util.LogUtil;
 
 /**
@@ -26,9 +30,39 @@ public class ReplyToQuestionAction implements Action {
 		String responseId = request.getParameter(ActionConstants.ID);
 		String param = request.getParameter(ActionConstants.PARAM);
 
-		ActionUtil util = new ActionUtil();
+		JSONObject obj = new JSONObject(param);
+		long questionId = obj.getLong(ActionConstants.QUESTION_ID);
+		int choice = obj.getInt(ActionConstants.QUESTION_CHOICE);
 
-		return null;
+		// Create result
+		Result result = new Result();
+
+		ImpressionDataManager.getInstance().respondToQuestion(result,
+				questionId, choice);
+
+		JSONObject resultObject = createResultParam(result, responseId);
+
+		LogUtil.d(TAG, "resultObject: " + resultObject.toString());
+
+		return resultObject.toString();
 	}
 
+	private JSONObject createResultParam(Result result, String responseId) {
+		ActionUtil util = new ActionUtil();
+
+		JSONObject resultParam = new JSONObject();
+		if (result.isFailed()) {
+			try {
+				resultParam
+						.put(ActionConstants.ERROR, result.getErrorMessage());
+			} catch (JSONException e) {
+
+			}
+		}
+
+		util.createResultJsonObject(resultParam, responseId);
+
+		return resultParam;
+
+	}
 }

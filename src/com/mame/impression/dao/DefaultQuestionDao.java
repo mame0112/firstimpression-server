@@ -6,12 +6,11 @@ import java.util.List;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.mame.impression.Result;
+import com.mame.impression.Result.ErrorType;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.QuestionDataBuilder;
@@ -19,7 +18,6 @@ import com.mame.impression.datastore.DatastoreKeyFactory;
 import com.mame.impression.datastore.DbConstant;
 import com.mame.impression.datastore.ImpressionDatastoreHelper;
 import com.mame.impression.util.LogUtil;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public class DefaultQuestionDao implements QuestionDao {
 
@@ -29,7 +27,7 @@ public class DefaultQuestionDao implements QuestionDao {
 	private final static DatastoreService mDS = DatastoreServiceFactory
 			.getDatastoreService();
 
-	public QuestionData storeNewQuestionData(QuestionData data) {
+	public QuestionData storeNewQuestionData(Result result, QuestionData data) {
 		LogUtil.d(TAG, "storeNewQuestionData");
 
 		if (data == null) {
@@ -42,14 +40,15 @@ public class DefaultQuestionDao implements QuestionDao {
 		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
 		helper.putQuestionDataToEntity(data, entity);
 
-		mDS.put(entity);
+		DatastoreHandler.put(result, entity);
 
 		// TODO
 		return null;
 
 	}
 
-	public List<QuestionData> getLatestQuestionData(int start, int end) {
+	public List<QuestionData> getLatestQuestionData(Result result, int start,
+			int end) {
 
 		LogUtil.d(TAG, "getLatestQuestionData");
 
@@ -67,7 +66,7 @@ public class DefaultQuestionDao implements QuestionDao {
 					"Start index must be larger than end index");
 		}
 
-		List<QuestionData> result = new ArrayList<QuestionData>();
+		List<QuestionData> questions = new ArrayList<QuestionData>();
 
 		Query q = new Query(DbConstant.KIND_QUESTION);
 		PreparedQuery pq = mDS.prepare(q);
@@ -81,18 +80,14 @@ public class DefaultQuestionDao implements QuestionDao {
 			QuestionDataBuilder builder = new QuestionDataBuilder();
 
 			// TODO
-			result.add(builder.setQuestionId(id).setDescription(description)
+			questions.add(builder.setQuestionId(id).setDescription(description)
 					.getResult());
 		}
 
-		// Filter questionFilter = new
-		// FilterPredicate(Entity.KEY_RESERVED_PROPERTY,
-		// FilterOperator., minHeight);
-
-		return result;
+		return questions;
 	}
 
-	public void updateQuestionData(QuestionData data) {
+	public void updateQuestionData(Result result, QuestionData data) {
 
 		LogUtil.d(TAG, "updateQuestionData");
 
@@ -112,7 +107,7 @@ public class DefaultQuestionDao implements QuestionDao {
 
 	}
 
-	public QuestionData findQuestionById(long questionId) {
+	public QuestionData findQuestionById(Result result, long questionId) {
 
 		LogUtil.d(TAG, "findQuestionById");
 
@@ -122,17 +117,53 @@ public class DefaultQuestionDao implements QuestionDao {
 
 		Key key = DatastoreKeyFactory.getQuestionKey(questionId);
 
-		try {
-			Entity e = mDS.get(key);
-			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
+		Entity e = DatastoreHandler.get(result, key);
+		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
 
-			return helper.createQuestionDataFromEntity(e);
+		return helper.createQuestionDataFromEntity(e);
 
-		} catch (EntityNotFoundException e) {
-			LogUtil.d(TAG, "EntityNotFoundException: " + e.getMessage());
+	}
+
+	@Override
+	public void saveQuestionResponseData(Result result, long questionId,
+			int choice) {
+		LogUtil.d(TAG, "saveQuestionResponseData");
+
+		Key key = DatastoreKeyFactory.getQuestionKey(questionId);
+
+		Entity e = DatastoreHandler.get(result, key);
+
+		if (e != null) {
+
+			int num = 0;
+
+			switch (choice) {
+			case 0:
+				num = (Integer) e
+						.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_A);
+				num = num + 1;
+				e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_A, num);
+				break;
+			case 1:
+				num = (Integer) e
+						.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_B);
+				num = num + 1;
+				e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_A, num);
+				break;
+			default:
+				LogUtil.w(TAG, "Illegal choice value");
+				result.setErrorType(ErrorType.FAILED_TO_WRITE_TO_DB);
+				result.setErrorMessage("Illegal choice value");
+				break;
+			}
+			// Store back to Datastore
+			DatastoreHandler.put(result, e);
+		} else {
+			LogUtil.w(TAG, "Entity is null");
+			result.setErrorType(ErrorType.FAILED_TO_WRITE_TO_DB);
+			result.setErrorMessage("Entity is null");
 		}
 
-		return null;
 	}
 
 }

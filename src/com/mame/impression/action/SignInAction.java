@@ -45,7 +45,7 @@ public class SignInAction implements Action {
 			if (data.getUserId() != Constants.NO_USER
 					&& data.getUserName() != null && data.getPassword() != null) {
 				userData = ImpressionDataManager.getInstance()
-						.findUserDataByName(result, data.getUserName());
+						.findUserDataByNameAndPassword(result, data.getUserName(), data.getPassword());
 				paramObject = util
 						.createJsonFromUserData(paramObject, userData);
 			} else {

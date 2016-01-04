@@ -33,20 +33,63 @@ public class ActionUtil {
 
 		JSONObject input = new JSONObject(param);
 
-		long userId = (Long) input.getLong(ActionConstants.USER_ID);
-		String userName = (String) input.getString(ActionConstants.USER_NAME);
-		String password = (String) input
-				.getString(ActionConstants.USER_PASSWORD);
-		String thumbUrl = (String) input
-				.getString(ActionConstants.USER_THUMBNAIL);
-		AGE age = AGE.valueOf((String) input.get(ActionConstants.USER_AGE));
-		GENDER gender = GENDER.valueOf((String) input
-				.get(ActionConstants.USER_GENDER));
-		JSONArray idArrays = (JSONArray) input
-				.get(ActionConstants.USER_CREATED_QUESTION_ID);
+		long userId = Constants.NO_USER;
+		try {
+			userId = (Long) input.getLong(ActionConstants.USER_ID);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+		
+		String userName = null;
+		try {
+			userName = (String) input.getString(ActionConstants.USER_NAME);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+		
+		String password = null;
+		try {
+			password = (String) input
+					.getString(ActionConstants.USER_PASSWORD);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+		
+		String thumbUrl = null;
+		try {
+			thumbUrl = (String) input
+					.getString(ActionConstants.USER_THUMBNAIL);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+		
+		AGE age = null;
+		try {
+			age = AGE.valueOf((String)input.get(ActionConstants.USER_AGE));
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+		
+		GENDER gender = null;
+		try {
+			gender = GENDER.valueOf((String) input
+					.get(ActionConstants.USER_GENDER));
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+
 		List<Long> listData = new ArrayList<Long>();
-		for (int i = 0; i < idArrays.length(); i++) {
-			listData.add((Long) idArrays.get(i));
+		try {
+			JSONArray idArrays = null;
+			idArrays = (JSONArray) input
+					.get(ActionConstants.USER_CREATED_QUESTION_ID);
+
+			for (int i = 0; i < idArrays.length(); i++) {
+				listData.add((Long) idArrays.get(i));
+			}
+
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
 
 		return new UserDataBuilder().setUserId(userId).setUserName(userName)

@@ -71,6 +71,11 @@ public class Result {
 		if (errorMessage == null) {
 			throw new IllegalArgumentException("Error message cannot be null");
 		}
+		// In case Error message is not stored case, we accept to put new
+		// message (We should keep original error message)
+		if (mErrorMessage == null) {
+			mErrorMessage = errorMessage;
+		}
 	}
 
 	public String getErrorMessage() {

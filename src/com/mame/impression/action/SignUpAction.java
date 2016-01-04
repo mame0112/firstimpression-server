@@ -1,5 +1,8 @@
 package com.mame.impression.action;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,11 +32,28 @@ public class SignUpAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		String responseId = request.getParameter(ActionConstants.ID);
-		String param = request.getParameter(ActionConstants.PARAM);
+		//TODO
+//		String responseId = request.getParameter(ActionConstants.ID);
+		String responseId = "1";
+//		String param = request.getParameter(ActionConstants.PARAM);
+		JSONObject param = ParameterRetriver.retrieveParam(request);
+		
+		LogUtil.d(TAG, "id: " + responseId);
+		LogUtil.d(TAG, "param: " + param);
+		
+		Map map = request.getParameterMap();
+		Iterator it = map.keySet().iterator();
+		while (it.hasNext()) {
+			String name = (String) it.next();
+			String[] val = (String[]) map.get(name);
+			for (int i = 0; i < val.length; i++) {
+//				out.println(name + "=" + val[i] + "<br>");
+				LogUtil.d(TAG, "name; " + name + " val[i]: " + val[i]);
+			}
+		}
 
 		ActionUtil util = new ActionUtil();
-		UserData data = util.createUserDataFromParam(param);
+		UserData data = util.createUserDataFromParam(param.toString());
 
 		// Use current time as user id
 		data.setUserId(new TimeUtil().getCurrentTime());

@@ -30,13 +30,85 @@ public class ImpressionDatastoreHelper {
 		}
 
 		e.setProperty(DbConstant.ENTITY_USER_ID, data.getUserId());
-		e.setProperty(DbConstant.ENTITY_USER_NAME, data.getUserName());
-		e.setProperty(DbConstant.ENTITY_USER_PASSWORD, data.getPassword());
-		e.setProperty(DbConstant.ENTITY_USER_THUMBNAIL, data.getThumbnailUrl());
-		e.setProperty(DbConstant.ENTITY_USER_AGE, data.getAge().name());
-		e.setProperty(DbConstant.ENTITY_USER_GENDER, data.getGender().name());
-		e.setProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID,
-				data.getCreatedQuestionIds());
+
+		if(data.getUserName() != null){
+			e.setProperty(DbConstant.ENTITY_USER_NAME, data.getUserName());
+		}
+		
+		if(data.getPassword() != null){
+			e.setProperty(DbConstant.ENTITY_USER_PASSWORD, data.getPassword());
+		}
+
+		if(data.getThumbnailUrl() != null){
+			e.setProperty(DbConstant.ENTITY_USER_THUMBNAIL, data.getThumbnailUrl());
+		}
+		
+		if(data.getAge() != null && data.getAge().name() != null){
+			e.setProperty(DbConstant.ENTITY_USER_AGE, data.getAge().name());
+		}
+		
+		if(data.getGender() != null && data.getGender() .name() != null){
+			e.setProperty(DbConstant.ENTITY_USER_GENDER, data.getGender().name());
+		}
+		
+		if(data.getCreatedQuestionIds() != null){
+			e.setProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID,
+					data.getCreatedQuestionIds());
+		}
+
+		return e;
+	}
+
+	/**
+	 * Update user data. But input is null, its field will not updadte (keep
+	 * default value)
+	 * 
+	 * @param data
+	 * @param e
+	 * @return
+	 */
+	public Entity putUserDataToEntityWithoutOverride(UserData data, Entity e) {
+		LogUtil.d(TAG, "putUserDataToEntityWithoutOverride");
+
+		if (data == null) {
+			throw new IllegalArgumentException("UserData cannot be null");
+		}
+
+		if (e == null) {
+			throw new IllegalArgumentException("Entity cannot be null");
+		}
+
+		if (data.getUserId() != Constants.NO_USER) {
+			e.setProperty(DbConstant.ENTITY_USER_ID, data.getUserId());
+		}
+
+		if (data.getUserName() != null) {
+			e.setProperty(DbConstant.ENTITY_USER_NAME, data.getUserName());
+		}
+
+		if (data.getPassword() != null) {
+			e.setProperty(DbConstant.ENTITY_USER_PASSWORD, data.getPassword());
+		}
+
+		if (data.getThumbnailUrl() != null) {
+			e.setProperty(DbConstant.ENTITY_USER_THUMBNAIL,
+					data.getThumbnailUrl());
+		}
+
+		if (data.getAge() != null) {
+			e.setProperty(DbConstant.ENTITY_USER_AGE, data.getAge().name());
+		}
+
+		if (data.getGender() != null) {
+			e.setProperty(DbConstant.ENTITY_USER_GENDER, data.getGender()
+					.name());
+		}
+
+		if (data.getCreatedQuestionIds() != null
+				&& data.getCreatedQuestionIds().size() != 0) {
+			e.setProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID,
+					data.getCreatedQuestionIds());
+		}
 
 		return e;
 	}

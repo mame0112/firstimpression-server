@@ -7,6 +7,15 @@
 
   <!-- Servlets -->
   <servlet>
+	<servlet-name>JsonRPCTestServlet</servlet-name>
+	<servlet-class>com.mame.impression.JsonRPCTestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>JsonRPCTestServlet</servlet-name>
+	<url-pattern>/jsonrpc</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>com.mame.impression.server.GreetingServiceImpl</servlet-class>
   </servlet>
