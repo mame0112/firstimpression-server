@@ -72,16 +72,18 @@ public class DefaultQuestionDao implements QuestionDao {
 		PreparedQuery pq = mDS.prepare(q);
 
 		for (Entity entity : pq.asIterable()) {
-			long id = (Long) entity.getProperty(DbConstant.ENTITY_QUESTION_ID);
-			String description = (String) entity
-					.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
-			LogUtil.d(TAG, "id: " + id);
-
-			QuestionDataBuilder builder = new QuestionDataBuilder();
-
-			// TODO
-			questions.add(builder.setQuestionId(id).setDescription(description)
-					.getResult());
+			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
+			questions.add(helper.createQuestionDataFromEntity(entity));
+//			long id = (Long) entity.getProperty(DbConstant.ENTITY_QUESTION_ID);
+//			String description = (String) entity
+//					.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
+//			LogUtil.d(TAG, "id: " + id);
+//
+//			QuestionDataBuilder builder = new QuestionDataBuilder();
+//
+//			// TODO
+//			questions.add(builder.setQuestionId(id).setDescription(description)
+//					.getResult());
 		}
 
 		return questions;

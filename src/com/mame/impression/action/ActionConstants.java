@@ -102,5 +102,7 @@ public class ActionConstants {
 	public final static String QUESTION_START_POS = "start";
 
 	public final static String QUESTION_END_POS = "end";
+	
+    public final static String QUESTION_SELECTED_CHOICE = "selected_choice";
 
 }
