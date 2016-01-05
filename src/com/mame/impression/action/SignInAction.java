@@ -10,6 +10,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.data.UserData;
 import com.mame.impression.manager.ImpressionDataManager;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TimeUtil;
 
 /**
  * Action for Sign in.<br>
@@ -28,7 +29,9 @@ public class SignInAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		String responseId = request.getParameter(ActionConstants.ID);
+		//TODO
+//		String responseId = request.getParameter(ActionConstants.ID);
+		String responseId = "1";
 		String param = request.getParameter(ActionConstants.PARAM);
 
 		ActionUtil util = new ActionUtil();
@@ -42,12 +45,20 @@ public class SignInAction implements Action {
 
 		// Error check
 		if (data != null) {
-			if (data.getUserId() != Constants.NO_USER
-					&& data.getUserName() != null && data.getPassword() != null) {
+			if (data.getUserName() != null && data.getPassword() != null) {
+				
 				userData = ImpressionDataManager.getInstance()
 						.findUserDataByNameAndPassword(result, data.getUserName(), data.getPassword());
-				paramObject = util
-						.createJsonFromUserData(paramObject, userData);
+				
+				//If user name and password found (Sign in success)
+				if(userData != null){
+					paramObject = util
+							.createJsonFromUserData(paramObject, userData);
+				} else {
+					//If User name and password is not found (Sign in fail)
+					paramObject = createNoUserJson(paramObject);
+				}
+
 			} else {
 				// If some information is missing
 				paramObject = createFailResultJson(paramObject);
@@ -68,6 +79,15 @@ public class SignInAction implements Action {
 	private JSONObject createFailResultJson(JSONObject object) {
 		try {
 			object.put(ActionConstants.ERROR, "Error occurrs");
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+		return object;
+	}
+	
+	private JSONObject createNoUserJson(JSONObject object) {
+		try {
+			object.put(ActionConstants.USER_ID, Constants.NO_USER);
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}

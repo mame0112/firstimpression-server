@@ -33,6 +33,15 @@ public class DatastoreKeyFactory {
 
 		return KeyFactory.createKey(DbConstant.KIND_QUESTION, questionId);
 	}
+	
+	public static Key getUserNameKey(String userName) {
+		if (userName == null) {
+			throw new IllegalArgumentException(
+					"User name cannot be null");
+		}
+
+		return KeyFactory.createKey(DbConstant.KIND_USER, userName);
+	}
 
 	private static String generateUserKeyIdentifier(String userName, long userId) {
 		return userName + DbConstant.KEY_DIVIDER + userId;

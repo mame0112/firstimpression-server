@@ -31,27 +31,29 @@ public class ImpressionDatastoreHelper {
 
 		e.setProperty(DbConstant.ENTITY_USER_ID, data.getUserId());
 
-		if(data.getUserName() != null){
+		if (data.getUserName() != null) {
 			e.setProperty(DbConstant.ENTITY_USER_NAME, data.getUserName());
 		}
-		
-		if(data.getPassword() != null){
+
+		if (data.getPassword() != null) {
 			e.setProperty(DbConstant.ENTITY_USER_PASSWORD, data.getPassword());
 		}
 
-		if(data.getThumbnailUrl() != null){
-			e.setProperty(DbConstant.ENTITY_USER_THUMBNAIL, data.getThumbnailUrl());
+		if (data.getThumbnailUrl() != null) {
+			e.setProperty(DbConstant.ENTITY_USER_THUMBNAIL,
+					data.getThumbnailUrl());
 		}
-		
-		if(data.getAge() != null && data.getAge().name() != null){
+
+		if (data.getAge() != null && data.getAge().name() != null) {
 			e.setProperty(DbConstant.ENTITY_USER_AGE, data.getAge().name());
 		}
-		
-		if(data.getGender() != null && data.getGender() .name() != null){
-			e.setProperty(DbConstant.ENTITY_USER_GENDER, data.getGender().name());
+
+		if (data.getGender() != null && data.getGender().name() != null) {
+			e.setProperty(DbConstant.ENTITY_USER_GENDER, data.getGender()
+					.name());
 		}
-		
-		if(data.getCreatedQuestionIds() != null){
+
+		if (data.getCreatedQuestionIds() != null) {
 			e.setProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID,
 					data.getCreatedQuestionIds());
 		}
@@ -124,10 +126,18 @@ public class ImpressionDatastoreHelper {
 
 		long userId = (Long) e.getProperty(DbConstant.ENTITY_USER_ID);
 		String userName = (String) e.getProperty(DbConstant.ENTITY_USER_NAME);
-		AGE age = AGE.valueOf((String) e
-				.getProperty(DbConstant.ENTITY_USER_AGE));
-		GENDER gender = GENDER.valueOf((String) e
-				.getProperty(DbConstant.ENTITY_USER_GENDER));
+		String ageString = (String) e.getProperty(DbConstant.ENTITY_USER_AGE);
+		AGE age = null;
+		if(ageString != null){
+			age = AGE.valueOf(ageString);
+		}
+		
+		String genderString = (String) e
+				.getProperty(DbConstant.ENTITY_USER_GENDER);
+		GENDER gender = null;
+		if(genderString != null){
+			gender = GENDER.valueOf(genderString);
+		}
 		String password = (String) e
 				.getProperty(DbConstant.ENTITY_USER_PASSWORD);
 		String thumbUrl = (String) e

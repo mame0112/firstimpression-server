@@ -1,5 +1,8 @@
 package com.mame.impression.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -17,6 +20,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 
 public class DefaultUserDao implements UserDao {
 
@@ -26,25 +30,27 @@ public class DefaultUserDao implements UserDao {
 	private final static DatastoreService mDS = DatastoreServiceFactory
 			.getDatastoreService();
 
-	private final static String ASCII_FIRST = "!";
+	private final static String ASCII_FIRST = "0";
 
 	public UserData findUserDataByNameAndPassword(Result result,
 			String userName, String password) {
-		LogUtil.d(TAG, "findUserDataByName");
+		LogUtil.d(TAG, "findUserDataByNameAndPassword");
+
+		Key firstKey = DatastoreKeyFactory.getUserNameKey(userName);
+		Key lastKey = DatastoreKeyFactory.getUserNameKey(userName + ASCII_FIRST);
 
 		Filter userFirstFilter = new FilterPredicate(
 				Entity.KEY_RESERVED_PROPERTY,
-				FilterOperator.GREATER_THAN_OR_EQUAL, userName);
+				FilterOperator.GREATER_THAN_OR_EQUAL, firstKey);
 		Filter userLastFilter = new FilterPredicate(
-				Entity.KEY_RESERVED_PROPERTY, FilterOperator.LESS_THAN,
-				userName + ASCII_FIRST);
-		Query q = new Query(DbConstant.KIND_USER).setFilter(userFirstFilter)
-				.setFilter(userLastFilter);
+				Entity.KEY_RESERVED_PROPERTY, FilterOperator.LESS_THAN, lastKey);
+		
+		Query q = new Query(DbConstant.KIND_USER).setFilter(CompositeFilterOperator.and(userFirstFilter, userLastFilter));
+		
 		PreparedQuery pq = mDS.prepare(q);
 
 		for (Entity e : pq.asIterable()) {
 			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
-
 			UserData data = helper.createUserDataFromEntity(e);
 			if (password.equals(data.getPassword())) {
 				return data;
