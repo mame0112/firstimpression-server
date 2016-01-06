@@ -27,10 +27,13 @@ public class ReplyToQuestionAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		String responseId = request.getParameter(ActionConstants.ID);
-		String param = request.getParameter(ActionConstants.PARAM);
-
-		JSONObject obj = new JSONObject(param);
+		// TODO
+		String responseId = "1";
+		// String responseId = request.getParameter(ActionConstants.ID);
+		JSONObject obj = ParameterRetriver.retrieveParam(request);
+		// String param = request.getParameter(ActionConstants.PARAM);
+		//
+		// JSONObject obj = new JSONObject(param);
 		long questionId = obj.getLong(ActionConstants.QUESTION_ID);
 		int choice = obj.getInt(ActionConstants.QUESTION_CHOICE);
 
@@ -55,8 +58,15 @@ public class ReplyToQuestionAction implements Action {
 			try {
 				resultParam
 						.put(ActionConstants.ERROR, result.getErrorMessage());
+				resultParam.put(ActionConstants.ID, responseId);
 			} catch (JSONException e) {
-
+				LogUtil.w(TAG, "JSONException: " + e.getMessage());
+			}
+		} else {
+			try {
+				resultParam.put(ActionConstants.ID, responseId);
+			} catch (JSONException e) {
+				LogUtil.w(TAG, "JSONException: " + e.getMessage());
 			}
 		}
 

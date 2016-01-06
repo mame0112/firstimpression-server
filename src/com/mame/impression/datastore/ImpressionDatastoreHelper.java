@@ -208,42 +208,29 @@ public class ImpressionDatastoreHelper {
 
 		QuestionDataBuilder builder = new QuestionDataBuilder();
 
-		LogUtil.d(TAG, "A");
 		long questionId = (Long) e.getProperty(DbConstant.ENTITY_QUESTION_ID);
-		LogUtil.d(TAG, "B");
 		String description = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
-		LogUtil.d(TAG, "C");
 		Category category = Category.valueOf((String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CATEGORY));
-		LogUtil.d(TAG, "D");
 		String choiceA = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_A);
-		LogUtil.d(TAG, "E");
 		String choiceB = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_B);
-		LogUtil.d(TAG, "F");
 		String createdUserName = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
-		LogUtil.d(TAG, "G");
 		long createdUserId = (Long) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
-		LogUtil.d(TAG, "H");
 		String thumbnail = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USER_THUMB);
-		LogUtil.d(TAG, "I");
 		long choiceAResponse = (long) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_A_RESP);
-		LogUtil.d(TAG, "J");
 		long choiceBResponse = (long) e
 				.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_B_RESP);
-		LogUtil.d(TAG, "K");
 		String additionalQuestion = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_QUESTION);
-		LogUtil.d(TAG, "L");
 		List<String> additionalAnswer = (List) e
 				.getProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_ANSWER);
-		LogUtil.d(TAG, "M");
 
 		return builder.setQuestionId(questionId).setDescription(description)
 				.setCategory(category).setChoiceA(choiceA).setChoiceB(choiceB)
