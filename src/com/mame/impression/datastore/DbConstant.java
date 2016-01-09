@@ -38,7 +38,8 @@ public class DbConstant {
 	/**
 	 * Entities for question kind
 	 */
-	public final static String ENTITY_QUESTION_ID = "questionid";
+	
+	public final static String ENTITY_QUESTION_ID = "question_id";
 	
 	public final static String ENTITY_QUESTION_DESCRIPTION = "description";
 	
@@ -47,6 +48,8 @@ public class DbConstant {
 	public final static String ENTITY_QUESTION_CHOICE_A = "choice_a";
 	
 	public final static String ENTITY_QUESTION_CHOICE_B = "choice_b";
+	
+	public final static String ENTITY_QUESTION_POST_DATE = "post_date";
 	
 	public final static String ENTITY_QUESTION_CREATED_USERNAME = "created_username";
 	

@@ -20,6 +20,8 @@ public class QuestionData {
 	private String mChoiceA;
 
 	private String mChoiceB;
+	
+	private long mCreatedDate = 0;
 
 	private String mCreatedUserName;
 
@@ -49,6 +51,11 @@ public class QuestionData {
 	public void setQuestionId(long questionId) {
 		mQuestionId = questionId;
 	}
+	
+	public void setCreatedDate(long date){
+		mCreatedDate = date;
+	}
+
 
 	void setDescription(String description) {
 		mDescription = description;
@@ -112,6 +119,10 @@ public class QuestionData {
 
 	public String getChoiceB() {
 		return mChoiceB;
+	}
+	
+	public long getCreatedDate(){
+		return mCreatedDate;
 	}
 
 	public String getCreatedUserName() {

@@ -179,6 +179,7 @@ public class ImpressionDatastoreHelper {
 					data.getChoiceA());
 			e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_B,
 					data.getChoiceB());
+			e.setProperty(DbConstant.ENTITY_QUESTION_POST_DATE, data.getCreatedDate());
 			e.setProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME,
 					data.getCreatedUserName());
 			e.setProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID,
@@ -214,6 +215,7 @@ public class ImpressionDatastoreHelper {
 		QuestionDataBuilder builder = new QuestionDataBuilder();
 
 		long questionId = (Long) e.getProperty(DbConstant.ENTITY_QUESTION_ID);
+		long createdDate = (Long) e.getProperty(DbConstant.ENTITY_QUESTION_POST_DATE);
 		String description = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
 		Category category = Category.valueOf((String) e
@@ -238,7 +240,7 @@ public class ImpressionDatastoreHelper {
 				.getProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_ANSWER);
 
 		return builder.setQuestionId(questionId).setDescription(description)
-				.setCategory(category).setChoiceA(choiceA).setChoiceB(choiceB)
+				.setCategory(category).setChoiceA(choiceA).setChoiceB(choiceB).setCreatedDate(createdDate)
 				.setCreatedUserName(createdUserName)
 				.setCreatedUserId(createdUserId).setThumbnail(thumbnail)
 				.setChoiceAResponseNum((int) choiceAResponse)

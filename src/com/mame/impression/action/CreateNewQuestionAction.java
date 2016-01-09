@@ -42,7 +42,9 @@ public class CreateNewQuestionAction implements Action {
 		QuestionData data = util.createQuestionDataFromParam(param.toString());
 
 		// Use current time as question id
-		data.setQuestionId(new TimeUtil().getCurrentTime());
+		long current = new TimeUtil().getCurrentTime();
+		data.setQuestionId(current);
+		data.setCreatedDate(current);
 
 		// Create result
 		Result result = new Result();

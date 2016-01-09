@@ -283,6 +283,8 @@ public class ActionUtil {
 						question.getChoiceA());
 				object.put(ActionConstants.QUESTION_CHOICE_B,
 						question.getChoiceB());
+				object.put(ActionConstants.QUESTION_POST_DATE,
+						question.getCreatedDate());
 				object.put(ActionConstants.QUESTION_CHOICE_A_RESPONSE,
 						question.getChoiceAResponseNum());
 				object.put(ActionConstants.QUESTION_CHOICE_B_RESPONSE,

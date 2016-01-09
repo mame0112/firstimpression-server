@@ -35,6 +35,11 @@ public class QuestionDataBuilder {
 		mData.setChoiceB(choiceB);
 		return this;
 	}
+	
+	public QuestionDataBuilder setCreatedDate(long createDate){
+		mData.setCreatedDate(createDate);
+		return this;
+	}
 
 	public QuestionDataBuilder setCreatedUserName(String createdUserName) {
 		mData.setCreatedUserName(createdUserName);
