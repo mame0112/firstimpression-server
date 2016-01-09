@@ -46,12 +46,8 @@ public class ActionFactory {
 				new UpdateQuestionAction());
 
 		// Question detail actions
-		mAction.put(ActionConstants.GET + ActionConstants.KEY_QUESTION_DETAIL,
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_QUESTION_RESULT,
 				new RequestQuestionDetailAction());
-		mAction.put(ActionConstants.POST + ActionConstants.KEY_QUESTION_DETAIL,
-				new CreateQuestionDetailAction());
-		mAction.put(ActionConstants.PUT + ActionConstants.KEY_QUESTION_DETAIL,
-				new UpdateQuestionDetailAction());
 
 		// Answer action
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_ANSWER,

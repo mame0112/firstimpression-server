@@ -31,7 +31,10 @@ public class Result {
 	 * 
 	 */
 	public enum ErrorType {
-		NONE, FAILED_TO_WRITE_TO_DB, ILLEGAL_JSON_FORMAT
+		NONE,
+		FAILED_TO_WRITE_TO_DB,
+		ILLEGAL_JSON_FORMAT,
+		LACK_OF_GIVEN_PARAMETER	/* This shall be used when parameter given from client side is not enough */
 	}
 
 	private ErrorType mErrorType = ErrorType.NONE;

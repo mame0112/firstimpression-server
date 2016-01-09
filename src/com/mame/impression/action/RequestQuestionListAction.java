@@ -79,34 +79,13 @@ public class RequestQuestionListAction implements Action {
 
 			JSONObject obj = new JSONObject(param);
 
-			// This parameter shall be passed in case client side need question
-			// list for target user id
-			long userId = Constants.NO_USER;
-			try {
-				userId = obj.getLong(ActionConstants.QUESTION_CREATED_USER_ID);
-			} catch(JSONException e){
-				//No user ID is given. Nothing to do.
-			}
-
 			// Create result
 			Result result = new Result();
 			List<QuestionData> questions = null;
 
-			// If NO created user id is given
-			if(userId == Constants.NO_QUESTION){
-				
-				//Get all data
-				questions = ImpressionDataManager.getInstance()
-						.getLatestQuestionList(result);
-				
-			} else {
-				
-				//If specific user id is given
-				questions = ImpressionDataManager.getInstance()
-						.getLatestQuestionListForUser(result, userId);
-				
-			}
-
+			// Get all data
+			questions = ImpressionDataManager.getInstance()
+					.getLatestQuestionList(result);
 
 			ActionUtil util = new ActionUtil();
 			JSONArray questionArray = util

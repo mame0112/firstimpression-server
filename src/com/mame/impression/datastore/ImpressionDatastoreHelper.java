@@ -8,6 +8,8 @@ import com.mame.impression.Result.ActionResult;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.QuestionDataBuilder;
+import com.mame.impression.data.ResultListData;
+import com.mame.impression.data.ResultListDataBuilder;
 import com.mame.impression.data.UserData;
 import com.mame.impression.data.QuestionData.Category;
 import com.mame.impression.data.UserData.AGE;
@@ -179,7 +181,8 @@ public class ImpressionDatastoreHelper {
 					data.getChoiceA());
 			e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_B,
 					data.getChoiceB());
-			e.setProperty(DbConstant.ENTITY_QUESTION_POST_DATE, data.getCreatedDate());
+			e.setProperty(DbConstant.ENTITY_QUESTION_POST_DATE,
+					data.getCreatedDate());
 			e.setProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME,
 					data.getCreatedUserName());
 			e.setProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID,
@@ -215,7 +218,8 @@ public class ImpressionDatastoreHelper {
 		QuestionDataBuilder builder = new QuestionDataBuilder();
 
 		long questionId = (Long) e.getProperty(DbConstant.ENTITY_QUESTION_ID);
-		long createdDate = (Long) e.getProperty(DbConstant.ENTITY_QUESTION_POST_DATE);
+		long createdDate = (Long) e
+				.getProperty(DbConstant.ENTITY_QUESTION_POST_DATE);
 		String description = (String) e
 				.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
 		Category category = Category.valueOf((String) e
@@ -240,13 +244,63 @@ public class ImpressionDatastoreHelper {
 				.getProperty(DbConstant.ENTITY_QUESTION_ADDITIONAL_ANSWER);
 
 		return builder.setQuestionId(questionId).setDescription(description)
-				.setCategory(category).setChoiceA(choiceA).setChoiceB(choiceB).setCreatedDate(createdDate)
+				.setCategory(category).setChoiceA(choiceA).setChoiceB(choiceB)
+				.setCreatedDate(createdDate)
 				.setCreatedUserName(createdUserName)
 				.setCreatedUserId(createdUserId).setThumbnail(thumbnail)
 				.setChoiceAResponseNum((int) choiceAResponse)
 				.setChoiceBResponseNum((int) choiceBResponse)
 				.setAdditionalQuestion(additionalQuestion)
 				.setAdditionalAnswer(additionalAnswer).getResult();
+
+	}
+
+	/**
+	 * Translate Entity to ResultListData format
+	 * 
+	 * @param e
+	 * @return
+	 */
+	public ResultListData createResultListDataFromEntity(Entity e) {
+
+		LogUtil.d(TAG, "createResultListDataFromEntity");
+
+		if (e == null) {
+			throw new IllegalArgumentException("Entity cannot be null");
+		}
+
+		ResultListDataBuilder builder = new ResultListDataBuilder();
+
+		String description = null;
+		String category = null;
+		long lastCommentDate = 0L;
+		int numOfAnswer = 0;
+		int numOfAdditionalComment = 0;
+		try {
+			LogUtil.d(TAG, "A");
+			description = (String) e
+					.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
+			LogUtil.d(TAG, "B");
+			category = (String) e
+					.getProperty(DbConstant.ENTITY_QUESTION_CATEGORY);
+			LogUtil.d(TAG, "C");
+			lastCommentDate = (long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_LAST_COMMENT_DATE);
+			LogUtil.d(TAG, "D");
+			numOfAnswer = (int) e
+					.getProperty(DbConstant.ENTITY_QUESTION_NUM_OF_ANSWER);
+			LogUtil.d(TAG, "E");
+			numOfAdditionalComment = (int) e
+					.getProperty(DbConstant.ENTITY_QUESTION_NUM_OF_ADDITIONAL_COMMENT);
+			LogUtil.d(TAG, "F");
+		} catch (Exception e1) {
+			LogUtil.d(TAG, e1.getMessage());
+		}
+
+		return builder.setDescription(description).setCategory(category)
+				.setLastCommentDate(lastCommentDate)
+				.setNumOfAnswer(numOfAnswer)
+				.setNumOfAdditionalComment(numOfAdditionalComment).getResult();
 
 	}
 }

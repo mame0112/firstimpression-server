@@ -10,6 +10,8 @@ import com.mame.impression.dao.ImpressionDaoFactory;
 import com.mame.impression.dao.QuestionDao;
 import com.mame.impression.dao.UserDao;
 import com.mame.impression.data.QuestionData;
+import com.mame.impression.data.ResultDetailData;
+import com.mame.impression.data.ResultListData;
 import com.mame.impression.data.UserData;
 import com.mame.impression.util.LogUtil;
 
@@ -88,7 +90,7 @@ public class ImpressionDataManager {
 
 	public synchronized void saveNewQuestionData(Result result,
 			QuestionData data) {
-		LogUtil.d(TAG,  "saveNewQuestionData");
+		LogUtil.d(TAG, "saveNewQuestionData");
 		if (result == null) {
 			throw new IllegalArgumentException("Result cannot be null");
 		}
@@ -123,23 +125,45 @@ public class ImpressionDataManager {
 	}
 
 	public List<QuestionData> getLatestQuestionList(Result result) {
-		
-		if(result == null){
+
+		if (result == null) {
 			throw new IllegalArgumentException("Result cannot be null");
 		}
 
 		return mQuestionDao.getLatestQuestionData(result);
 
 	}
-	
-	public List<QuestionData> getLatestQuestionListForUser(Result result, long userId) {
-		
-		if(result == null){
+
+	public List<ResultListData> getQuestionResultList(Result result, long userId) {
+
+		LogUtil.d(TAG, "getQuestionResultList");
+
+		if (result == null) {
 			throw new IllegalArgumentException("Result cannot be null");
 		}
 
-		//TODO
-		return mQuestionDao.getLatestQuestionData(result);
+		if (userId == Constants.NO_USER) {
+			throw new IllegalArgumentException("user id cannot be -1");
+		}
+
+		return mQuestionDao.getQuestionResultList(result, userId);
+
+	}
+
+	public ResultDetailData getQuestionResultDetail(Result result,
+			long questionId) {
+
+		LogUtil.d(TAG, "getQuestionResultDetail");
+
+		if (result == null) {
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+
+		if (questionId == Constants.NO_QUESTION) {
+			throw new IllegalArgumentException("question id cannot be -1");
+		}
+
+		return mQuestionDao.getQuestionResultDetail(result, questionId);
 
 	}
 

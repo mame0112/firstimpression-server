@@ -21,7 +21,7 @@ public class ActionConstants {
 	/**
 	 * URL pattern for detail of question operation
 	 */
-	public static final String KEY_QUESTION_DETAIL = "/details";
+	public static final String KEY_QUESTION_RESULT = "/results";
 
 	/**
 	 * URL pattern for answer
@@ -78,13 +78,13 @@ public class ActionConstants {
 	public final static String QUESTION_DESCRIPTION = "description";
 
 	public final static String QUESTION_CATEGORY = "category";
-	
+
 	public final static String QUESTION_CHOICE = "choice";
 
 	public final static String QUESTION_CHOICE_A = "choice_a";
 
 	public final static String QUESTION_CHOICE_B = "choice_b";
-	
+
 	public final static String QUESTION_POST_DATE = "post_date";
 
 	public final static String QUESTION_CREATED_USER_NAME = "created_user_name";
@@ -100,7 +100,35 @@ public class ActionConstants {
 	public final static String QUESTION_ADDITIONAL_QUESTION = "additional_question";
 
 	public final static String QUESTION_ADDITIONAL_COMMENT = "additional_comment";
-	
-    public final static String QUESTION_SELECTED_CHOICE = "selected_choice";
+
+	public final static String QUESTION_SELECTED_CHOICE = "selected_choice";
+
+	public final static String QUESTION_GENDER_MALE = "male";
+
+	public final static String QUESTION_GENDER_FEMALE = "female";
+
+	public final static String QUESTION_GENDER_UNKNOWN = "unknonw";
+
+	public final static String QUESTION_AGE_UNDER10 = "under10";
+
+	public final static String QUESTION_AGE_FROM10_20 = "from10_20";
+
+	public final static String QUESTION_AGE_FROM20_30 = "from20_30";
+
+	public final static String QUESTION_AGE_FROM30_40 = "from30_40";
+
+	public final static String QUESTION_AGE_FROM40_50 = "from40_50";
+
+	public final static String QUESTION_AGE_FROM50_60 = "from50_60";
+
+	public final static String QUESTION_AGE_FROM60_70 = "from60_70";
+
+	public final static String QUESTION_AGE_OVER70 = "over70";
+
+	public final static String QUESTION_NUM_OF_ANSWER = "num_of_answer";
+
+	public final static String QUESTION_LAST_COMMENT_DATE = "last_comment_date";
+
+	public final static String QUESTION_NUM_OF_ADDITIONAL_COMMENT = "additional_comment_num";
 
 }

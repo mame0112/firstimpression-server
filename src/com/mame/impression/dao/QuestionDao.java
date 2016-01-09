@@ -4,11 +4,14 @@ import java.util.List;
 
 import com.mame.impression.Result;
 import com.mame.impression.data.QuestionData;
+import com.mame.impression.data.ResultDetailData;
+import com.mame.impression.data.ResultListData;
 
 public interface QuestionDao {
-	
+
 	/**
 	 * Get latest question list.
+	 * 
 	 * @param result
 	 * @return
 	 */
@@ -46,5 +49,25 @@ public interface QuestionDao {
 	 */
 	public void saveQuestionResponseData(Result result, long questionId,
 			int choice);
+
+	/**
+	 * Get Question result list for given user id
+	 * 
+	 * @param result
+	 * @param userId
+	 * @return
+	 */
+	public List<ResultListData> getQuestionResultList(Result result, long userId);
+
+	/**
+	 * Get detail Question result for given user id and given question id
+	 * 
+	 * @param result
+	 * @param userId
+	 * @param questionId
+	 * @return
+	 */
+	public ResultDetailData getQuestionResultDetail(Result result,
+			long questionId);
 
 }
