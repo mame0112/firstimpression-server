@@ -88,6 +88,7 @@ public class ImpressionDataManager {
 
 	public synchronized QuestionData saveNewQuestionData(Result result,
 			QuestionData data) {
+		LogUtil.d(TAG,  "saveNewQuestionData");
 		if (result == null) {
 			throw new IllegalArgumentException("Result cannot be null");
 		}

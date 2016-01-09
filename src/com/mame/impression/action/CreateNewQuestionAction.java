@@ -31,12 +31,15 @@ public class CreateNewQuestionAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		String responseId = request.getParameter(ActionConstants.ID);
-		String param = request.getParameter(ActionConstants.PARAM);
+		//TDDO
+//		String responseId = request.getParameter(ActionConstants.ID);
+//		String param = request.getParameter(ActionConstants.PARAM);
+		String responseId = "1";
+		JSONObject param = ParameterRetriver.retrieveParam(request);
 
 		// Create Question data from input string
 		ActionUtil util = new ActionUtil();
-		QuestionData data = util.createQuestionDataFromParam(param);
+		QuestionData data = util.createQuestionDataFromParam(param.toString());
 
 		// Use current time as question id
 		data.setQuestionId(new TimeUtil().getCurrentTime());
@@ -56,6 +59,7 @@ public class CreateNewQuestionAction implements Action {
 	}
 
 	private JSONObject createResponseJson(QuestionData data) {
+		LogUtil.d(TAG, "createResponseJson");
 
 		JSONObject result = new JSONObject();
 		if (data != null) {

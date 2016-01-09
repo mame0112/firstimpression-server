@@ -39,37 +39,35 @@ public class ActionUtil {
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
-		
+
 		String userName = null;
 		try {
 			userName = (String) input.getString(ActionConstants.USER_NAME);
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
-		
+
 		String password = null;
 		try {
-			password = (String) input
-					.getString(ActionConstants.USER_PASSWORD);
+			password = (String) input.getString(ActionConstants.USER_PASSWORD);
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
-		
+
 		String thumbUrl = null;
 		try {
-			thumbUrl = (String) input
-					.getString(ActionConstants.USER_THUMBNAIL);
+			thumbUrl = (String) input.getString(ActionConstants.USER_THUMBNAIL);
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
-		
+
 		AGE age = null;
 		try {
-			age = AGE.valueOf((String)input.get(ActionConstants.USER_AGE));
+			age = AGE.valueOf((String) input.get(ActionConstants.USER_AGE));
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
-		
+
 		GENDER gender = null;
 		try {
 			gender = GENDER.valueOf((String) input
@@ -129,6 +127,7 @@ public class ActionUtil {
 
 	public JSONObject createResultJsonObject(JSONObject paramObject,
 			String responseId) {
+		LogUtil.d(TAG, "createResultJsonObject");
 
 		if (paramObject == null) {
 			throw new IllegalArgumentException("paramObject cannot be null");
@@ -186,12 +185,11 @@ public class ActionUtil {
 
 		JSONObject input = new JSONObject(param);
 
+		// Mandatory field
 		long questionId = Constants.NO_QUESTION;
 
 		String description = (String) input
 				.getString(ActionConstants.QUESTION_DESCRIPTION);
-		String category = (String) input
-				.getString(ActionConstants.QUESTION_CATEGORY);
 		String choiceA = (String) input
 				.getString(ActionConstants.QUESTION_CHOICE_A);
 		String choiceB = (String) input
@@ -200,12 +198,39 @@ public class ActionUtil {
 				.getString(ActionConstants.QUESTION_CREATED_USER_NAME);
 		long createdUserId = (Long) input
 				.getLong(ActionConstants.QUESTION_CREATED_USER_ID);
-		String thumbnail = (String) input
-				.getString(ActionConstants.QUESTION_THUMBNAIL);
-		int choiceAResp = (Integer) input
-				.getInt(ActionConstants.QUESTION_CHOICE_A_RESPONSE);
-		int choiceBResp = (Integer) input
-				.getInt(ActionConstants.QUESTION_CHOICE_B_RESPONSE);
+
+		// Optional field
+		String category = null;
+		try {
+			category = (String) input
+					.getString(ActionConstants.QUESTION_CATEGORY);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+
+		String thumbnail = null;
+		try {
+			thumbnail = (String) input
+					.getString(ActionConstants.QUESTION_THUMBNAIL);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+
+		int choiceAResp = 0;
+		try {
+			choiceAResp = (Integer) input
+					.getInt(ActionConstants.QUESTION_CHOICE_A_RESPONSE);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+
+		int choiceBResp = 0;
+		try {
+			choiceBResp = (Integer) input
+					.getInt(ActionConstants.QUESTION_CHOICE_B_RESPONSE);
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
 
 		return new QuestionDataBuilder().setQuestionId(questionId)
 				.setDescription(description).setChoiceA(choiceA)
