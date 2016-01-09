@@ -11,9 +11,8 @@ public interface QuestionDao {
 	 * Save a question data
 	 * 
 	 * @param data
-	 * @return
 	 */
-	public QuestionData storeNewQuestionData(Result result, QuestionData data);
+	public void storeNewQuestionData(Result result, QuestionData data);
 
 	/**
 	 * Get latest questions

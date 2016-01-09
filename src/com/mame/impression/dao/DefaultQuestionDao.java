@@ -27,7 +27,10 @@ public class DefaultQuestionDao implements QuestionDao {
 	private final static DatastoreService mDS = DatastoreServiceFactory
 			.getDatastoreService();
 
-	public QuestionData storeNewQuestionData(Result result, QuestionData data) {
+	/**
+	 * Put new Question to Datastore. All results shall be put into Result.
+	 */
+	public void storeNewQuestionData(Result result, QuestionData data) {
 		LogUtil.d(TAG, "storeNewQuestionData");
 
 		if (data == null) {
@@ -38,12 +41,9 @@ public class DefaultQuestionDao implements QuestionDao {
 		Entity entity = new Entity(key);
 
 		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
-		helper.putQuestionDataToEntity(data, entity);
+		helper.putQuestionDataToEntity(result, data, entity);
 
 		DatastoreHandler.put(result, entity);
-
-		// TODO
-		return null;
 
 	}
 
@@ -104,7 +104,7 @@ public class DefaultQuestionDao implements QuestionDao {
 		// TODO Need to consider if we can complete override whole current data
 		// by new data
 		Entity e = new Entity(key);
-		helper.putQuestionDataToEntity(data, e);
+		helper.putQuestionDataToEntity(result, data, e);
 
 		mDS.put(e);
 

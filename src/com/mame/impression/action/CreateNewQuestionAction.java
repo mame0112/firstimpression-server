@@ -31,9 +31,9 @@ public class CreateNewQuestionAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		//TDDO
-//		String responseId = request.getParameter(ActionConstants.ID);
-//		String param = request.getParameter(ActionConstants.PARAM);
+		// TDDO
+		// String responseId = request.getParameter(ActionConstants.ID);
+		// String param = request.getParameter(ActionConstants.PARAM);
 		String responseId = "1";
 		JSONObject param = ParameterRetriver.retrieveParam(request);
 
@@ -47,9 +47,14 @@ public class CreateNewQuestionAction implements Action {
 		// Create result
 		Result result = new Result();
 
-		QuestionData storeResult = ImpressionDataManager.getInstance()
-				.saveNewQuestionData(result, data);
-		JSONObject paramObject = createResponseJson(storeResult);
+		ImpressionDataManager.getInstance().saveNewQuestionData(result, data);
+
+		JSONObject paramObject = null;
+		if (result.isSuccess()) {
+			paramObject = createSuccessResponseJson(data);
+		} else {
+			paramObject = createFailedResponseJson(result);
+		}
 		JSONObject resultObject = util.createResultJsonObject(paramObject,
 				responseId);
 
@@ -58,15 +63,29 @@ public class CreateNewQuestionAction implements Action {
 		return resultObject.toString();
 	}
 
-	private JSONObject createResponseJson(QuestionData data) {
-		LogUtil.d(TAG, "createResponseJson");
+	private JSONObject createSuccessResponseJson(QuestionData data) {
+		LogUtil.d(TAG, "createSuccessResponseJson");
 
 		JSONObject result = new JSONObject();
 		if (data != null) {
 			try {
 				result.put(ActionConstants.ID, data.getQuestionId());
-				result.put(ActionConstants.QUESTION_DESCRIPTION,
-						data.getDescription());
+			} catch (JSONException e) {
+				LogUtil.d(TAG, "JSONException: " + e.getMessage());
+			}
+		}
+
+		return result;
+	}
+
+	private JSONObject createFailedResponseJson(Result actionResult) {
+		LogUtil.d(TAG, "createFailedResponseJson");
+
+		JSONObject result = new JSONObject();
+		if (actionResult != null) {
+			try {
+				result.put(ActionConstants.ERROR,
+						actionResult.getErrorMessage());
 			} catch (JSONException e) {
 				LogUtil.d(TAG, "JSONException: " + e.getMessage());
 			}

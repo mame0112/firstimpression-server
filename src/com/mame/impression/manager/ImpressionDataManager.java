@@ -86,7 +86,7 @@ public class ImpressionDataManager {
 
 	}
 
-	public synchronized QuestionData saveNewQuestionData(Result result,
+	public synchronized void saveNewQuestionData(Result result,
 			QuestionData data) {
 		LogUtil.d(TAG,  "saveNewQuestionData");
 		if (result == null) {
@@ -99,8 +99,6 @@ public class ImpressionDataManager {
 
 		mQuestionDao.storeNewQuestionData(result, data);
 
-		// TODO
-		return null;
 	}
 
 	public synchronized void respondToQuestion(Result result, long questionId,

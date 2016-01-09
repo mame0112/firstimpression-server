@@ -200,10 +200,10 @@ public class ActionUtil {
 				.getLong(ActionConstants.QUESTION_CREATED_USER_ID);
 
 		// Optional field
-		String category = null;
+		Category category = Category.GENERAL;
 		try {
-			category = (String) input
-					.getString(ActionConstants.QUESTION_CATEGORY);
+			category = Category.valueOf((String) input
+					.getString(ActionConstants.QUESTION_CATEGORY));
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
@@ -238,7 +238,7 @@ public class ActionUtil {
 				.setCreatedUserId(createdUserId).setThumbnail(thumbnail)
 				.setChoiceAResponseNum(choiceAResp)
 				.setChoiceBResponseNum(choiceBResp)
-				.setCategory(Category.valueOf(category)).getResult();
+				.setCategory(category).getResult();
 	}
 
 	/**

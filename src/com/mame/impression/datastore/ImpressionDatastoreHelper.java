@@ -3,6 +3,8 @@ package com.mame.impression.datastore;
 import java.util.List;
 
 import com.google.appengine.api.datastore.Entity;
+import com.mame.impression.Result;
+import com.mame.impression.Result.ActionResult;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.QuestionDataBuilder;
@@ -128,14 +130,14 @@ public class ImpressionDatastoreHelper {
 		String userName = (String) e.getProperty(DbConstant.ENTITY_USER_NAME);
 		String ageString = (String) e.getProperty(DbConstant.ENTITY_USER_AGE);
 		AGE age = null;
-		if(ageString != null){
+		if (ageString != null) {
 			age = AGE.valueOf(ageString);
 		}
-		
+
 		String genderString = (String) e
 				.getProperty(DbConstant.ENTITY_USER_GENDER);
 		GENDER gender = null;
-		if(genderString != null){
+		if (genderString != null) {
 			gender = GENDER.valueOf(genderString);
 		}
 		String password = (String) e
@@ -152,7 +154,8 @@ public class ImpressionDatastoreHelper {
 
 	}
 
-	public Entity putQuestionDataToEntity(QuestionData data, Entity e) {
+	public Entity putQuestionDataToEntity(Result result, QuestionData data,
+			Entity e) {
 		LogUtil.d(TAG, "putQuestionDataToEntity");
 
 		if (data == null) {
@@ -192,6 +195,8 @@ public class ImpressionDatastoreHelper {
 					data.getAdditionalAnswer());
 		} catch (IllegalArgumentException e1) {
 			LogUtil.d(TAG, "IllegalArgumentException: " + e1.getMessage());
+			result.setErrorMessage(e1.getMessage());
+			result.setActionResult(ActionResult.FAIL);
 		}
 
 		return e;
@@ -236,8 +241,8 @@ public class ImpressionDatastoreHelper {
 				.setCategory(category).setChoiceA(choiceA).setChoiceB(choiceB)
 				.setCreatedUserName(createdUserName)
 				.setCreatedUserId(createdUserId).setThumbnail(thumbnail)
-				.setChoiceAResponseNum((int)choiceAResponse)
-				.setChoiceBResponseNum((int)choiceBResponse)
+				.setChoiceAResponseNum((int) choiceAResponse)
+				.setChoiceBResponseNum((int) choiceBResponse)
 				.setAdditionalQuestion(additionalQuestion)
 				.setAdditionalAnswer(additionalAnswer).getResult();
 
