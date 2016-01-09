@@ -67,7 +67,7 @@ public class QuestionData {
 	}
 
 	void setCreatedUserName(String createdUserName) {
-		createdUserName = mCreatedUserName;
+		mCreatedUserName = createdUserName;
 	}
 
 	void setCreatedUserId(long createdUserId) {
