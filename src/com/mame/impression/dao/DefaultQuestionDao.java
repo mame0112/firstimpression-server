@@ -47,24 +47,9 @@ public class DefaultQuestionDao implements QuestionDao {
 
 	}
 
-	public List<QuestionData> getLatestQuestionData(Result result, int start,
-			int end) {
+	public List<QuestionData> getLatestQuestionData(Result result) {
 
 		LogUtil.d(TAG, "getLatestQuestionData");
-
-		if (start < 0) {
-			throw new IllegalArgumentException(
-					"Start index must be more than 1");
-		}
-
-		if (end < 0) {
-			throw new IllegalArgumentException("End index must be more than 1");
-		}
-
-		if (start > end) {
-			throw new IllegalArgumentException(
-					"Start index must be larger than end index");
-		}
 
 		List<QuestionData> questions = new ArrayList<QuestionData>();
 

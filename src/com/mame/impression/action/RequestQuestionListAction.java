@@ -57,8 +57,8 @@ public class RequestQuestionListAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		//TOOD
-//		String responseId = request.getParameter(ActionConstants.ID);
+		// TOOD
+		// String responseId = request.getParameter(ActionConstants.ID);
 		String responseId = "1";
 		String param = request.getParameter(ActionConstants.PARAM);
 
@@ -68,7 +68,7 @@ public class RequestQuestionListAction implements Action {
 			String name = (String) it.next();
 			String[] val = (String[]) map.get(name);
 			for (int i = 0; i < val.length; i++) {
-//				out.println(name + "=" + val[i] + "<br>");
+				// out.println(name + "=" + val[i] + "<br>");
 				LogUtil.d(TAG, "name; " + name + " val[i]: " + val[i]);
 			}
 		}
@@ -78,14 +78,35 @@ public class RequestQuestionListAction implements Action {
 			LogUtil.d(TAG, "param: " + param.toString());
 
 			JSONObject obj = new JSONObject(param);
-			int start = obj.getInt(ActionConstants.QUESTION_START_POS);
-			int end = obj.getInt(ActionConstants.QUESTION_END_POS);
+
+			// This parameter shall be passed in case client side need question
+			// list for target user id
+			long userId = Constants.NO_USER;
+			try {
+				userId = obj.getLong(ActionConstants.QUESTION_CREATED_USER_ID);
+			} catch(JSONException e){
+				//No user ID is given. Nothing to do.
+			}
 
 			// Create result
 			Result result = new Result();
+			List<QuestionData> questions = null;
 
-			List<QuestionData> questions = ImpressionDataManager.getInstance()
-					.getLatestQuestionList(result, start, end);
+			// If NO created user id is given
+			if(userId == Constants.NO_QUESTION){
+				
+				//Get all data
+				questions = ImpressionDataManager.getInstance()
+						.getLatestQuestionList(result);
+				
+			} else {
+				
+				//If specific user id is given
+				questions = ImpressionDataManager.getInstance()
+						.getLatestQuestionListForUser(result, userId);
+				
+			}
+
 
 			ActionUtil util = new ActionUtil();
 			JSONArray questionArray = util

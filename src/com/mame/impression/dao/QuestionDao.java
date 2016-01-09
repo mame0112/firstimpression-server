@@ -6,6 +6,13 @@ import com.mame.impression.Result;
 import com.mame.impression.data.QuestionData;
 
 public interface QuestionDao {
+	
+	/**
+	 * Get latest question list.
+	 * @param result
+	 * @return
+	 */
+	public List<QuestionData> getLatestQuestionData(Result result);
 
 	/**
 	 * Save a question data
@@ -13,16 +20,6 @@ public interface QuestionDao {
 	 * @param data
 	 */
 	public void storeNewQuestionData(Result result, QuestionData data);
-
-	/**
-	 * Get latest questions
-	 * 
-	 * @param start
-	 * @param end
-	 * @return
-	 */
-	public List<QuestionData> getLatestQuestionData(Result result, int start,
-			int end);
 
 	/**
 	 * Update question data if it updated (e.g. Get additional comment, get

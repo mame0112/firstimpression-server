@@ -81,15 +81,4 @@ public class MockJsonGenerator {
 		return paramObject;
 	}
 
-	public static JSONObject createInputFotStartAndEndPos() {
-
-		JSONObject paramObject = new JSONObject();
-		try {
-			paramObject.put(ActionConstants.QUESTION_START_POS, 0);
-			paramObject.put(ActionConstants.QUESTION_END_POS, 19);
-		} catch (JSONException e) {
-			LogUtil.d(TAG, "JSONException: " + e.getMessage());
-		}
-		return paramObject;
-	}
 }

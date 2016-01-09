@@ -36,12 +36,5 @@
 		<input type="submit" value="Create new questions(POST)">
 	</form>
 
-
-	<form action="/api/v1/list" method="get">
-		<INPUT type="hidden" name="id" value=1> <INPUT type="hidden"
-			name="param"
-			value=<%=MockJsonGenerator.createInputFotStartAndEndPos()%>>
-		<input type="submit" value="Get latest questions(GET)">
-	</form>
 </body>
 </html>

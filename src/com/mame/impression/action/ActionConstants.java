@@ -100,10 +100,6 @@ public class ActionConstants {
 	public final static String QUESTION_ADDITIONAL_QUESTION = "additional_question";
 
 	public final static String QUESTION_ADDITIONAL_COMMENT = "additional_comment";
-
-	public final static String QUESTION_START_POS = "start";
-
-	public final static String QUESTION_END_POS = "end";
 	
     public final static String QUESTION_SELECTED_CHOICE = "selected_choice";
 

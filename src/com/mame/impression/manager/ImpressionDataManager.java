@@ -122,10 +122,24 @@ public class ImpressionDataManager {
 
 	}
 
-	public List<QuestionData> getLatestQuestionList(Result result, int start,
-			int end) {
+	public List<QuestionData> getLatestQuestionList(Result result) {
+		
+		if(result == null){
+			throw new IllegalArgumentException("Result cannot be null");
+		}
 
-		return mQuestionDao.getLatestQuestionData(result, start, end);
+		return mQuestionDao.getLatestQuestionData(result);
+
+	}
+	
+	public List<QuestionData> getLatestQuestionListForUser(Result result, long userId) {
+		
+		if(result == null){
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+
+		//TODO
+		return mQuestionDao.getLatestQuestionData(result);
 
 	}
 
