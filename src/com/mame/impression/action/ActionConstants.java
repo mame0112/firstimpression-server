@@ -107,7 +107,7 @@ public class ActionConstants {
 
 	public final static String QUESTION_GENDER_FEMALE = "female";
 
-	public final static String QUESTION_GENDER_UNKNOWN = "unknonw";
+	public final static String QUESTION_GENDER_UNKNOWN = "gender_unknonw";
 
 	public final static String QUESTION_AGE_UNDER10 = "under10";
 
@@ -124,6 +124,10 @@ public class ActionConstants {
 	public final static String QUESTION_AGE_FROM60_70 = "from60_70";
 
 	public final static String QUESTION_AGE_OVER70 = "over70";
+	
+	public final static String QUESTION_CHOICE_ITEM_A = "item_a";
+	
+	public final static String QUESTION_CHOICE_ITEM_B = "item_b";
 
 	public final static String QUESTION_NUM_OF_ANSWER = "num_of_answer";
 

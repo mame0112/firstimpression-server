@@ -153,19 +153,60 @@ public class RequestQuestionDetailAction implements Action {
 					data.getAdditionalQuestion());
 			obj.put(ActionConstants.QUESTION_ADDITIONAL_COMMENT,
 					data.getAdditionalComments());
-			obj.put(ActionConstants.QUESTION_GENDER_MALE, data.getMale());
-			obj.put(ActionConstants.QUESTION_GENDER_FEMALE, data.getFemale());
-			obj.put(ActionConstants.QUESTION_GENDER_UNKNOWN,
-					data.getGenderUnknown());
-			obj.put(ActionConstants.QUESTION_AGE_UNDER10, data.getUnder10());
 
-			obj.put(ActionConstants.QUESTION_AGE_FROM10_20, data.getFrom10_20());
-			obj.put(ActionConstants.QUESTION_AGE_FROM20_30, data.getFrom20_30());
-			obj.put(ActionConstants.QUESTION_AGE_FROM30_40, data.getFrom39_40());
-			obj.put(ActionConstants.QUESTION_AGE_FROM40_50, data.getFrom40_50());
-			obj.put(ActionConstants.QUESTION_AGE_FROM50_60, data.getFrom50_60());
-			obj.put(ActionConstants.QUESTION_AGE_FROM60_70, data.getFrom60_70());
-			obj.put(ActionConstants.QUESTION_AGE_OVER70, data.getOver70());
+			// Items for choice A
+			JSONObject itemAObj = new JSONObject();
+			itemAObj.put(ActionConstants.QUESTION_GENDER_MALE, data
+					.getChoiceAItem().getMale());
+			itemAObj.put(ActionConstants.QUESTION_GENDER_FEMALE, data
+					.getChoiceAItem().getFemale());
+			itemAObj.put(ActionConstants.QUESTION_GENDER_UNKNOWN, data
+					.getChoiceAItem().getGenderUnknown());
+			itemAObj.put(ActionConstants.QUESTION_AGE_UNDER10, data
+					.getChoiceAItem().getUnder10());
+			itemAObj.put(ActionConstants.QUESTION_AGE_FROM10_20, data
+					.getChoiceAItem().getFrom10_20());
+			itemAObj.put(ActionConstants.QUESTION_AGE_FROM20_30, data
+					.getChoiceAItem().getFrom20_30());
+			itemAObj.put(ActionConstants.QUESTION_AGE_FROM30_40, data
+					.getChoiceAItem().getFrom39_40());
+			itemAObj.put(ActionConstants.QUESTION_AGE_FROM40_50, data
+					.getChoiceAItem().getFrom40_50());
+			itemAObj.put(ActionConstants.QUESTION_AGE_FROM50_60, data
+					.getChoiceAItem().getFrom50_60());
+			itemAObj.put(ActionConstants.QUESTION_AGE_FROM60_70, data
+					.getChoiceAItem().getFrom60_70());
+			itemAObj.put(ActionConstants.QUESTION_AGE_OVER70, data
+					.getChoiceAItem().getOver70());
+
+			// Items for choice B
+			JSONObject itemBObj = new JSONObject();
+			itemBObj.put(ActionConstants.QUESTION_GENDER_MALE, data
+					.getChoiceBItem().getMale());
+			itemBObj.put(ActionConstants.QUESTION_GENDER_FEMALE, data
+					.getChoiceBItem().getFemale());
+			itemBObj.put(ActionConstants.QUESTION_GENDER_UNKNOWN, data
+					.getChoiceBItem().getGenderUnknown());
+			itemBObj.put(ActionConstants.QUESTION_AGE_UNDER10, data
+					.getChoiceBItem().getUnder10());
+			itemBObj.put(ActionConstants.QUESTION_AGE_FROM10_20, data
+					.getChoiceBItem().getFrom10_20());
+			itemBObj.put(ActionConstants.QUESTION_AGE_FROM20_30, data
+					.getChoiceBItem().getFrom20_30());
+			itemBObj.put(ActionConstants.QUESTION_AGE_FROM30_40, data
+					.getChoiceBItem().getFrom39_40());
+			itemBObj.put(ActionConstants.QUESTION_AGE_FROM40_50, data
+					.getChoiceBItem().getFrom40_50());
+			itemBObj.put(ActionConstants.QUESTION_AGE_FROM50_60, data
+					.getChoiceBItem().getFrom50_60());
+			itemBObj.put(ActionConstants.QUESTION_AGE_FROM60_70, data
+					.getChoiceBItem().getFrom60_70());
+			itemBObj.put(ActionConstants.QUESTION_AGE_OVER70, data
+					.getChoiceBItem().getOver70());
+
+			obj.put(ActionConstants.QUESTION_CHOICE_ITEM_A, itemAObj);
+			obj.put(ActionConstants.QUESTION_CHOICE_ITEM_B, itemBObj);
+
 			obj.put(ActionConstants.QUESTION_CREATED_USER_ID,
 					data.getCreatedUserId());
 			obj.put(ActionConstants.QUESTION_CATEGORY, data.getCategory());

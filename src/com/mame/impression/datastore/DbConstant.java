@@ -61,27 +61,49 @@ public class DbConstant {
 
 	public final static String ENTITY_QUESTION_CHOICE_B_RESP = "choice_b_response";
 
-	public final static String ENTITY_QUESTION_GENDER_MALE = "male";
+	public final static String ENTITY_QUESTION_GENDER_MALE_A = "male_a";
 
-	public final static String ENTITY_QUESTION_GENDER_FEMALE = "female";
+	public final static String ENTITY_QUESTION_GENDER_FEMALE_A = "female_a";
 
-	public final static String ENTITY_QUESTION_GENDER_UNKNOWN = "unknonw";
+	public final static String ENTITY_QUESTION_GENDER_UNKNOWN_A = "unknonw_a";
 
-	public final static String ENTITY_QUESTION_AGE_UNDER10 = "under10";
+	public final static String ENTITY_QUESTION_AGE_UNDER10_A = "under10_a";
 
-	public final static String ENTITY_QUESTION_AGE_FROM10_20 = "from10_20";
+	public final static String ENTITY_QUESTION_AGE_FROM10_20_A = "from10_20_a";
 
-	public final static String ENTITY_QUESTION_AGE_FROM20_30 = "from20_30";
+	public final static String ENTITY_QUESTION_AGE_FROM20_30_A = "from20_30_a";
 
-	public final static String ENTITY_QUESTION_AGE_FROM30_40 = "from30_40";
+	public final static String ENTITY_QUESTION_AGE_FROM30_40_A = "from30_40_a";
 
-	public final static String ENTITY_QUESTION_AGE_FROM40_50 = "from40_50";
+	public final static String ENTITY_QUESTION_AGE_FROM40_50_A = "from40_50_a";
 
-	public final static String ENTITY_QUESTION_AGE_FROM50_60 = "from50_60";
+	public final static String ENTITY_QUESTION_AGE_FROM50_60_A = "from50_60_a";
 
-	public final static String ENTITY_QUESTION_AGE_FROM60_70 = "from60_70";
+	public final static String ENTITY_QUESTION_AGE_FROM60_70_A = "from60_70_a";
 
-	public final static String ENTITY_QUESTION_AGE_OVER70 = "over70";
+	public final static String ENTITY_QUESTION_AGE_OVER70_A = "over70_a";
+	
+	public final static String ENTITY_QUESTION_GENDER_MALE_B = "male_b";
+
+	public final static String ENTITY_QUESTION_GENDER_FEMALE_B = "female_b";
+
+	public final static String ENTITY_QUESTION_GENDER_UNKNOWN_B = "unknonw_b";
+
+	public final static String ENTITY_QUESTION_AGE_UNDER10_B = "under10_b";
+
+	public final static String ENTITY_QUESTION_AGE_FROM10_20_B = "from10_20_b";
+
+	public final static String ENTITY_QUESTION_AGE_FROM20_30_B = "from20_30_b";
+
+	public final static String ENTITY_QUESTION_AGE_FROM30_40_B = "from30_40_b";
+
+	public final static String ENTITY_QUESTION_AGE_FROM40_50_B = "from40_50_b";
+
+	public final static String ENTITY_QUESTION_AGE_FROM50_60_B = "from50_60_b";
+
+	public final static String ENTITY_QUESTION_AGE_FROM60_70_B = "from60_70_b";
+
+	public final static String ENTITY_QUESTION_AGE_OVER70_B = "over70_b";
 
 	public final static String ENTITY_QUESTION_ADDITIONAL_QUESTION = "additional_question";
 
