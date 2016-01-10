@@ -1,6 +1,10 @@
 package com.mame.impression.data;
 
+import com.mame.impression.constant.Constants;
+
 public class ResultListData {
+	
+	private long mQuestionId = Constants.NO_QUESTION;
 
 	private String mDescription;
 
@@ -11,6 +15,10 @@ public class ResultListData {
 	private long mLastCommentDate = 0L;
 
 	private int mNumOfAdditionalComment = 0;
+	
+	void setQuestionId(long questionId){
+		mQuestionId = questionId;
+	}
 
 	void setDescription(String description) {
 		mDescription = description;
@@ -30,6 +38,10 @@ public class ResultListData {
 
 	void setNumOfAdditionalComment(int numOfAddiComment) {
 		mNumOfAdditionalComment = numOfAddiComment;
+	}
+	
+	public long getQuestionId(){
+		return mQuestionId;
 	}
 
 	public String getDescription() {

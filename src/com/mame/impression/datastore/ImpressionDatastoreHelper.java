@@ -271,33 +271,30 @@ public class ImpressionDatastoreHelper {
 
 		ResultListDataBuilder builder = new ResultListDataBuilder();
 
+		long questionId = Constants.NO_QUESTION;
 		String description = null;
 		String category = null;
 		long lastCommentDate = 0L;
 		int numOfAnswer = 0;
 		int numOfAdditionalComment = 0;
 		try {
-			LogUtil.d(TAG, "A");
+			questionId = (long)e.getProperty(DbConstant.ENTITY_QUESTION_ID);
 			description = (String) e
 					.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
-			LogUtil.d(TAG, "B");
 			category = (String) e
 					.getProperty(DbConstant.ENTITY_QUESTION_CATEGORY);
-			LogUtil.d(TAG, "C");
 			lastCommentDate = (long) e
 					.getProperty(DbConstant.ENTITY_QUESTION_LAST_COMMENT_DATE);
-			LogUtil.d(TAG, "D");
+			// TODO We shouldn't use this field
 			numOfAnswer = (int) e
 					.getProperty(DbConstant.ENTITY_QUESTION_NUM_OF_ANSWER);
-			LogUtil.d(TAG, "E");
 			numOfAdditionalComment = (int) e
 					.getProperty(DbConstant.ENTITY_QUESTION_NUM_OF_ADDITIONAL_COMMENT);
-			LogUtil.d(TAG, "F");
 		} catch (Exception e1) {
 			LogUtil.d(TAG, e1.getMessage());
 		}
 
-		return builder.setDescription(description).setCategory(category)
+		return builder.setQuestionId(questionId).setDescription(description).setCategory(category)
 				.setLastCommentDate(lastCommentDate)
 				.setNumOfAnswer(numOfAnswer)
 				.setNumOfAdditionalComment(numOfAdditionalComment).getResult();

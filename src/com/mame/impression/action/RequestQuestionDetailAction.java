@@ -115,6 +115,7 @@ public class RequestQuestionDetailAction implements Action {
 			JSONObject obj = new JSONObject();
 
 			try {
+				obj.put(ActionConstants.QUESTION_ID, data.getQuestionId());
 				obj.put(ActionConstants.QUESTION_DESCRIPTION,
 						data.getDescription());
 

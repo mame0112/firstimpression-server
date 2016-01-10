@@ -3,6 +3,11 @@ package com.mame.impression.data;
 public class ResultListDataBuilder {
 
 	private ResultListData mData = new ResultListData();
+	
+	public ResultListDataBuilder setQuestionId(long questionId) {
+		mData.setQuestionId(questionId);
+		return this;
+	}
 
 	public ResultListDataBuilder setDescription(String description) {
 		mData.setDescription(description);
