@@ -9,8 +9,8 @@ import com.mame.impression.action.ActionConstants;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.UserData;
-import com.mame.impression.data.UserData.AGE;
-import com.mame.impression.data.UserData.GENDER;
+import com.mame.impression.data.UserData.Age;
+import com.mame.impression.data.UserData.Gender;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.TimeUtil;
 
@@ -28,9 +28,9 @@ public class MockJsonGenerator {
 			paramObject.put(ActionConstants.USER_PASSWORD, "test_password");
 			paramObject.put(ActionConstants.USER_THUMBNAIL, "http://xxxx");
 
-			paramObject.put(ActionConstants.USER_AGE, AGE.valueOf("FROM20_30"));
+			paramObject.put(ActionConstants.USER_AGE, Age.valueOf("FROM20_30"));
 			paramObject
-					.put(ActionConstants.USER_GENDER, GENDER.valueOf("MALE"));
+					.put(ActionConstants.USER_GENDER, Gender.valueOf("MALE"));
 			paramObject.put(ActionConstants.USER_CREATED_QUESTION_ID,
 					new ArrayList<Long>());
 		} catch (JSONException e) {

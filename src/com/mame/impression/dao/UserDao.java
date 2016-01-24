@@ -11,5 +11,7 @@ public interface UserDao {
 	public void storeNewUserData(Result result, UserData data);
 
 	public void updateUserData(Result result, UserData data);
+	
+	public void signOut(Result result, long userId, String userName);
 
 }

@@ -11,8 +11,8 @@ import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.QuestionData.Category;
 import com.mame.impression.data.QuestionDataBuilder;
 import com.mame.impression.data.UserData;
-import com.mame.impression.data.UserData.AGE;
-import com.mame.impression.data.UserData.GENDER;
+import com.mame.impression.data.UserData.Age;
+import com.mame.impression.data.UserData.Gender;
 import com.mame.impression.data.UserDataBuilder;
 import com.mame.impression.util.LogUtil;
 
@@ -61,16 +61,16 @@ public class ActionUtil {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
 
-		AGE age = null;
+		Age age = null;
 		try {
-			age = AGE.valueOf((String) input.get(ActionConstants.USER_AGE));
+			age = Age.valueOf((String) input.get(ActionConstants.USER_AGE));
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
 
-		GENDER gender = null;
+		Gender gender = null;
 		try {
-			gender = GENDER.valueOf((String) input
+			gender = Gender.valueOf((String) input
 					.get(ActionConstants.USER_GENDER));
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
@@ -110,8 +110,8 @@ public class ActionUtil {
 		String userName = data.getUserName();
 		String password = data.getPassword();
 		String thumbUrl = data.getThumbnailUrl();
-		AGE age = data.getAge();
-		GENDER gender = data.getGender();
+		Age age = data.getAge();
+		Gender gender = data.getGender();
 		List<Long> ids = data.getCreatedQuestionIds();
 
 		object.put(ActionConstants.USER_ID, userId);

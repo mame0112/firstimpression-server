@@ -10,7 +10,11 @@ public class ResultListData {
 
 	private String mCategory;
 
-	private int mNumOfAnswer = 0;
+//	private int mNumOfAnswer = 0;
+	
+	private int mNumOfChoiceA = 0;
+	
+	private int mNumOfChoiceB = 0;
 
 	private long mLastCommentDate = 0L;
 
@@ -28,8 +32,12 @@ public class ResultListData {
 		mCategory = category;
 	}
 
-	void setNumOfAnswer(int numOfAnswer) {
-		mNumOfAnswer = numOfAnswer;
+	void setNumOfChoiceA(int NumOfChoiceA) {
+		mNumOfChoiceA = NumOfChoiceA;
+	}
+	
+	void setNumOfChoiceB(int NumOfChoiceB) {
+		mNumOfChoiceB = NumOfChoiceB;
 	}
 
 	void setLastCommentDate(long date) {
@@ -52,8 +60,12 @@ public class ResultListData {
 		return mCategory;
 	}
 
-	public int getNumOfAnswer() {
-		return mNumOfAnswer;
+	public int getNumOfChoiceA() {
+		return mNumOfChoiceA;
+	}
+	
+	public int getNumOfChoiceB() {
+		return mNumOfChoiceB;
 	}
 
 	public long getLastCommentDate() {

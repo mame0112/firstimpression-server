@@ -85,4 +85,17 @@ public class DefaultUserDao implements UserDao {
 		DatastoreHandler.put(result, entity);
 	}
 
+	@Override
+	public void signOut(Result result, long userId, String userName) {
+		LogUtil.d(TAG,  "signOut");
+		
+		Key key = DatastoreKeyFactory.getUserIdKey(userName, userId);
+		Entity e = DatastoreHandler.get(result, key);
+		
+		//Update Device id to null
+		e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, null);
+		DatastoreHandler.put(result, e);
+		
+	}
+
 }

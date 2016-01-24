@@ -23,6 +23,8 @@ import com.mame.impression.data.ResultDetailDataBuilder;
 import com.mame.impression.data.ResultDetailDataItemBuilder;
 import com.mame.impression.data.ResultDetailDataItem;
 import com.mame.impression.data.ResultListData;
+import com.mame.impression.data.UserData.Age;
+import com.mame.impression.data.UserData.Gender;
 import com.mame.impression.datastore.DatastoreKeyFactory;
 import com.mame.impression.datastore.DbConstant;
 import com.mame.impression.datastore.ImpressionDatastoreHelper;
@@ -123,7 +125,7 @@ public class DefaultQuestionDao implements QuestionDao {
 
 	@Override
 	public void saveQuestionResponseData(Result result, long questionId,
-			int choice) {
+			int choice, Gender gender, Age age) {
 		LogUtil.d(TAG, "saveQuestionResponseData");
 
 		try {
@@ -154,6 +156,13 @@ public class DefaultQuestionDao implements QuestionDao {
 					result.setErrorMessage("Illegal choice value");
 					break;
 				}
+				
+				// Store response data for each gender and age.
+				if(gender != null && age != null){
+					ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
+					helper.setGenderAndAgeData(e, gender, age, choice);
+				}
+				
 				// Store back to Datastore
 				DatastoreHandler.put(result, e);
 			} else {
@@ -218,8 +227,9 @@ public class DefaultQuestionDao implements QuestionDao {
 			choiceB = (String) e
 					.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_B);
 
-			choiceAItem = getAnswerResultResultItemA(e);
-			choiceBItem = getAnswerResultResultItemB(e);
+			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
+			choiceAItem = helper.getAnswerResultResultItemA(e);
+			choiceBItem = helper.getAnswerResultResultItemB(e);
 
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
@@ -288,200 +298,6 @@ public class DefaultQuestionDao implements QuestionDao {
 				.setAdditionalComments(additionalAnswer)
 				.setChoiceAItem(choiceAItem).setChoiceBItem(choiceBItem)
 				.getResult();
-	}
-
-	private ResultDetailDataItem getAnswerResultResultItemA(Entity e) {
-		int male = 0;
-		try {
-			male = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_MALE_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int female = 0;
-		try {
-			female = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_FEMALE_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int genderUnknown = 0;
-		try {
-			genderUnknown = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_UNKNOWN_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int under10 = 0;
-		try {
-			under10 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNDER10_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from10_20 = 0;
-		try {
-			from10_20 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM10_20_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from20_30 = 0;
-		try {
-			from20_30 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM20_30_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from30_40 = 0;
-		try {
-			from30_40 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM30_40_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from40_50 = 0;
-		try {
-			from40_50 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM40_50_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from50_60 = 0;
-		try {
-			from50_60 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM50_60_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from60_70 = 0;
-		try {
-			from60_70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM60_70_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int over70 = 0;
-		try {
-			over70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_OVER70_A);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		return new ResultDetailDataItemBuilder().setMale(male)
-				.setFemale(female).setGenderUnknown(genderUnknown)
-				.setUnder10(under10).setFrom10_20(from10_20)
-				.setFrom20_30(from20_30).setFrom30_40(from30_40)
-				.setFrom40_50(from40_50).setFrom50_60(from50_60)
-				.setFrom60_70(from60_70).setOver70(over70).getResult();
-	}
-
-	private ResultDetailDataItem getAnswerResultResultItemB(Entity e) {
-		int male = 0;
-		try {
-			male = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_MALE_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int female = 0;
-		try {
-			female = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_FEMALE_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int genderUnknown = 0;
-		try {
-			genderUnknown = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_UNKNOWN_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int under10 = 0;
-		try {
-			under10 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNDER10_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from10_20 = 0;
-		try {
-			from10_20 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM10_20_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from20_30 = 0;
-		try {
-			from20_30 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM20_30_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from30_40 = 0;
-		try {
-			from30_40 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM30_40_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from40_50 = 0;
-		try {
-			from40_50 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM40_50_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from50_60 = 0;
-		try {
-			from50_60 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM50_60_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int from60_70 = 0;
-		try {
-			from60_70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM60_70_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		int over70 = 0;
-		try {
-			over70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_OVER70_B);
-		} catch (Exception e1) {
-			LogUtil.d(TAG, "Exception: " + e1.getMessage());
-		}
-
-		return new ResultDetailDataItemBuilder().setMale(male)
-				.setFemale(female).setGenderUnknown(genderUnknown)
-				.setUnder10(under10).setFrom10_20(from10_20)
-				.setFrom20_30(from20_30).setFrom30_40(from30_40)
-				.setFrom40_50(from40_50).setFrom50_60(from50_60)
-				.setFrom60_70(from60_70).setOver70(over70).getResult();
 	}
 
 }

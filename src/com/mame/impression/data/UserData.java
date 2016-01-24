@@ -13,19 +13,19 @@ public class UserData {
 
 	private String mPassword;
 
-	private AGE mAge;
+	private Age mAge;
 
 	private String mThumbnail;
 
-	private GENDER mGender;
+	private Gender mGender;
 
 	private List<Long> mCreatedQuestionIds;
 
-	public enum AGE {
+	public enum Age {
 		UNDER10, FROM10_20, FROM20_30, FROM30_40, FROM40_50, FROM50_60, FROM60_70, OVER70
 	}
 
-	public enum GENDER {
+	public enum Gender {
 		MALE, FEMALE, OTHER, UNKNOWN
 	}
 
@@ -34,7 +34,7 @@ public class UserData {
 	}
 
 	/* Package private */UserData(long userid, String userName,
-			String password, AGE age, String thumbnail, GENDER gender,
+			String password, Age age, String thumbnail, Gender gender,
 			List<Long> createdQuestionIds) {
 		mUserId = Constants.NO_USER;
 		mUserName = userName;
@@ -62,11 +62,11 @@ public class UserData {
 		mThumbnail = thumbUrl;
 	}
 
-	void setAge(AGE age) {
+	void setAge(Age age) {
 		mAge = age;
 	}
 
-	void setGender(GENDER gender) {
+	void setGender(Gender gender) {
 		mGender = gender;
 	}
 
@@ -90,11 +90,11 @@ public class UserData {
 		return mThumbnail;
 	}
 
-	public AGE getAge() {
+	public Age getAge() {
 		return mAge;
 	}
 
-	public GENDER getGender() {
+	public Gender getGender() {
 		return mGender;
 	}
 

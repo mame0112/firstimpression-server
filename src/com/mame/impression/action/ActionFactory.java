@@ -21,10 +21,12 @@ public class ActionFactory {
 				new SignInAction());
 		mAction.put(ActionConstants.POST + ActionConstants.KEY_USER,
 				new SignUpAction());
-		mAction.put(ActionConstants.DELETE + ActionConstants.KEY_USER,
-				new DeleteAccountAction());
+//		mAction.put(ActionConstants.DELETE + ActionConstants.KEY_USER,
+//				new DeleteAccountAction());
 		mAction.put(ActionConstants.PUT + ActionConstants.KEY_USER,
 				new UserInfoUpdateAction());
+		mAction.put(ActionConstants.DELETE + ActionConstants.KEY_USER,
+				new SignOutAction());
 
 		// Status
 		// Use
@@ -55,6 +57,10 @@ public class ActionFactory {
 		// Use
 		mAction.put(ActionConstants.PUT + ActionConstants.KEY_ANSWER,
 				new ReplyToQuestionAction());
+		
+		//Device action
+		//TODO To be added
+		
 	}
 
 	public static Action getAction(HttpServletRequest request)
@@ -62,6 +68,8 @@ public class ActionFactory {
 
 		String method = request.getMethod();
 		String path = request.getPathInfo();
+		
+		LogUtil.d(TAG,  "method: " + method + " path: " + path); 
 
 		if (method == null || path == null) {
 			LogUtil.d(TAG, "getAction method or pathinfo is null");

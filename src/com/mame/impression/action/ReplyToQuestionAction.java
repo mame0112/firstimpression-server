@@ -7,6 +7,8 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.impression.Result;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.UserData.Age;
+import com.mame.impression.data.UserData.Gender;
 import com.mame.impression.manager.ImpressionDataManager;
 import com.mame.impression.util.LogUtil;
 
@@ -36,12 +38,24 @@ public class ReplyToQuestionAction implements Action {
 		// JSONObject obj = new JSONObject(param);
 		long questionId = obj.getLong(ActionConstants.QUESTION_ID);
 		int choice = obj.getInt(ActionConstants.QUESTION_CHOICE);
+		String genderString = obj.getString(ActionConstants.USER_GENDER);
+		String ageString = obj.getString(ActionConstants.USER_AGE);
 
 		// Create result
 		Result result = new Result();
+		
+		Gender gender = null;
+		Age age = null;
+		
+		if(genderString != null){
+			gender = Gender.valueOf(genderString);
+		}
+		if(ageString != null){
+			age = Age.valueOf(ageString);
+		}
 
 		ImpressionDataManager.getInstance().respondToQuestion(result,
-				questionId, choice);
+				questionId, choice, gender, age);
 
 		JSONObject resultObject = createResultParam(result, responseId);
 

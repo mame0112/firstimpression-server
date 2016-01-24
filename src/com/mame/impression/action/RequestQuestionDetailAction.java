@@ -120,8 +120,10 @@ public class RequestQuestionDetailAction implements Action {
 						data.getDescription());
 
 				obj.put(ActionConstants.QUESTION_CATEGORY, data.getCategory());
-				obj.put(ActionConstants.QUESTION_NUM_OF_ANSWER,
-						data.getNumOfAnswer());
+				obj.put(ActionConstants.QUESTION_CHOICE_A_RESPONSE,
+						data.getNumOfChoiceA());
+				obj.put(ActionConstants.QUESTION_CHOICE_B_RESPONSE,
+						data.getNumOfChoiceB());
 				obj.put(ActionConstants.QUESTION_LAST_COMMENT_DATE,
 						data.getLastCommentDate());
 				obj.put(ActionConstants.QUESTION_NUM_OF_ADDITIONAL_COMMENT,

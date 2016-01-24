@@ -6,6 +6,8 @@ import com.mame.impression.Result;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.ResultDetailData;
 import com.mame.impression.data.ResultListData;
+import com.mame.impression.data.UserData.Age;
+import com.mame.impression.data.UserData.Gender;
 
 public interface QuestionDao {
 
@@ -48,7 +50,7 @@ public interface QuestionDao {
 	 * @return
 	 */
 	public void saveQuestionResponseData(Result result, long questionId,
-			int choice);
+			int choice, Gender gender, Age age);
 
 	/**
 	 * Get Question result list for given user id

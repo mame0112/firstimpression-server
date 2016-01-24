@@ -34,11 +34,12 @@ public class DbConstant {
 	public final static String ENTITY_USER_GENDER = "gender";
 
 	public final static String ENTITY_USER_CREATED_QUESTION_ID = "created_question_ids";
+	
+	public final static String ENTITY_USER_DEVICE_ID = "deviceid";
 
 	/**
 	 * Entities for question kind
 	 */
-
 	public final static String ENTITY_QUESTION_ID = "question_id";
 
 	public final static String ENTITY_QUESTION_DESCRIPTION = "description";
@@ -109,9 +110,7 @@ public class DbConstant {
 
 	public final static String ENTITY_QUESTION_ADDITIONAL_ANSWER = "additional_answer";
 
-	public final static String ENTITY_QUESTION_NUM_OF_ANSWER = "num_of_answer";
-
-	public final static String ENTITY_QUESTION_LAST_COMMENT_DATE = "last_comment_date";
+	public final static String ENTITY_QUESTION_LAST_UPDATE_DATE = "last_update_date";
 
 	public final static String ENTITY_QUESTION_NUM_OF_ADDITIONAL_COMMENT = "additional_comment_num";
 

@@ -27,6 +27,11 @@ public class ActionConstants {
 	 * URL pattern for answer
 	 */
 	public static final String KEY_ANSWER = "/answers";
+	
+	/**
+	 * URL pattern for answer
+	 */
+	public static final String KEY_DEVICE = "/device";
 
 	/**
 	 * Methods for RESTful APIs
@@ -128,8 +133,6 @@ public class ActionConstants {
 	public final static String QUESTION_CHOICE_ITEM_A = "item_a";
 	
 	public final static String QUESTION_CHOICE_ITEM_B = "item_b";
-
-	public final static String QUESTION_NUM_OF_ANSWER = "num_of_answer";
 
 	public final static String QUESTION_LAST_COMMENT_DATE = "last_comment_date";
 

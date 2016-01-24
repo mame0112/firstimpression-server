@@ -13,6 +13,8 @@ import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.ResultDetailData;
 import com.mame.impression.data.ResultListData;
 import com.mame.impression.data.UserData;
+import com.mame.impression.data.UserData.Age;
+import com.mame.impression.data.UserData.Gender;
 import com.mame.impression.util.LogUtil;
 
 public class ImpressionDataManager {
@@ -75,7 +77,6 @@ public class ImpressionDataManager {
 		LogUtil.d(TAG, "updateUserData");
 
 		if (result == null) {
-			result.setActionResult(ActionResult.FAIL);
 			throw new IllegalArgumentException("Result cannot be null");
 		}
 
@@ -86,6 +87,25 @@ public class ImpressionDataManager {
 
 		mUserDao.updateUserData(result, data);
 
+	}
+	
+	public synchronized void signOut(Result result, long userId, String userName){
+		LogUtil.d(TAG,  "signOut");
+		
+		if (result == null) {
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+		
+		if(userId == Constants.NO_USER){
+			throw new IllegalArgumentException("User id cannot be NO_USER");
+		}
+		
+		if(userName == null){
+			throw new IllegalArgumentException("User name cannot be null");
+		}
+		
+		mUserDao.signOut(result, userId, userName);
+		
 	}
 
 	public synchronized void saveNewQuestionData(Result result,
@@ -103,8 +123,16 @@ public class ImpressionDataManager {
 
 	}
 
+	/**
+	 * Store response data to Database.
+	 * @param result Mandatory file.
+	 * @param questionId Mandatory file.
+	 * @param choice Mandatory filed.
+	 * @param gender Optional field since user might be able to respond to question with anonymous.
+	 * @param age Optional field since user might be able to respond to question with anonymous.
+	 */
 	public synchronized void respondToQuestion(Result result, long questionId,
-			int choice) {
+			int choice, Gender gender, Age age) {
 
 		LogUtil.d(TAG, "respondToQuestion");
 
@@ -120,7 +148,7 @@ public class ImpressionDataManager {
 			throw new IllegalArgumentException("Illegal choice parameter");
 		}
 
-		mQuestionDao.saveQuestionResponseData(result, questionId, choice);
+		mQuestionDao.saveQuestionResponseData(result, questionId, choice, gender, age);
 
 	}
 

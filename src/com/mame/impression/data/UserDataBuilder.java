@@ -2,8 +2,8 @@ package com.mame.impression.data;
 
 import java.util.List;
 
-import com.mame.impression.data.UserData.AGE;
-import com.mame.impression.data.UserData.GENDER;
+import com.mame.impression.data.UserData.Age;
+import com.mame.impression.data.UserData.Gender;
 
 public class UserDataBuilder {
 
@@ -33,12 +33,12 @@ public class UserDataBuilder {
 		return this;
 	}
 
-	public UserDataBuilder setAge(AGE age) {
+	public UserDataBuilder setAge(Age age) {
 		mData.setAge(age);
 		return this;
 	}
 
-	public UserDataBuilder setGender(GENDER gender) {
+	public UserDataBuilder setGender(Gender gender) {
 		mData.setGender(gender);
 		return this;
 	}
