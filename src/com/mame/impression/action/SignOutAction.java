@@ -51,8 +51,8 @@ public class SignOutAction implements Action {
 				return resultJson.toString();
 
 			}
-			
-
+		} else {
+			//TODO Error handling
 		}
 		
 		return null;
