@@ -1,0 +1,37 @@
+{
+	"common": {
+		"cancel": "キャンセル",
+		"save": "保存",
+		"illegal_user_id": "不正な値です。時間をおいて再度お試しください"
+	},
+	"header":{
+		"overview":"概要",
+		"contact": "お問合せ",
+		"privacy": "プライバシーポリシー",
+		"tos": "利用規約",
+		"blog": "ブログ"
+	},
+	"footer":{
+		"home":"トップ",
+		"overview":"概要",
+		"contact": "お問合せ",
+		"privacy": "プライバシーポリシー",
+		"tos": "利用規約",
+		"blog": "ブログ"
+	},
+	"contact":{
+		"overview":"質問や意見、感想など、お気軽にお寄せください",
+		"name":"お名前",
+		"email":"メールアドレス",
+		"message": "メッセージ",
+		"send": "メッセージを送る",
+		"illegal_email": "不正なメールアドレスです",
+		"name_hint": "お名前を入力",
+		"email_hint":"メールアドレスを入力",
+		"message_hint":"メッセージを入力",
+		"message_send_result":"メッセージ送信",
+		"successfully_sent": "ご連絡ありがとうございます。メッセージを送信しました！",
+		"send_failed": "メッセージの送信に失敗しました。時間をおいて再度試してください",
+		"contact_us": "連絡はこちら"
+	}
+}

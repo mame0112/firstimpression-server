@@ -1,0 +1,38 @@
+{
+	"common": {
+		"cancel": "Cancel",
+		"save": "Save",
+		"illegal_user_id": "Illegal parameter. Please try again later"
+	},
+	"header":{
+		"home":"Home",
+		"overview":"Overview",
+		"contact": "Contact",
+		"privacy": "Privacy policy",
+		"tos": "Terms of use",
+		"blog": "Blog"
+	},
+	"footer":{
+		"home":"Home",
+		"overview":"Overview",
+		"contact": "Contact",
+		"privacy": "Privacy policy",
+		"tos": "Terms of use",
+		"blog": "Blog"
+	},
+	"contact":{
+		"overview":"We are always welcome to your comments and messages.",
+		"name":"Name",
+		"email":"Mail address",
+		"message": "Message",
+		"send": "Send message",
+		"illegal_email": "Illegal mail address",
+		"name_hint": "Input your name",
+		"email_hint":"Input your mail address",
+		"message_hint":"Input message",
+		"message_send_result":"Send message",
+		"successfully_sent": "Thank you for sending out your message. Your message is successfully sent out to us.",
+		"send_failed": "Failed to send mesage. And please try again later",
+		"contact_us": "Contact us"
+	}
+}

@@ -6,13 +6,15 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
+
   <servlet>
-	<servlet-name>JsonRPCTestServlet</servlet-name>
-	<servlet-class>com.mame.impression.JsonRPCTestServlet</servlet-class>
+    <servlet-name>pushServlet</servlet-name>
+    <servlet-class>com.mame.impression.GCMPushServlet</servlet-class>
   </servlet>
+  
   <servlet-mapping>
-	<servlet-name>JsonRPCTestServlet</servlet-name>
-	<url-pattern>/jsonrpc</url-pattern>
+    <servlet-name>pushServlet</servlet-name>
+    <url-pattern>/push</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -24,7 +26,7 @@
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/firstimpression_backend/greet</url-pattern>
   </servlet-mapping>
-
+  
 	<!-- Main controller class for First impression backend -->
 	<servlet>
 		<servlet-name>controllerServlet</servlet-name>

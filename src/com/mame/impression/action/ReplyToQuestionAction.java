@@ -57,14 +57,14 @@ public class ReplyToQuestionAction implements Action {
 		ImpressionDataManager.getInstance().respondToQuestion(result,
 				questionId, choice, gender, age);
 
-		JSONObject resultObject = createResultParam(result, responseId);
+		JSONObject resultObject = createResultParam(result, questionId, responseId);
 
 		LogUtil.d(TAG, "resultObject: " + resultObject.toString());
 
 		return resultObject.toString();
 	}
 
-	private JSONObject createResultParam(Result result, String responseId) {
+	private JSONObject createResultParam(Result result, long questionId, String responseId) {
 		ActionUtil util = new ActionUtil();
 
 		JSONObject resultParam = new JSONObject();
@@ -78,15 +78,13 @@ public class ReplyToQuestionAction implements Action {
 			}
 		} else {
 			try {
-				resultParam.put(ActionConstants.ID, responseId);
+				resultParam.put(ActionConstants.QUESTION_ID, questionId);
 			} catch (JSONException e) {
 				LogUtil.w(TAG, "JSONException: " + e.getMessage());
 			}
 		}
 
-		util.createResultJsonObject(resultParam, responseId);
-
-		return resultParam;
+		return util.createResultJsonObject(resultParam, responseId);
 
 	}
 }
