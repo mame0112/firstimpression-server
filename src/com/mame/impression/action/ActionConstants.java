@@ -27,11 +27,16 @@ public class ActionConstants {
 	 * URL pattern for answer
 	 */
 	public static final String KEY_ANSWER = "/answers";
-	
+
 	/**
-	 * URL pattern for answer
+	 * URL pattern for device
 	 */
 	public static final String KEY_DEVICE = "/device";
+
+	/**
+	 * URL pattern for contact
+	 */
+	public static final String KEY_CONTACT = "/contact";
 
 	/**
 	 * Methods for RESTful APIs
@@ -69,11 +74,22 @@ public class ActionConstants {
 
 	public final static String USER_THUMBNAIL = "thumbnail";
 
+	public final static String USER_MAILADDRESS = "email";
+
 	public final static String USER_AGE = "age";
 
 	public final static String USER_GENDER = "gender";
 
 	public final static String USER_CREATED_QUESTION_ID = "created_question_ids";
+
+	/**
+	 * Field name for contact
+	 */
+	public final static String CONTACT_NAME = "name";
+
+	public final static String CONTACT_EMAIL = "email";
+
+	public final static String CONTACT_MESSAGE = "message";
 
 	/**
 	 * Parameter fields for QuestionData
@@ -129,9 +145,9 @@ public class ActionConstants {
 	public final static String QUESTION_AGE_FROM60_70 = "from60_70";
 
 	public final static String QUESTION_AGE_OVER70 = "over70";
-	
+
 	public final static String QUESTION_CHOICE_ITEM_A = "item_a";
-	
+
 	public final static String QUESTION_CHOICE_ITEM_B = "item_b";
 
 	public final static String QUESTION_LAST_COMMENT_DATE = "last_comment_date";

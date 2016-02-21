@@ -61,6 +61,10 @@ public class ActionFactory {
 		//Device action
 		//TODO To be added
 		
+		//Contact action
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_CONTACT,
+				new ContactAction());
+		
 	}
 
 	public static Action getAction(HttpServletRequest request)

@@ -1,5 +1,5 @@
 var impressionApp = angular.module('impressionApp', [
-	// 'ngResource', 
+	'ngResource', 
 	// 'ngCookies', 
 	'ui.bootstrap',
 	'ui.router',

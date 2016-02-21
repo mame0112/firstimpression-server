@@ -1,0 +1,110 @@
+
+/*Top*/
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    max-width:1000px;
+}
+
+.jumbotron {
+    margin-bottom: 20px;
+    background-image: url(../image/heroshot.jpg);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: none;
+}
+
+.jumbotron .title{
+	float: left;
+}
+
+.jumbotron .subtitle{
+	clear:both;
+}
+
+
+.jumbotron .description{
+
+}
+
+/*Footer*/
+#footer {
+	padding-top: 10px;
+	height: 120px;
+	background-color: #666666;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+#footer .item{
+	float: left;
+}
+
+#footer a{
+	color: #cccccc;
+}
+
+#footer .address{
+	color: #ffffff;
+	text-align: right;
+	padding-right: 20px;
+	margin-top: 10px;
+}
+
+/*Contact*/
+#contact {
+
+}
+
+#contact .overview{
+	color: #888888;
+	font-size: 16px;
+}
+
+#contact .item{
+	color: #333333;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 16px;
+}
+
+#contact .item .notice{
+	color: #ff0000;
+}
+
+#contact .item .subtitle{
+	display: inline;
+}
+
+#contact .note {
+
+}
+
+#contact .note .title{
+	font-size: 18px;
+	font-weight: bold;
+	color: #888888;
+}
+
+#contact .note .subtitle{
+	color: #5cb85c;
+	font-size: 16px;
+	margin-top: 20px;
+	margin-bottom: 0em;
+	padding: 0px;
+}
+
+#contact .note .description{
+	color: #666666;
+	font-size: 16px;
+	padding: 0px;
+}
+
+#contact .footer {
+	margin-top: 20px;
+	margin-bottom: 30px;
+
+}
