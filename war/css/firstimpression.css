@@ -118,3 +118,62 @@ body {
 	margin-bottom: 30px;
 
 }
+
+#overview{
+	background-color: #888888;
+}
+
+#overview .title{
+	color: #ffffff;
+	font-size: 28px;
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+#overview .message{
+	color: #ffffff;
+	font-size: 22px;
+	padding-left: 20px;
+	padding-top: 14px;
+}
+
+#overview .title_dark{
+	color: #333333;
+	font-size: 28px;
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+#overview .message_dark{
+	color: #333333;
+	font-size: 22px;
+	padding-left: 20px;
+	padding-top: 14px;
+}
+
+#overview .description1{
+	background-color: #2a5a72;
+}
+
+#overview .description2{
+	background-color: #a4b940;
+}
+
+#overview .description3{
+	background-color: #79bee9;
+}
+
+#overview .description4{
+	background-color: #f7ad1c;
+}
+
+#overview .description5{
+	background-color: #ed622c;
+}
+
+#overview .description5 .joinButton{
+	margin-top: 20px;
+	margin-left: 20px;
+}
