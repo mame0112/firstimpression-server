@@ -25,8 +25,6 @@ public class GCMPushServlet extends HttpServlet {
 	private static final String API_KEY = "AIzaSyBqd3I6JieGeK34NE6u25Jjm0I_ToTaHhI";
 	private static final int RETRY_COUNT = 5;
 
-	static Map<String, String> deviceMap = new HashMap<String, String>();
-
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws IOException {
 
@@ -51,7 +49,8 @@ public class GCMPushServlet extends HttpServlet {
 		LogUtil.d(TAG, "send");
 		
 		String msg ="Test message";
-		String registrationId = "c_HUcOVvaxk:APA91bHESNvR1FNmqAJxDgvcB_O-tPZGXBM9mF1xUAtrziYNa_PO3n2XHG_dTs9BUoBZ9mxvvknpZKYl4LYOFN26XiBS4eJdHOVQ_Ja7Tyip63ig5UqxqtUrpykgBdYDUFRd031_s9bs";
+//		String registrationId = "c_HUcOVvaxk:APA91bHESNvR1FNmqAJxDgvcB_O-tPZGXBM9mF1xUAtrziYNa_PO3n2XHG_dTs9BUoBZ9mxvvknpZKYl4LYOFN26XiBS4eJdHOVQ_Ja7Tyip63ig5UqxqtUrpykgBdYDUFRd031_s9bs";
+		String registrationId = "e_KGCTX4lG8:APA91bGeZmaaD0BCkrg94btrffFuFzNGgbarkr6ylhTjKVE7MdjdXlPqAeBEVi4aIeDQsRHheNDOIHzJn9-KuDmNUF6RsnymZx0knSYDjL7FuStkmUZkNuQxS_DwdVWxea4cag0Hu_tS";
 
 		// registrationId = deviceMap.get(userId);
 		Sender sender = new Sender(API_KEY);
