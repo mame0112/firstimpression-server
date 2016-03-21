@@ -89,10 +89,18 @@ public class ActionUtil {
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
+		
+		String deviceId = null;
+		try {
+			deviceId = ((String) input
+					.get(ActionConstants.USER_DEVICE_ID));
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
 
 		return new UserDataBuilder().setUserId(userId).setUserName(userName)
 				.setPassword(password).setThumbnailUrl(thumbUrl).setAge(age)
-				.setGender(gender).setCreatedQuestionIds(listData).getResult();
+				.setGender(gender).setCreatedQuestionIds(listData).setDeviceId(deviceId).getResult();
 	}
 
 	public JSONObject createJsonFromUserData(JSONObject object, UserData data)

@@ -63,6 +63,10 @@ public class ImpressionDatastoreHelper {
 			e.setProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID,
 					data.getCreatedQuestionIds());
 		}
+		
+		if(data.getDeviceId() != null){
+			e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, data.getDeviceId());
+		}
 
 		return e;
 	}
@@ -150,10 +154,11 @@ public class ImpressionDatastoreHelper {
 				.getProperty(DbConstant.ENTITY_USER_THUMBNAIL);
 		List<Long> createdIds = (List) e
 				.getProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID);
+		String deviceId = (String)e.getProperty(DbConstant.ENTITY_USER_DEVICE_ID);
 
 		return builder.setUserId(userId).setUserName(userName)
 				.setPassword(password).setThumbnailUrl(thumbUrl).setAge(age)
-				.setGender(gender).setCreatedQuestionIds(createdIds)
+				.setGender(gender).setCreatedQuestionIds(createdIds).setDeviceId(deviceId)
 				.getResult();
 
 	}

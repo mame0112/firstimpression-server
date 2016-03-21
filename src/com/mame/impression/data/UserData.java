@@ -20,6 +20,8 @@ public class UserData {
 	private Gender mGender;
 
 	private List<Long> mCreatedQuestionIds;
+	
+	private String mDeviceId;
 
 	public enum Age {
 		UNDER10, FROM10_20, FROM20_30, FROM30_40, FROM40_50, FROM50_60, FROM60_70, OVER70
@@ -35,7 +37,7 @@ public class UserData {
 
 	/* Package private */UserData(long userid, String userName,
 			String password, Age age, String thumbnail, Gender gender,
-			List<Long> createdQuestionIds) {
+			List<Long> createdQuestionIds, String deviceId) {
 		mUserId = Constants.NO_USER;
 		mUserName = userName;
 		mPassword = password;
@@ -43,6 +45,7 @@ public class UserData {
 		mThumbnail = thumbnail;
 		mGender = gender;
 		mCreatedQuestionIds = createdQuestionIds;
+		mDeviceId = deviceId;
 	}
 
 	// TODO This should not be public. Need to consider.
@@ -73,6 +76,10 @@ public class UserData {
 	void setCreatedQuestionIds(List<Long> createdQuestionIds) {
 		mCreatedQuestionIds = createdQuestionIds;
 	}
+	
+	void setDeviceId(String deviceId){
+		mDeviceId = deviceId;
+	}
 
 	public long getUserId() {
 		return mUserId;
@@ -100,6 +107,10 @@ public class UserData {
 
 	public List<Long> getCreatedQuestionIds() {
 		return mCreatedQuestionIds;
+	}
+	
+	public String getDeviceId(){
+		return mDeviceId;
 	}
 
 }

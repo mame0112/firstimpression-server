@@ -47,6 +47,11 @@ public class UserDataBuilder {
 		mData.setCreatedQuestionIds(createdQuestionIds);
 		return this;
 	}
+	
+	public UserDataBuilder setDeviceId(String deviceId) {
+		mData.setDeviceId(deviceId);
+		return this;
+	}
 
 	public UserData getResult() {
 		return mData;

@@ -81,6 +81,8 @@ public class ActionConstants {
 	public final static String USER_GENDER = "gender";
 
 	public final static String USER_CREATED_QUESTION_ID = "created_question_ids";
+	
+	public final static String USER_DEVICE_ID = "deviceid";
 
 	/**
 	 * Field name for contact
