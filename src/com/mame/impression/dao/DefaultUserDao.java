@@ -37,16 +37,19 @@ public class DefaultUserDao implements UserDao {
 		LogUtil.d(TAG, "findUserDataByNameAndPassword");
 
 		Key firstKey = DatastoreKeyFactory.getUserNameKey(userName);
-		Key lastKey = DatastoreKeyFactory.getUserNameKey(userName + ASCII_FIRST);
+		Key lastKey = DatastoreKeyFactory
+				.getUserNameKey(userName + ASCII_FIRST);
 
 		Filter userFirstFilter = new FilterPredicate(
 				Entity.KEY_RESERVED_PROPERTY,
 				FilterOperator.GREATER_THAN_OR_EQUAL, firstKey);
 		Filter userLastFilter = new FilterPredicate(
 				Entity.KEY_RESERVED_PROPERTY, FilterOperator.LESS_THAN, lastKey);
-		
-		Query q = new Query(DbConstant.KIND_USER).setFilter(CompositeFilterOperator.and(userFirstFilter, userLastFilter));
-		
+
+		Query q = new Query(DbConstant.KIND_USER)
+				.setFilter(CompositeFilterOperator.and(userFirstFilter,
+						userLastFilter));
+
 		PreparedQuery pq = mDS.prepare(q);
 
 		for (Entity e : pq.asIterable()) {
@@ -85,17 +88,22 @@ public class DefaultUserDao implements UserDao {
 		DatastoreHandler.put(result, entity);
 	}
 
+	/**
+	 * Update deviceid. This shall be used for Sign out case (in this case, to
+	 * be given deviceId shall be null)
+	 */
 	@Override
-	public void signOut(Result result, long userId, String userName) {
-		LogUtil.d(TAG,  "signOut");
-		
+	public void updateDeviceId(Result result, long userId, String userName,
+			String deviceId) {
+		LogUtil.d(TAG, "updateDeviceId");
+
 		Key key = DatastoreKeyFactory.getUserIdKey(userName, userId);
 		Entity e = DatastoreHandler.get(result, key);
-		
-		//Update Device id to null
-		e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, null);
+
+		// Update Device.
+		e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, deviceId);
 		DatastoreHandler.put(result, e);
-		
+
 	}
 
 }

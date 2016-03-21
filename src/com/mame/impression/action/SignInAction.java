@@ -29,8 +29,8 @@ public class SignInAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		//TODO
-//		String responseId = request.getParameter(ActionConstants.ID);
+		// TODO
+		// String responseId = request.getParameter(ActionConstants.ID);
 		String responseId = "1";
 		String param = request.getParameter(ActionConstants.PARAM);
 
@@ -46,16 +46,25 @@ public class SignInAction implements Action {
 		// Error check
 		if (data != null) {
 			if (data.getUserName() != null && data.getPassword() != null) {
-				
+
 				userData = ImpressionDataManager.getInstance()
-						.findUserDataByNameAndPassword(result, data.getUserName(), data.getPassword());
-				
-				//If user name and password found (Sign in success)
-				if(userData != null){
-					paramObject = util
-							.createJsonFromUserData(paramObject, userData);
+						.findUserDataByNameAndPassword(result,
+								data.getUserName(), data.getPassword());
+
+				// If user name and password found (Sign in success)
+				if (userData != null) {
+
+					// Store Device Id to Datastore.
+					// User id and name comes from DB (userData), deviceId comes
+					// from client side (data)
+					ImpressionDataManager.getInstance().updateDeviceId(result,
+							userData.getUserId(), userData.getUserName(),
+							data.getDeviceId());
+
+					paramObject = util.createJsonFromUserData(paramObject,
+							userData);
 				} else {
-					//If User name and password is not found (Sign in fail)
+					// If User name and password is not found (Sign in fail)
 					paramObject = createNoUserJson(paramObject);
 				}
 
@@ -84,7 +93,7 @@ public class SignInAction implements Action {
 		}
 		return object;
 	}
-	
+
 	private JSONObject createNoUserJson(JSONObject object) {
 		try {
 			object.put(ActionConstants.USER_ID, Constants.NO_USER);

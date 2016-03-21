@@ -12,6 +12,6 @@ public interface UserDao {
 
 	public void updateUserData(Result result, UserData data);
 	
-	public void signOut(Result result, long userId, String userName);
+	public void updateDeviceId(Result result, long userId, String userName, String deviceId);
 
 }

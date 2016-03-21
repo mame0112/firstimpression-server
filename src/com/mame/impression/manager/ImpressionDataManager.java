@@ -72,6 +72,29 @@ public class ImpressionDataManager {
 		mUserDao.storeNewUserData(result, data);
 
 	}
+	
+	public synchronized void updateDeviceId(Result result, long userId, String userName, String deviceId) {
+		LogUtil.d(TAG, "updateDeviceId");
+
+		if (result == null) {
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+
+		if (userId == Constants.NO_USER) {
+			throw new IllegalArgumentException("User Id cannot be NO_USER");
+		}
+		
+		if (userName == null) {
+			throw new IllegalArgumentException("User name cannot be null");
+		}
+		
+		if(deviceId == null){
+			throw new IllegalArgumentException("Device Id cannot be null");
+		}
+
+		mUserDao.updateDeviceId(result, userId, userName, deviceId);
+
+	}
 
 	public synchronized void updateUserData(Result result, UserData data) {
 		LogUtil.d(TAG, "updateUserData");
@@ -104,7 +127,7 @@ public class ImpressionDataManager {
 			throw new IllegalArgumentException("User name cannot be null");
 		}
 		
-		mUserDao.signOut(result, userId, userName);
+		mUserDao.updateDeviceId(result, userId, userName, null);
 		
 	}
 
