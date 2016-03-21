@@ -8,10 +8,13 @@ public interface UserDao {
 	public UserData findUserDataByNameAndPassword(Result result,
 			String userName, String password);
 
+	public UserData getUserData(Result result, long userId, String userName);
+
 	public void storeNewUserData(Result result, UserData data);
 
 	public void updateUserData(Result result, UserData data);
-	
-	public void updateDeviceId(Result result, long userId, String userName, String deviceId);
+
+	public void updateDeviceId(Result result, long userId, String userName,
+			String deviceId);
 
 }

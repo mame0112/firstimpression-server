@@ -3,6 +3,7 @@ package com.mame.impression.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.api.server.spi.Constant;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -16,11 +17,11 @@ import com.mame.impression.Result;
 import com.mame.impression.Result.ActionResult;
 import com.mame.impression.Result.ErrorType;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.IndexUserData;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.QuestionData.Category;
 import com.mame.impression.data.ResultDetailData;
 import com.mame.impression.data.ResultDetailDataBuilder;
-import com.mame.impression.data.ResultDetailDataItemBuilder;
 import com.mame.impression.data.ResultDetailDataItem;
 import com.mame.impression.data.ResultListData;
 import com.mame.impression.data.UserData.Age;
@@ -123,10 +124,15 @@ public class DefaultQuestionDao implements QuestionDao {
 
 	}
 
+	/**
+	 * Return created user name and user id . If error ocurrs. returns null
+	 */
 	@Override
-	public void saveQuestionResponseData(Result result, long questionId,
-			int choice, Gender gender, Age age) {
+	public IndexUserData saveQuestionResponseData(Result result,
+			long questionId, int choice, Gender gender, Age age) {
 		LogUtil.d(TAG, "saveQuestionResponseData");
+
+		IndexUserData indexUserData = null;
 
 		try {
 			Key key = DatastoreKeyFactory.getQuestionKey(questionId);
@@ -136,6 +142,8 @@ public class DefaultQuestionDao implements QuestionDao {
 			if (e != null) {
 
 				long num = 0;
+				long createdUserId = Constants.NO_USER;
+				String createdUserName = null;
 
 				switch (choice) {
 				case 0:
@@ -143,12 +151,23 @@ public class DefaultQuestionDao implements QuestionDao {
 							.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_A_RESP);
 					num = num + 1;
 					e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_A_RESP, num);
+					createdUserId = (long) e
+							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
+					createdUserName = (String) e
+							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
+					indexUserData = new IndexUserData(createdUserId, createdUserName);
 					break;
 				case 1:
 					num = (long) e
 							.getProperty(DbConstant.ENTITY_QUESTION_CHOICE_B_RESP);
 					num = num + 1;
 					e.setProperty(DbConstant.ENTITY_QUESTION_CHOICE_B_RESP, num);
+					createdUserId = (long) e
+							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
+					createdUserName = (String) e
+							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
+					indexUserData = new IndexUserData(createdUserId, createdUserName);
+					
 					break;
 				default:
 					LogUtil.w(TAG, "Illegal choice value");
@@ -156,13 +175,13 @@ public class DefaultQuestionDao implements QuestionDao {
 					result.setErrorMessage("Illegal choice value");
 					break;
 				}
-				
+
 				// Store response data for each gender and age.
-				if(gender != null && age != null){
+				if (gender != null && age != null) {
 					ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
 					helper.setGenderAndAgeData(e, gender, age, choice);
 				}
-				
+
 				// Store back to Datastore
 				DatastoreHandler.put(result, e);
 			} else {
@@ -174,6 +193,8 @@ public class DefaultQuestionDao implements QuestionDao {
 			LogUtil.w(TAG, "Exception: " + e.getMessage());
 			result.setErrorType(ErrorType.FAILED_TO_WRITE_TO_DB);
 		}
+
+		return indexUserData;
 	}
 
 	@Override

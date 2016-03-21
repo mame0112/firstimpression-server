@@ -3,6 +3,7 @@ package com.mame.impression.dao;
 import java.util.List;
 
 import com.mame.impression.Result;
+import com.mame.impression.data.IndexUserData;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.ResultDetailData;
 import com.mame.impression.data.ResultListData;
@@ -47,10 +48,10 @@ public interface QuestionDao {
 	 * Get question data based on questionId
 	 * 
 	 * @param questionId
-	 * @return
+	 * @return created user name and user id.
 	 */
-	public void saveQuestionResponseData(Result result, long questionId,
-			int choice, Gender gender, Age age);
+	public IndexUserData saveQuestionResponseData(Result result,
+			long questionId, int choice, Gender gender, Age age);
 
 	/**
 	 * Get Question result list for given user id

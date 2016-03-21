@@ -63,6 +63,15 @@ public class DefaultUserDao implements UserDao {
 		return null;
 	}
 
+	public UserData getUserData(Result result, long userId, String userName) {
+		LogUtil.d(TAG, "getUserData");
+
+		Key key = DatastoreKeyFactory.getUserIdKey(userName, userId);
+		Entity entity = DatastoreHandler.get(result, key);
+		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
+		return helper.createUserDataFromEntity(entity);
+	}
+
 	public void storeNewUserData(Result result, UserData data) {
 		LogUtil.d(TAG, "storeNewUserData");
 		Key key = DatastoreKeyFactory.getUserIdKey(data.getUserName(),

@@ -7,8 +7,11 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.impression.Result;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.IndexUserData;
+import com.mame.impression.data.UserData;
 import com.mame.impression.data.UserData.Age;
 import com.mame.impression.data.UserData.Gender;
+import com.mame.impression.gcm.GCMPushSender;
 import com.mame.impression.manager.ImpressionDataManager;
 import com.mame.impression.util.LogUtil;
 
@@ -43,28 +46,42 @@ public class ReplyToQuestionAction implements Action {
 
 		// Create result
 		Result result = new Result();
-		
+
 		Gender gender = null;
 		Age age = null;
-		
-		if(genderString != null){
+
+		if (genderString != null) {
 			gender = Gender.valueOf(genderString);
 		}
-		if(ageString != null){
+		if (ageString != null) {
 			age = Age.valueOf(ageString);
 		}
 
-		ImpressionDataManager.getInstance().respondToQuestion(result,
-				questionId, choice, gender, age);
+		IndexUserData indexUserData = ImpressionDataManager.getInstance()
+				.respondToQuestion(result, questionId, choice, gender, age);
 
-		JSONObject resultObject = createResultParam(result, questionId, responseId);
+		if (result.isSuccess()) {
+			UserData data = ImpressionDataManager.getInstance().getUserData(
+					result, indexUserData.getUserId(),
+					indexUserData.getUserName());
+			if (data != null) {
+				GCMPushSender sender = new GCMPushSender();
+				sender.sendPushNotification(response, data.getDeviceId(),
+						"Test message");
+			}
+
+		}
+
+		JSONObject resultObject = createResultParam(result, questionId,
+				responseId);
 
 		LogUtil.d(TAG, "resultObject: " + resultObject.toString());
 
 		return resultObject.toString();
 	}
 
-	private JSONObject createResultParam(Result result, long questionId, String responseId) {
+	private JSONObject createResultParam(Result result, long questionId,
+			String responseId) {
 		ActionUtil util = new ActionUtil();
 
 		JSONObject resultParam = new JSONObject();

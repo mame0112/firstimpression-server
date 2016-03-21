@@ -9,6 +9,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.dao.ImpressionDaoFactory;
 import com.mame.impression.dao.QuestionDao;
 import com.mame.impression.dao.UserDao;
+import com.mame.impression.data.IndexUserData;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.ResultDetailData;
 import com.mame.impression.data.ResultListData;
@@ -72,8 +73,28 @@ public class ImpressionDataManager {
 		mUserDao.storeNewUserData(result, data);
 
 	}
-	
-	public synchronized void updateDeviceId(Result result, long userId, String userName, String deviceId) {
+
+	public synchronized UserData getUserData(Result result, long userId,
+			String userName) {
+		LogUtil.d(TAG, "getUserData");
+
+		if (result == null) {
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+
+		if (userId == Constants.NO_USER) {
+			throw new IllegalArgumentException("User Id cannot be NO_USER");
+		}
+
+		if (userName == null) {
+			throw new IllegalArgumentException("User name cannot be null");
+		}
+
+		return mUserDao.getUserData(result, userId, userName);
+	}
+
+	public synchronized void updateDeviceId(Result result, long userId,
+			String userName, String deviceId) {
 		LogUtil.d(TAG, "updateDeviceId");
 
 		if (result == null) {
@@ -83,12 +104,12 @@ public class ImpressionDataManager {
 		if (userId == Constants.NO_USER) {
 			throw new IllegalArgumentException("User Id cannot be NO_USER");
 		}
-		
+
 		if (userName == null) {
 			throw new IllegalArgumentException("User name cannot be null");
 		}
-		
-		if(deviceId == null){
+
+		if (deviceId == null) {
 			throw new IllegalArgumentException("Device Id cannot be null");
 		}
 
@@ -111,24 +132,24 @@ public class ImpressionDataManager {
 		mUserDao.updateUserData(result, data);
 
 	}
-	
-	public synchronized void signOut(Result result, long userId, String userName){
-		LogUtil.d(TAG,  "signOut");
-		
+
+	public synchronized void signOut(Result result, long userId, String userName) {
+		LogUtil.d(TAG, "signOut");
+
 		if (result == null) {
 			throw new IllegalArgumentException("Result cannot be null");
 		}
-		
-		if(userId == Constants.NO_USER){
+
+		if (userId == Constants.NO_USER) {
 			throw new IllegalArgumentException("User id cannot be NO_USER");
 		}
-		
-		if(userName == null){
+
+		if (userName == null) {
 			throw new IllegalArgumentException("User name cannot be null");
 		}
-		
+
 		mUserDao.updateDeviceId(result, userId, userName, null);
-		
+
 	}
 
 	public synchronized void saveNewQuestionData(Result result,
@@ -147,15 +168,23 @@ public class ImpressionDataManager {
 	}
 
 	/**
-	 * Store response data to Database.
-	 * @param result Mandatory file.
-	 * @param questionId Mandatory file.
-	 * @param choice Mandatory filed.
-	 * @param gender Optional field since user might be able to respond to question with anonymous.
-	 * @param age Optional field since user might be able to respond to question with anonymous.
+	 * Store response data to Database. Return created user id and user name.
+	 * 
+	 * @param result
+	 *            Mandatory field.
+	 * @param questionId
+	 *            Mandatory field.
+	 * @param choice
+	 *            Mandatory field.
+	 * @param gender
+	 *            Optional field since user might be able to respond to question
+	 *            with anonymous.
+	 * @param age
+	 *            Optional field since user might be able to respond to question
+	 *            with anonymous.
 	 */
-	public synchronized void respondToQuestion(Result result, long questionId,
-			int choice, Gender gender, Age age) {
+	public synchronized IndexUserData respondToQuestion(Result result,
+			long questionId, int choice, Gender gender, Age age) {
 
 		LogUtil.d(TAG, "respondToQuestion");
 
@@ -171,7 +200,8 @@ public class ImpressionDataManager {
 			throw new IllegalArgumentException("Illegal choice parameter");
 		}
 
-		mQuestionDao.saveQuestionResponseData(result, questionId, choice, gender, age);
+		return mQuestionDao.saveQuestionResponseData(result, questionId,
+				choice, gender, age);
 
 	}
 

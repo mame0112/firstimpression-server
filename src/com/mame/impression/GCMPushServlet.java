@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
-
+import com.mame.impression.gcm.GCMPushSender;
 import com.mame.impression.util.LogUtil;
 
 public class GCMPushServlet extends HttpServlet {
@@ -45,8 +45,6 @@ public class GCMPushServlet extends HttpServlet {
 
 //		DbgUtil.showLog(TAG, "action: " + action);
 //		DbgUtil.showLog(TAG, "registrationId: " + registrationId);
-
-		LogUtil.d(TAG, "send");
 		
 		String msg ="Test message";
 //		String registrationId = "c_HUcOVvaxk:APA91bHESNvR1FNmqAJxDgvcB_O-tPZGXBM9mF1xUAtrziYNa_PO3n2XHG_dTs9BUoBZ9mxvvknpZKYl4LYOFN26XiBS4eJdHOVQ_Ja7Tyip63ig5UqxqtUrpykgBdYDUFRd031_s9bs";
