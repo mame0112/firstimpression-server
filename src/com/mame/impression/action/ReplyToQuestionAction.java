@@ -7,6 +7,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.impression.Result;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.GcmPushData;
 import com.mame.impression.data.IndexUserData;
 import com.mame.impression.data.UserData;
 import com.mame.impression.data.UserData.Age;
@@ -66,8 +67,9 @@ public class ReplyToQuestionAction implements Action {
 					indexUserData.getUserName());
 			if (data != null) {
 				GCMPushSender sender = new GCMPushSender();
-				sender.sendPushNotification(response, data.getDeviceId(),
-						"Test message");
+				// TODO Need to include Question title.
+				GcmPushData pushData = new GcmPushData(questionId);
+				sender.sendPushNotification(data.getDeviceId(), pushData);
 			}
 
 		}

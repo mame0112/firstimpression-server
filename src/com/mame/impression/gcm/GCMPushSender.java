@@ -8,6 +8,7 @@ import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.GcmPushData;
 import com.mame.impression.util.LogUtil;
 
 public class GCMPushSender {
@@ -18,23 +19,21 @@ public class GCMPushSender {
 	private final static String TAG = Constants.TAG
 			+ GCMPushSender.class.getSimpleName();
 
-	public GCMPushSender() {
-
-	}
-
-	public void sendPushNotification(HttpServletResponse res, String deviceId, String input) {
+	public void sendPushNotification(String deviceId, GcmPushData data) {
 		LogUtil.d(TAG, "sendPushNotification");
 
 		if (deviceId != null) {
 
+			String input = new GcmPushUtil().createPushContent(data).toString();
+
 			Sender sender = new Sender(API_KEY);
-			Message message = new Message.Builder().addData("msg", input).build();
+			Message message = new Message.Builder().addData(
+					GcmConstants.MESSAGE, input).build();
 
 			Result result = null;
 			try {
 				result = sender.send(message, deviceId, RETRY_COUNT);
-				res.setContentType("text/plain");
-				res.getWriter().println("Result=" + result);
+				LogUtil.d(TAG, "result: " + result);
 			} catch (IOException e) {
 				LogUtil.d(TAG, "IOException: " + e.getMessage());
 			}
