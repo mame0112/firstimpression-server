@@ -63,8 +63,8 @@ public class ImpressionDatastoreHelper {
 			e.setProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID,
 					data.getCreatedQuestionIds());
 		}
-		
-		if(data.getDeviceId() != null){
+
+		if (data.getDeviceId() != null) {
 			e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, data.getDeviceId());
 		}
 
@@ -154,12 +154,13 @@ public class ImpressionDatastoreHelper {
 				.getProperty(DbConstant.ENTITY_USER_THUMBNAIL);
 		List<Long> createdIds = (List) e
 				.getProperty(DbConstant.ENTITY_USER_CREATED_QUESTION_ID);
-		String deviceId = (String)e.getProperty(DbConstant.ENTITY_USER_DEVICE_ID);
+		String deviceId = (String) e
+				.getProperty(DbConstant.ENTITY_USER_DEVICE_ID);
 
 		return builder.setUserId(userId).setUserName(userName)
 				.setPassword(password).setThumbnailUrl(thumbUrl).setAge(age)
-				.setGender(gender).setCreatedQuestionIds(createdIds).setDeviceId(deviceId)
-				.getResult();
+				.setGender(gender).setCreatedQuestionIds(createdIds)
+				.setDeviceId(deviceId).getResult();
 
 	}
 
@@ -321,90 +322,91 @@ public class ImpressionDatastoreHelper {
 	}
 
 	public ResultDetailDataItem getAnswerResultResultItemA(Entity e) {
+		LogUtil.d(TAG, "getAnswerResultResultItemA");
 		int male = 0;
 		try {
-			male = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_MALE_A);
+			male = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_MALE_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int female = 0;
 		try {
-			female = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_FEMALE_A);
+			female = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_FEMALE_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int genderUnknown = 0;
 		try {
-			genderUnknown = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_UNKNOWN_A);
+			genderUnknown = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_UNKNOWN_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int under10 = 0;
 		try {
-			under10 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNDER10_A);
+			under10 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNDER10_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from10_20 = 0;
 		try {
-			from10_20 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM10_20_A);
+			from10_20 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM10_20_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from20_30 = 0;
 		try {
-			from20_30 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM20_30_A);
+			from20_30 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM20_30_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from30_40 = 0;
 		try {
-			from30_40 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM30_40_A);
+			from30_40 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM30_40_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from40_50 = 0;
 		try {
-			from40_50 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM40_50_A);
+			from40_50 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM40_50_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from50_60 = 0;
 		try {
-			from50_60 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM50_60_A);
+			from50_60 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM50_60_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from60_70 = 0;
 		try {
-			from60_70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM60_70_A);
+			from60_70 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM60_70_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int over70 = 0;
 		try {
-			over70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_OVER70_A);
+			over70 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_OVER70_A));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
@@ -418,90 +420,91 @@ public class ImpressionDatastoreHelper {
 	}
 
 	public ResultDetailDataItem getAnswerResultResultItemB(Entity e) {
+		LogUtil.d(TAG, "getAnswerResultResultItemB");
 		int male = 0;
 		try {
-			male = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_MALE_B);
+			male = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_MALE_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int female = 0;
 		try {
-			female = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_FEMALE_B);
+			female = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_FEMALE_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int genderUnknown = 0;
 		try {
-			genderUnknown = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_UNKNOWN_B);
+			genderUnknown = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_GENDER_UNKNOWN_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int under10 = 0;
 		try {
-			under10 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNDER10_B);
+			under10 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNDER10_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from10_20 = 0;
 		try {
-			from10_20 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM10_20_B);
+			from10_20 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM10_20_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from20_30 = 0;
 		try {
-			from20_30 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM20_30_B);
+			from20_30 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM20_30_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from30_40 = 0;
 		try {
-			from30_40 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM30_40_B);
+			from30_40 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM30_40_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from40_50 = 0;
 		try {
-			from40_50 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM40_50_B);
+			from40_50 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM40_50_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from50_60 = 0;
 		try {
-			from50_60 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM50_60_B);
+			from50_60 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM50_60_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int from60_70 = 0;
 		try {
-			from60_70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM60_70_B);
+			from60_70 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_FROM60_70_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
 		int over70 = 0;
 		try {
-			over70 = (int) e
-					.getProperty(DbConstant.ENTITY_QUESTION_AGE_OVER70_B);
+			over70 = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_OVER70_B));
 		} catch (Exception e1) {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
@@ -529,7 +532,7 @@ public class ImpressionDatastoreHelper {
 		if (age == null) {
 			throw new IllegalArgumentException("Age cannot be null");
 		}
-		
+
 		switch (gender) {
 		case MALE:
 			switch (choice) {
@@ -560,7 +563,7 @@ public class ImpressionDatastoreHelper {
 			}
 			break;
 		case UNKNOWN:
-			LogUtil.d(TAG,  "Unknown");
+			LogUtil.d(TAG, "Unknown");
 			switch (choice) {
 			case 0:
 				updateCategoryResponseNum(entity,
@@ -575,10 +578,10 @@ public class ImpressionDatastoreHelper {
 			}
 			break;
 		case OTHER:
-			LogUtil.d(TAG,  "Other");
+			LogUtil.d(TAG, "Other");
 			break;
 		}
-		
+
 		switch (age) {
 		case UNDER10:
 			switch (choice) {
@@ -702,8 +705,8 @@ public class ImpressionDatastoreHelper {
 			num = (long) entity.getProperty(fieldName);
 			num = num + 1;
 			entity.setProperty(fieldName, num);
-		} catch (Exception e){
-			//If no property exist
+		} catch (Exception e) {
+			// If no property exist
 			entity.setProperty(fieldName, 1);
 		}
 
