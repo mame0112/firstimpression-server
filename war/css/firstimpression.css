@@ -39,6 +39,25 @@ body {
 
 }
 
+#top {
+
+}
+
+#top .title{
+	text-align: center;
+	font-size: 32px;
+}
+
+#top .subtitle{
+	text-align: center;
+	font-size: 22px;
+}
+
+#top .thumbnail{
+	border: 0 none;
+	box-shadow: none;
+}
+
 /*Footer*/
 #footer {
 	padding-top: 10px;

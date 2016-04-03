@@ -12,6 +12,20 @@ impressionApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('topHeroshotDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/top-heroshot-directive.html'
+	};
+})
+
+.directive('topDescriptionDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/top-description-directive.html'
+	};
+})
+
 .directive('contactContentDirective', function(){
 	return {
 		restrict: 'A',
