@@ -43,19 +43,36 @@ body {
 
 }
 
-#top .title{
-	text-align: center;
-	font-size: 32px;
+#top .block{
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-#top .subtitle{
+#top .block .title{
+	color: #666666;
 	text-align: center;
-	font-size: 22px;
+	font-size: 36px;
+	margin-top: -10px;
+	margin-bottom: 30px;
 }
 
-#top .thumbnail{
+#top .block .subtitle{
+	color: #666666;
+	text-align: center;
+	font-size: 26px;
+	margin-top: 10px;
+}
+
+#top .block .thumbnail{
 	border: 0 none;
 	box-shadow: none;
+}
+
+#top .block .thumbnail .caption h3{
+	color: #EF4481;
+	text-align: center;
+	margin-top: 0px;
+	padding-top: 0px;
 }
 
 /*Footer*/
