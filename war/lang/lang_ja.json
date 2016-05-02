@@ -5,7 +5,7 @@
 		"illegal_user_id": "不正な値です。時間をおいて再度お試しください"
 	},
 	"header":{
-		"overview":"概要",
+		"home":"Home",
 		"contact": "お問合せ",
 		"privacy": "プライバシーポリシー",
 		"tos": "利用規約",
