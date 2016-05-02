@@ -19,6 +19,54 @@
 		"tos": "利用規約",
 		"blog": "ブログ"
 	},
+	"top":{
+		"jumbotron": {
+			"title": "First Impression",
+			"description": "リアルタイムに、あなたのアイデアへの反応を見てみよう。",
+			"learn_more": "もっと詳しく"
+		},
+		"overview": {
+			"title": "「First Impression」の4つの要素",
+			"subtitle": "頑張れ、スタートアップ！",
+			"allfree_title": "すべてタダ",
+			"allfree_desc": "調査のためのお金がなくても問題ありません。",
+			"easyask_title": "手軽に確認",
+			"easyask_desc": "手続きも簡単なので、手軽に確認できます",
+			"realtime_title": "リアルタイム",
+			"realtime_desc": "結果を受けて、コンセプトの素早いブラッシュアップやピボットも可能。",
+			"gender_title": "性別/年代",
+			"gender_desc": "結果はそれぞれの性別や年代ごとに表示されます。"
+		},
+		"background": {
+			"title": "スターツアップ企業が終わる最大の理由",
+			"subtitle": "ご存知ですか？",
+			"header": "「マーケットのニーズがなかった」",
+			"caption": "スタートアップ企業が倒産する理由のうち、42% が「マーケットのニーズがなかった」こと。製品の品質がどれだけよくても、その製品を欲しいと思ってくれるニーズは必要です。"
+		},
+		"usecase": {
+			"title": "ユースケース",
+			"concept_title": "あなたの製品のコンセプトをユーザに確認",
+			"concept_desc": "いいアイデアを思いついたなら、すぐにそれをエンドユーザにぶつけてみましょう。ユーザニーズが担保された背品であれば、失敗する可能性を減らせます。",
+			"favorite_title": "ユーザの好みを確認",
+			"favorite_desc": "「AとBのどちらが好きか？」そんなシンプルな質問をすることもできます。",
+			"segment_title": "それぞれの世代と性別の傾向を確認",
+			"segment_desc": "世代/背別ごとに結果が表示されるため、それらの傾向を製品の方向性検討に活かすこともできます。"
+		},
+		"start":{
+			"title": "開始までの3ステップ",
+			"registration_title": "登録",
+			"registration_desc": "登録は1分で手軽。",
+			"ask_title": "質問をする",
+			"ask_desc": "A/Bテスト形式で質問します。質問まで30秒！",
+			"wait_title": "しばし待つ",
+			"wait_desc":"回答がついたら、自動でお知らせします"
+		},
+		"download": {
+			"title": "アプリをダウンロードしてみる",
+			"subtitle": "リアルタイムに、あなたのアイデアへの反応を見てみよう。",
+			"download_button": "Androidアプリをダウンロード"
+		}
+	},
 	"contact":{
 		"overview":"質問や意見、感想など、お気軽にお寄せください",
 		"name":"お名前",
