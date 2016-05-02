@@ -40,7 +40,19 @@
 
 	<title>index</title>
 </head>
-<body bgcolor="#F9FAFB">
+<body>
+
+<!-- Facebook plug-in -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.6&appId=148187165584179";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- Facebook plug-in -->
+
 <div class="container-fluid" height="100%">
 	<div class="row">
 	<div header-directive></div>
@@ -48,6 +60,6 @@
 	<div ui-view height="100%" autoscroll="false"></div>
 	</div>
 </div>
-<!-- <div footer-directive></div> -->
+<div footer-directive></div>
 </body>
 </html>
