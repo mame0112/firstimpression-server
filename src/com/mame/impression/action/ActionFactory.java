@@ -5,6 +5,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.mame.impression.action.answer.ReplyToQuestionAction;
+import com.mame.impression.action.answer.RequestAnswerAction;
+import com.mame.impression.action.contact.ContactAction;
+import com.mame.impression.action.list.RequestQuestionListAction;
+import com.mame.impression.action.question.CreateNewQuestionAction;
+import com.mame.impression.action.question.DeleteQuestionAction;
+import com.mame.impression.action.question.RequestQuestionAction;
+import com.mame.impression.action.question.UpdateQuestionAction;
+import com.mame.impression.action.result.RequestQuestionDetailAction;
+import com.mame.impression.action.user.SignInAction;
+import com.mame.impression.action.user.SignOutAction;
+import com.mame.impression.action.user.SignUpAction;
+import com.mame.impression.action.user.UserInfoUpdateAction;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
 
@@ -57,9 +70,6 @@ public class ActionFactory {
 		// Use
 		mAction.put(ActionConstants.PUT + ActionConstants.KEY_ANSWER,
 				new ReplyToQuestionAction());
-		
-		//Device action
-		//TODO To be added
 		
 		//Contact action
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_CONTACT,

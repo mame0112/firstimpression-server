@@ -32,12 +32,22 @@
 		<servlet-name>controllerServlet</servlet-name>
 		<servlet-class>com.mame.impression.ImpressionControllerServlet</servlet-class>
 	</servlet>
-
+	
 	<servlet-mapping>
 		<servlet-name>controllerServlet</servlet-name>
 		<url-pattern>/api/v1/*</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+	  <servlet-name>cronMemcacheServlet</servlet-name>
+	  <servlet-class>com.mame.impression.MemcacheClearServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	  <servlet-name>cronMemcacheServlet</servlet-name>
+	  <url-pattern>/cron_memcache</url-pattern>
+	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>_ah_sessioncleanup</servlet-name>
 		<url-pattern>/_ah/sessioncleanup</url-pattern>

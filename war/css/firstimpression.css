@@ -34,7 +34,6 @@ body {
 	clear:both;
 }
 
-
 .jumbotron .description{
 
 }
@@ -63,9 +62,26 @@ body {
 	margin-top: 10px;
 }
 
+#top .block .description{
+	color: #666666;
+	margin-top: 4px;
+}
+
+#top .block .description .head{
+	font-size: 22px;
+}
+
+#top .block .description .body{
+	font-size: 16px;
+}
+
 #top .block .thumbnail{
 	border: 0 none;
 	box-shadow: none;
+}
+
+#top .block .thumbnail img{
+	width: 200px;
 }
 
 #top .block .thumbnail .caption h3{
@@ -75,6 +91,56 @@ body {
 	padding-top: 0px;
 }
 
+#top .block .thumbnail .caption p{
+	font-size: 18px;
+	text-align: center;
+}
+
+#top #usecase {
+	background-color: #3366CB;
+	padding: 20px;
+}
+
+#top #usecase .block{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#top #usecase .block .title{
+	color: #ffffff;
+}
+
+#top #usecase .block img{
+	height: 200px;
+}
+
+#top #usecase .block .pos{
+	display: table-cell;
+	vertical-align: middle;
+	margin: 0;
+	height: 200px;
+}
+
+#top #usecase .block .pos .head{
+	color: #ffffff;
+	font-size: 22px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#top #usecase .block .pos .body{
+	color: #ffffff;
+	font-size: 16px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#top #usecase .block img{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 /*Footer*/
 #footer {
 	padding-top: 10px;

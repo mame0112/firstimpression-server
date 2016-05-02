@@ -205,13 +205,32 @@ public class ImpressionDataManager {
 
 	}
 
-	public List<QuestionData> getLatestQuestionList(Result result) {
+	/**
+	 * Get Question list.
+	 * The maximum number of qustion is 20.
+	 * 10 is from latest question. Another 10 is from old questions.
+	 * @param result
+	 * @return
+	 */
+	public List<QuestionData> getQuestionList(Result result) {
 
 		if (result == null) {
 			throw new IllegalArgumentException("Result cannot be null");
 		}
+		
+		List<QuestionData> questions = mQuestionDao.getLatestQuestionData(result);
+		if(questions != null){
+			List<QuestionData> olderQuestions = mQuestionDao.getOlderQuestionData(result);
+			if(olderQuestions != null){
+				questions.addAll(olderQuestions);
+				return questions;
+			}
+		} else {
+			//Just in case, if latest question is null
+			return mQuestionDao.getOlderQuestionData(result);
+		}
 
-		return mQuestionDao.getLatestQuestionData(result);
+		return questions;
 
 	}
 

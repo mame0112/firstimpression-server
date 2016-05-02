@@ -7,12 +7,14 @@ import com.google.api.server.spi.Constant;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.mame.impression.Result;
 import com.mame.impression.Result.ActionResult;
 import com.mame.impression.Result.ErrorType;
@@ -29,6 +31,8 @@ import com.mame.impression.data.UserData.Gender;
 import com.mame.impression.datastore.DatastoreKeyFactory;
 import com.mame.impression.datastore.DbConstant;
 import com.mame.impression.datastore.ImpressionDatastoreHelper;
+import com.mame.impression.datastore.MemcacheConstant;
+import com.mame.impression.datastore.MemcacheHandler;
 import com.mame.impression.util.LogUtil;
 
 public class DefaultQuestionDao implements QuestionDao {
@@ -63,26 +67,73 @@ public class DefaultQuestionDao implements QuestionDao {
 
 		LogUtil.d(TAG, "getLatestQuestionData");
 
-		List<QuestionData> questions = new ArrayList<QuestionData>();
+		List<QuestionData> questions = (List<QuestionData>) MemcacheHandler
+				.get(DbConstant.KIND_QUESTION, MemcacheConstant.LATEST_QUESTION);
+
+		// If memcache already exists, return it.
+		if (questions != null && questions.size() != 0) {
+			LogUtil.d(TAG, "memcache exists");
+			return questions;
+		}
+
+		questions = new ArrayList<QuestionData>();
 
 		Query q = new Query(DbConstant.KIND_QUESTION);
+		q.addSort(DbConstant.ENTITY_QUESTION_POST_DATE,
+				SortDirection.DESCENDING);
+		FetchOptions fetchOptions = FetchOptions.Builder
+				.withLimit(Constants.LATEST_QUESTION_LIST_NUM);
 		PreparedQuery pq = mDS.prepare(q);
 
-		for (Entity entity : pq.asIterable()) {
+		for (Entity entity : pq.asIterable(fetchOptions)) {
 			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
 			questions.add(helper.createQuestionDataFromEntity(entity));
-			// long id = (Long)
-			// entity.getProperty(DbConstant.ENTITY_QUESTION_ID);
-			// String description = (String) entity
-			// .getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
-			// LogUtil.d(TAG, "id: " + id);
-			//
-			// QuestionDataBuilder builder = new QuestionDataBuilder();
-			//
-			// // TODO
-			// questions.add(builder.setQuestionId(id).setDescription(description)
-			// .getResult());
 		}
+
+		// Store data to memcache
+		MemcacheHandler.put(DbConstant.KIND_QUESTION,
+				MemcacheConstant.LATEST_QUESTION, questions);
+
+		return questions;
+	}
+
+	@Override
+	public List<QuestionData> getOlderQuestionData(Result result) {
+		LogUtil.d(TAG, "getOlderQuestionData");
+
+		List<QuestionData> questions = (List<QuestionData>) MemcacheHandler
+				.get(DbConstant.KIND_QUESTION, MemcacheConstant.OLDER_QUESTION);
+
+		// If memcache already exists, return it.
+		if (questions != null && questions.size() != 0) {
+			LogUtil.d(TAG, "memcache exists");
+			return questions;
+		}
+
+		questions = new ArrayList<QuestionData>();
+
+		Query q = new Query(DbConstant.KIND_QUESTION);
+		q.addSort(DbConstant.ENTITY_QUESTION_POST_DATE,
+				SortDirection.DESCENDING);
+		FetchOptions fetchOptions = FetchOptions.Builder.withLimit(
+				Constants.OLDER_QUESTION_LIST_NUM).offset(
+				Constants.LATEST_QUESTION_LIST_NUM);
+		PreparedQuery pq = mDS.prepare(q);
+
+		// TODO Need to consider how we retrieve old questions if the number of
+		// question increased
+		// int totalNum = pq.countEntities(FetchOptions.Builder.withDefaults());
+
+		for (Entity entity : pq.asIterable(fetchOptions)) {
+			LogUtil.d(TAG, "AA");
+			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
+			questions.add(helper.createQuestionDataFromEntity(entity));
+
+		}
+
+		// Store data to memcache
+		MemcacheHandler
+				.put(DbConstant.KIND_QUESTION, MemcacheConstant.OLDER_QUESTION, questions);
 
 		return questions;
 	}
@@ -155,7 +206,8 @@ public class DefaultQuestionDao implements QuestionDao {
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
 					createdUserName = (String) e
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
-					indexUserData = new IndexUserData(createdUserId, createdUserName);
+					indexUserData = new IndexUserData(createdUserId,
+							createdUserName);
 					break;
 				case 1:
 					num = (long) e
@@ -166,8 +218,9 @@ public class DefaultQuestionDao implements QuestionDao {
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
 					createdUserName = (String) e
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
-					indexUserData = new IndexUserData(createdUserId, createdUserName);
-					
+					indexUserData = new IndexUserData(createdUserId,
+							createdUserName);
+
 					break;
 				default:
 					LogUtil.w(TAG, "Illegal choice value");

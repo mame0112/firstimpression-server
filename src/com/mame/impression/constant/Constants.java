@@ -6,7 +6,10 @@ public class Constants {
 
 	public static final boolean IS_DEBUG = true;
 
-	public static final boolean iS_MEMCACHE_ENABLED = true;
+	/**
+	 * Boolean value to decide if memache is used.
+	 */
+	public static final boolean IS_MEMCACHE_ENABLED = true;
 
 	public static final long NO_USER = -1;
 
@@ -15,6 +18,9 @@ public class Constants {
 	/**
 	 * The number of question to be return to client side as latest question.
 	 */
-	public static final int LATEST_QUESTION_NUM = 20;
+	public final static int LATEST_QUESTION_LIST_NUM = 10;
+	
+	public final static int OLDER_QUESTION_LIST_NUM = 10;
 
+	
 }

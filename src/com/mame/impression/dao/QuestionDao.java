@@ -19,6 +19,14 @@ public interface QuestionDao {
 	 * @return
 	 */
 	public List<QuestionData> getLatestQuestionData(Result result);
+	
+	/**
+	 * Get older question list.
+	 * 
+	 * @param result
+	 * @return
+	 */
+	public List<QuestionData> getOlderQuestionData(Result result);
 
 	/**
 	 * Save a question data

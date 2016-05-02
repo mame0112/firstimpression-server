@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/cron_memcache</url>
+    <description>Remove question memcache</description>
+    <schedule>every 2 minutes</schedule>
+    <timezone>Asia/Tokyo</timezone>
+  </cron>
+</cronentries>

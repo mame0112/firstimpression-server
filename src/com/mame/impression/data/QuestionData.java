@@ -1,11 +1,17 @@
 package com.mame.impression.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mame.impression.constant.Constants;
 
-public class QuestionData {
+public class QuestionData implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1626619596576845044L;
 
 	/**
 	 * Question id. This also stands for created time of this question
