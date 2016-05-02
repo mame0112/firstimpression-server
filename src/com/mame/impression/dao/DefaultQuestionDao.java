@@ -125,7 +125,6 @@ public class DefaultQuestionDao implements QuestionDao {
 		// int totalNum = pq.countEntities(FetchOptions.Builder.withDefaults());
 
 		for (Entity entity : pq.asIterable(fetchOptions)) {
-			LogUtil.d(TAG, "AA");
 			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
 			questions.add(helper.createQuestionDataFromEntity(entity));
 
