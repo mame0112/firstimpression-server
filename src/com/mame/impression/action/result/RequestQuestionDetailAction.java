@@ -183,6 +183,8 @@ public class RequestQuestionDetailAction implements Action {
 					.getChoiceAItem().getFrom60_70());
 			itemAObj.put(ActionConstants.QUESTION_AGE_OVER70, data
 					.getChoiceAItem().getOver70());
+			itemAObj.put(ActionConstants.QUESTION_AGE_UNKNOWN, data
+					.getChoiceAItem().getGenerationUnknown());
 
 			// Items for choice B
 			JSONObject itemBObj = new JSONObject();
@@ -208,6 +210,8 @@ public class RequestQuestionDetailAction implements Action {
 					.getChoiceBItem().getFrom60_70());
 			itemBObj.put(ActionConstants.QUESTION_AGE_OVER70, data
 					.getChoiceBItem().getOver70());
+			itemBObj.put(ActionConstants.QUESTION_AGE_UNKNOWN, data
+					.getChoiceAItem().getGenerationUnknown());
 
 			obj.put(ActionConstants.QUESTION_CHOICE_ITEM_A, itemAObj);
 			obj.put(ActionConstants.QUESTION_CHOICE_ITEM_B, itemBObj);

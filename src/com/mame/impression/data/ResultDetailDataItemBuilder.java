@@ -59,6 +59,11 @@ public class ResultDetailDataItemBuilder {
 		return this;
 	}
 	
+	public ResultDetailDataItemBuilder setGenerationUnknown(int generationUnknown) {
+		mContent.setGenerationUnknown(generationUnknown);
+		return this;
+	}
+	
 	public ResultDetailDataItem getResult(){
 		return mContent;
 	}

@@ -66,7 +66,7 @@ public class DbConstant {
 
 	public final static String ENTITY_QUESTION_GENDER_FEMALE_A = "female_a";
 
-	public final static String ENTITY_QUESTION_GENDER_UNKNOWN_A = "unknonw_a";
+	public final static String ENTITY_QUESTION_GENDER_UNKNOWN_A = "unknown_a";
 
 	public final static String ENTITY_QUESTION_AGE_UNDER10_A = "under10_a";
 
@@ -84,11 +84,13 @@ public class DbConstant {
 
 	public final static String ENTITY_QUESTION_AGE_OVER70_A = "over70_a";
 	
+	public final static String ENTITY_QUESTION_AGE_UNKNOWN_A = "age_unknown_a";
+	
 	public final static String ENTITY_QUESTION_GENDER_MALE_B = "male_b";
 
 	public final static String ENTITY_QUESTION_GENDER_FEMALE_B = "female_b";
 
-	public final static String ENTITY_QUESTION_GENDER_UNKNOWN_B = "unknonw_b";
+	public final static String ENTITY_QUESTION_GENDER_UNKNOWN_B = "unknown_b";
 
 	public final static String ENTITY_QUESTION_AGE_UNDER10_B = "under10_b";
 
@@ -105,6 +107,8 @@ public class DbConstant {
 	public final static String ENTITY_QUESTION_AGE_FROM60_70_B = "from60_70_b";
 
 	public final static String ENTITY_QUESTION_AGE_OVER70_B = "over70_b";
+	
+	public final static String ENTITY_QUESTION_AGE_UNKNOWN_B = "age_unknown_b";
 
 	public final static String ENTITY_QUESTION_ADDITIONAL_QUESTION = "additional_question";
 

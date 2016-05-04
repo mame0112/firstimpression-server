@@ -24,6 +24,8 @@ public class ResultDetailDataItem {
 
 	private int mOver70;
 	
+	private int mGenerationUnknown;
+	
 	void setMale(int male) {
 		mMale = male;
 	}
@@ -68,6 +70,10 @@ public class ResultDetailDataItem {
 		mOver70 = over70;
 	}
 	
+	void setGenerationUnknown(int unknownGeneration) {
+		mGenerationUnknown = unknownGeneration;
+	}
+	
 	public int getMale() {
 		return mMale;
 	}
@@ -110,6 +116,10 @@ public class ResultDetailDataItem {
 
 	public int getOver70() {
 		return mOver70;
+	}
+	
+	public int getGenerationUnknown() {
+		return mGenerationUnknown;
 	}
 
 }

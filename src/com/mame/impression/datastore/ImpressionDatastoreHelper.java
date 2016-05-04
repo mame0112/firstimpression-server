@@ -411,12 +411,21 @@ public class ImpressionDatastoreHelper {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
+		int generationUnknown = 0;
+		try {
+			generationUnknown = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNKNOWN_A));
+		} catch (Exception e1) {
+			LogUtil.d(TAG, "Exception: " + e1.getMessage());
+		}
+
 		return new ResultDetailDataItemBuilder().setMale(male)
 				.setFemale(female).setGenderUnknown(genderUnknown)
 				.setUnder10(under10).setFrom10_20(from10_20)
 				.setFrom20_30(from20_30).setFrom30_40(from30_40)
 				.setFrom40_50(from40_50).setFrom50_60(from50_60)
-				.setFrom60_70(from60_70).setOver70(over70).getResult();
+				.setFrom60_70(from60_70).setOver70(over70)
+				.setGenerationUnknown(generationUnknown).getResult();
 	}
 
 	public ResultDetailDataItem getAnswerResultResultItemB(Entity e) {
@@ -509,12 +518,21 @@ public class ImpressionDatastoreHelper {
 			LogUtil.d(TAG, "Exception: " + e1.getMessage());
 		}
 
+		int generationUnknown = 0;
+		try {
+			generationUnknown = (int) ((long) e
+					.getProperty(DbConstant.ENTITY_QUESTION_AGE_UNKNOWN_B));
+		} catch (Exception e1) {
+			LogUtil.d(TAG, "Exception: " + e1.getMessage());
+		}
+
 		return new ResultDetailDataItemBuilder().setMale(male)
 				.setFemale(female).setGenderUnknown(genderUnknown)
 				.setUnder10(under10).setFrom10_20(from10_20)
 				.setFrom20_30(from20_30).setFrom30_40(from30_40)
 				.setFrom40_50(from40_50).setFrom50_60(from50_60)
-				.setFrom60_70(from60_70).setOver70(over70).getResult();
+				.setFrom60_70(from60_70).setOver70(over70)
+				.setGenerationUnknown(generationUnknown).getResult();
 	}
 
 	public void setGenderAndAgeData(Entity entity, Gender gender, Age age,
@@ -690,6 +708,20 @@ public class ImpressionDatastoreHelper {
 			case 1:
 				updateCategoryResponseNum(entity,
 						DbConstant.ENTITY_QUESTION_AGE_OVER70_B);
+				break;
+			default:
+				break;
+			}
+			break;
+		case UNKNOWN:
+			switch (choice) {
+			case 0:
+				updateCategoryResponseNum(entity,
+						DbConstant.ENTITY_QUESTION_AGE_UNKNOWN_A);
+				break;
+			case 1:
+				updateCategoryResponseNum(entity,
+						DbConstant.ENTITY_QUESTION_AGE_UNKNOWN_B);
 				break;
 			default:
 				break;

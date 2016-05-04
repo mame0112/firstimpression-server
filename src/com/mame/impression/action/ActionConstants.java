@@ -147,6 +147,8 @@ public class ActionConstants {
 	public final static String QUESTION_AGE_FROM60_70 = "from60_70";
 
 	public final static String QUESTION_AGE_OVER70 = "over70";
+	
+	public final static String QUESTION_AGE_UNKNOWN = "generation_unknown";
 
 	public final static String QUESTION_CHOICE_ITEM_A = "item_a";
 
