@@ -71,8 +71,7 @@ public class ReplyToQuestionAction implements Action {
 					indexUserData.getUserName());
 			if (data != null) {
 				GCMPushSender sender = new GCMPushSender();
-				// TODO Need to include Question title.
-				GcmPushData pushData = new GcmPushData(questionId);
+				GcmPushData pushData = new GcmPushData(questionId, indexUserData.getDescription());
 				sender.sendPushNotification(data.getDeviceId(), pushData);
 			}
 

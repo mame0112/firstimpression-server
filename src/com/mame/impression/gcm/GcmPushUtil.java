@@ -25,10 +25,11 @@ public class GcmPushUtil {
 
 		try {
 			result.put(GcmConstants.PARAM_QUESTION_ID, input.getQuestionId());
+			result.put(GcmConstants.PARAM_QUESTION_DESCRIPTION, input.getQuestionTitle());
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
-
+		
 		return result;
 	}
 

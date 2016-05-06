@@ -131,8 +131,8 @@ public class DefaultQuestionDao implements QuestionDao {
 		}
 
 		// Store data to memcache
-		MemcacheHandler
-				.put(DbConstant.KIND_QUESTION, MemcacheConstant.OLDER_QUESTION, questions);
+		MemcacheHandler.put(DbConstant.KIND_QUESTION,
+				MemcacheConstant.OLDER_QUESTION, questions);
 
 		return questions;
 	}
@@ -194,6 +194,7 @@ public class DefaultQuestionDao implements QuestionDao {
 				long num = 0;
 				long createdUserId = Constants.NO_USER;
 				String createdUserName = null;
+				String description = null;
 
 				switch (choice) {
 				case 0:
@@ -205,8 +206,10 @@ public class DefaultQuestionDao implements QuestionDao {
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
 					createdUserName = (String) e
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
+					description = (String) e
+							.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
 					indexUserData = new IndexUserData(createdUserId,
-							createdUserName);
+							createdUserName, description);
 					break;
 				case 1:
 					num = (long) e
@@ -217,8 +220,10 @@ public class DefaultQuestionDao implements QuestionDao {
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERID);
 					createdUserName = (String) e
 							.getProperty(DbConstant.ENTITY_QUESTION_CREATED_USERNAME);
+					description = (String) e
+							.getProperty(DbConstant.ENTITY_QUESTION_DESCRIPTION);
 					indexUserData = new IndexUserData(createdUserId,
-							createdUserName);
+							createdUserName, description);
 
 					break;
 				default:
