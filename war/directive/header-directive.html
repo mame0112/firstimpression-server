@@ -12,25 +12,11 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <!--
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a ui-sref="privacy" translate="header.privacy">Privacty policy</a></li>
-        <li><a ui-sref="tos" translate="header.tos">Terms</a></li>
-        <li><a ui-sref="contact" translate="header.contact">Contact</a></li>
-        <li><a href="http://mame0112.hatenablog.com/" translate="header.blog">Blog</a></li>
-      </ul>
-    </div>
-    -->
-    <!-- /.navbar-collapse -->
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" collapse="navbarCollapsed">
       <ul class="nav navbar-nav">
-        <li ng-click="switchNavivarStatus()"><a ui-sref="overview" translate="header.home">Home</a></li>
-        <li ng-click="switchNavivarStatus()"><a ui-sref="overview" translate="header.contact">Contact</a></li>
-        <li ng-click="switchNavivarStatus()"><a ui-sref="overview" translate="header.privacy">Privacy policy</a></li>
-        <li ng-click="switchNavivarStatus()"><a ui-sref="overview" translate="header.tos">Terms</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="privacy" translate="header.privacy">Privacy policy</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="tos" translate="header.tos">Terms</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="contact" translate="header.contact">Contact</a></li>
         <!-- <li ng-click="switchNavivarStatus()"><a ui-sref="contact" translate="header.contact">Contact</a></li> -->
         <li ng-click="switchNavivarStatus()"><a href="http://mame0112.hatenablog.com/" translate="header.blog">Blog</a></li>
       </ul>
