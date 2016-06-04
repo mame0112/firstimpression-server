@@ -76,6 +76,7 @@ public class CreateNewQuestionAction implements Action {
 		if (data != null) {
 			try {
 				result.put(ActionConstants.ID, data.getQuestionId());
+				result.put(ActionConstants.QUESTION_DESCRIPTION, data.getDescription());
 			} catch (JSONException e) {
 				LogUtil.d(TAG, "JSONException: " + e.getMessage());
 			}
