@@ -53,13 +53,15 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 <!-- Facebook plug-in -->
 
-<div class="container-fluid" height="100%">
+<div class="container-fullwidth" height="100%">
 	<div class="row">
 	<div header-directive></div>
 		<!-- <div toaster-directive></div> -->
-	<div ui-view height="100%" autoscroll="false"></div>
+	<div class="container-fluid" height="100%">
+		<div ui-view height="100%" autoscroll="false"></div>
 	</div>
+	</div>
+	<div footer-directive></div>
 </div>
-<div footer-directive></div>
 </body>
 </html>
