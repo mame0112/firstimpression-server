@@ -8,6 +8,7 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.mame.impression.Result;
+import com.mame.impression.Result.ActionResult;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionData;
 import com.mame.impression.data.UserData;
@@ -15,6 +16,7 @@ import com.mame.impression.datastore.DatastoreKeyFactory;
 import com.mame.impression.datastore.DbConstant;
 import com.mame.impression.datastore.ImpressionDatastoreHelper;
 import com.mame.impression.util.LogUtil;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
@@ -31,6 +33,33 @@ public class DefaultUserDao implements UserDao {
 			.getDatastoreService();
 
 	private final static String ASCII_FIRST = "0";
+	
+	public boolean isUserNameExist(Result result,
+			String userName) {
+		LogUtil.d(TAG, "findUserDataByName");
+		
+		Key firstKey = DatastoreKeyFactory.getUserNameKey(userName);
+		Key lastKey = DatastoreKeyFactory
+				.getUserNameKey(userName + ASCII_FIRST);
+
+		Filter userFirstFilter = new FilterPredicate(
+				Entity.KEY_RESERVED_PROPERTY,
+				FilterOperator.GREATER_THAN_OR_EQUAL, firstKey);
+		Filter userLastFilter = new FilterPredicate(
+				Entity.KEY_RESERVED_PROPERTY, FilterOperator.LESS_THAN, lastKey);
+
+		Query q = new Query(DbConstant.KIND_USER)
+				.setFilter(CompositeFilterOperator.and(userFirstFilter,
+						userLastFilter));
+
+		PreparedQuery pq = mDS.prepare(q);
+		List<Entity> eList = pq.asList(FetchOptions.Builder.withOffset(0));
+		if(eList != null && eList.size() != 0){
+			return true;
+		}
+		
+		return false;
+	}
 
 	public UserData findUserDataByNameAndPassword(Result result,
 			String userName, String password) {

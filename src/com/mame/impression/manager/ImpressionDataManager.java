@@ -42,6 +42,22 @@ public class ImpressionDataManager {
 		return sInstance;
 	}
 
+	public synchronized boolean isUserNameAlreadyUsed(Result result,
+			String userName) {
+		LogUtil.d(TAG, "isUserNameAlreadyUsed");
+
+		if (result == null) {
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+
+		if (userName == null) {
+			result.setActionResult(ActionResult.FAIL);
+			throw new IllegalArgumentException("user name cannot be null");
+		}
+
+		return mUserDao.isUserNameExist(result, userName);
+	}
+
 	public synchronized UserData findUserDataByNameAndPassword(Result result,
 			String userName, String password) {
 		LogUtil.d(TAG, "findUserDataByNameAndPassword");
@@ -206,9 +222,9 @@ public class ImpressionDataManager {
 	}
 
 	/**
-	 * Get Question list.
-	 * The maximum number of qustion is 20.
-	 * 10 is from latest question. Another 10 is from old questions.
+	 * Get Question list. The maximum number of qustion is 20. 10 is from latest
+	 * question. Another 10 is from old questions.
+	 * 
 	 * @param result
 	 * @return
 	 */
@@ -217,16 +233,18 @@ public class ImpressionDataManager {
 		if (result == null) {
 			throw new IllegalArgumentException("Result cannot be null");
 		}
-		
-		List<QuestionData> questions = mQuestionDao.getLatestQuestionData(result);
-		if(questions != null){
-			List<QuestionData> olderQuestions = mQuestionDao.getOlderQuestionData(result);
-			if(olderQuestions != null){
+
+		List<QuestionData> questions = mQuestionDao
+				.getLatestQuestionData(result);
+		if (questions != null) {
+			List<QuestionData> olderQuestions = mQuestionDao
+					.getOlderQuestionData(result);
+			if (olderQuestions != null) {
 				questions.addAll(olderQuestions);
 				return questions;
 			}
 		} else {
-			//Just in case, if latest question is null
+			// Just in case, if latest question is null
 			return mQuestionDao.getOlderQuestionData(result);
 		}
 

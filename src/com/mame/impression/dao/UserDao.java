@@ -4,7 +4,9 @@ import com.mame.impression.Result;
 import com.mame.impression.data.UserData;
 
 public interface UserDao {
-
+	
+	public boolean isUserNameExist(Result result, String userName);
+	
 	public UserData findUserDataByNameAndPassword(Result result,
 			String userName, String password);
 

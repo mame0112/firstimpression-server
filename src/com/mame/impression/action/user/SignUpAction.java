@@ -36,22 +36,22 @@ public class SignUpAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		//TODO
-//		String responseId = request.getParameter(ActionConstants.ID);
+		// TODO
+		// String responseId = request.getParameter(ActionConstants.ID);
 		String responseId = "1";
-//		String param = request.getParameter(ActionConstants.PARAM);
+		// String param = request.getParameter(ActionConstants.PARAM);
 		JSONObject param = ParameterRetriver.retrieveParam(request);
-		
+
 		LogUtil.d(TAG, "id: " + responseId);
 		LogUtil.d(TAG, "param: " + param);
-		
+
 		Map map = request.getParameterMap();
 		Iterator it = map.keySet().iterator();
 		while (it.hasNext()) {
 			String name = (String) it.next();
 			String[] val = (String[]) map.get(name);
 			for (int i = 0; i < val.length; i++) {
-//				out.println(name + "=" + val[i] + "<br>");
+				// out.println(name + "=" + val[i] + "<br>");
 				LogUtil.d(TAG, "name; " + name + " val[i]: " + val[i]);
 			}
 		}
@@ -59,20 +59,31 @@ public class SignUpAction implements Action {
 		ActionUtil util = new ActionUtil();
 		UserData data = util.createUserDataFromParam(param.toString());
 
-		// Use current time as user id
-		data.setUserId(new TimeUtil().getCurrentTime());
-
 		// Create result
 		Result result = new Result();
 
-		ImpressionDataManager.getInstance().storeNewUserData(result, data);
+		boolean isUsed = ImpressionDataManager.getInstance()
+				.isUserNameAlreadyUsed(result, data.getUserName());
 
+		// Result JSON Object
 		JSONObject paramObject = new JSONObject();
 
-		if (result.isSuccess()) {
-			paramObject = createSuccessResultJson(paramObject, data);
-		} else if (result.isFailed()) {
-			paramObject = createFailResultJson(paramObject);
+		// If user name has already been used
+		if (isUsed) {
+			// Return NO_USER for User id.
+			paramObject = createUserNameAlreadyUsedResultJson(paramObject);
+		} else {
+			// If user name has not been used
+			// Use current time as user id
+			data.setUserId(new TimeUtil().getCurrentTime());
+
+			ImpressionDataManager.getInstance().storeNewUserData(result, data);
+
+			if (result.isSuccess()) {
+				paramObject = createSuccessResultJson(paramObject, data);
+			} else if (result.isFailed()) {
+				paramObject = createFailResultJson(paramObject);
+			}
 		}
 
 		JSONObject resultJson = util.createResultJsonObject(paramObject,
@@ -96,6 +107,15 @@ public class SignUpAction implements Action {
 	private JSONObject createFailResultJson(JSONObject object) {
 		try {
 			object.put(ActionConstants.ERROR, "Error occurrs");
+		} catch (JSONException e) {
+			LogUtil.d(TAG, "JSONException: " + e.getMessage());
+		}
+		return object;
+	}
+
+	private JSONObject createUserNameAlreadyUsedResultJson(JSONObject object) {
+		try {
+			object.put(ActionConstants.USER_ID, (Long) Constants.NO_USER);
 		} catch (JSONException e) {
 			LogUtil.d(TAG, "JSONException: " + e.getMessage());
 		}
