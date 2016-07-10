@@ -29,8 +29,6 @@ public class ActionUtil {
 			throw new IllegalArgumentException("Input param cannot be null");
 		}
 
-		LogUtil.d(TAG, "param: " + param);
-
 		JSONObject input = new JSONObject(param);
 
 		long userId = Constants.NO_USER;

@@ -36,7 +36,7 @@ public class DefaultUserDao implements UserDao {
 	
 	public boolean isUserNameExist(Result result,
 			String userName) {
-		LogUtil.d(TAG, "findUserDataByName");
+		LogUtil.d(TAG, "isUserNameExist");
 		
 		Key firstKey = DatastoreKeyFactory.getUserNameKey(userName);
 		Key lastKey = DatastoreKeyFactory
@@ -119,7 +119,8 @@ public class DefaultUserDao implements UserDao {
 
 		Key key = DatastoreKeyFactory.getUserIdKey(data.getUserName(),
 				data.getUserId());
-		Entity entity = new Entity(key);
+//		Entity entity = new Entity(key);
+		Entity entity = DatastoreHandler.get(result, key);
 
 		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
 		helper.putUserDataToEntityWithoutOverride(data, entity);

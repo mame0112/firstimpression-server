@@ -11,6 +11,7 @@ import com.mame.impression.Result;
 import com.mame.impression.action.Action;
 import com.mame.impression.action.ActionConstants;
 import com.mame.impression.action.ActionUtil;
+import com.mame.impression.action.ParameterRetriver;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.UserData;
 import com.mame.impression.manager.ImpressionDataManager;
@@ -25,25 +26,28 @@ public class UserInfoUpdateAction implements Action {
 			HttpServletResponse response) throws Exception {
 		LogUtil.d(TAG, "execute");
 
-		String responseId = request.getParameter(ActionConstants.ID);
-		String param = request.getParameter(ActionConstants.PARAM);
-		
+		// String responseId = request.getParameter(ActionConstants.ID);
+		// TODO
+		String responseId = "1";
+		// String param = request.getParameter(ActionConstants.PARAM);
+		JSONObject param = ParameterRetriver.retrieveParam(request);
+
 		LogUtil.d(TAG, "id: " + responseId);
 		LogUtil.d(TAG, "param: " + param);
-		
+
 		Map map = request.getParameterMap();
 		Iterator it = map.keySet().iterator();
 		while (it.hasNext()) {
 			String name = (String) it.next();
 			String[] val = (String[]) map.get(name);
 			for (int i = 0; i < val.length; i++) {
-//				out.println(name + "=" + val[i] + "<br>");
+				// out.println(name + "=" + val[i] + "<br>");
 				LogUtil.d(TAG, "name; " + name + " val[i]: " + val[i]);
 			}
 		}
 
 		ActionUtil util = new ActionUtil();
-		UserData data = util.createUserDataFromParam(param);
+		UserData data = util.createUserDataFromParam(param.toString());
 
 		// Create result
 		Result result = new Result();
@@ -53,8 +57,9 @@ public class UserInfoUpdateAction implements Action {
 		JSONObject resultJson;
 
 		if (result.isSuccess()) {
-			resultJson = util.createResultJsonObject(new JSONObject(),
-					responseId);
+			JSONObject paramObject = new JSONObject();
+			paramObject.put(ActionConstants.USER_ID, data.getUserId());
+			resultJson = util.createResultJsonObject(paramObject, responseId);
 		} else {
 			JSONObject paramJson = new JSONObject();
 			paramJson.put(ActionConstants.ERROR, result.getErrorMessage());
