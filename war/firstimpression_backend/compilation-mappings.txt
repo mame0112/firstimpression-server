@@ -1,3 +1,6 @@
+04001C0A36B8DB68A19AFEAE404C4AF3.cache.js
+user.agent ie9
+
 3C1DFE332DC244BFB108934A3C50156C.cache.js
 user.agent safari
 
@@ -9,8 +12,5 @@ user.agent ie10
 
 79D19F7A9814D3E7EE028F92955DD6DC.cache.js
 user.agent gecko1_8
-
-F7F60EE370ACE16850CB25344C1921CB.cache.js
-user.agent ie9
 
 Devmode:devmode.js

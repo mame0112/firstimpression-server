@@ -39,7 +39,6 @@ public class SignUpAction implements Action {
 		// TODO
 		// String responseId = request.getParameter(ActionConstants.ID);
 		String responseId = "1";
-		// String param = request.getParameter(ActionConstants.PARAM);
 		JSONObject param = ParameterRetriver.retrieveParam(request);
 
 		LogUtil.d(TAG, "id: " + responseId);
