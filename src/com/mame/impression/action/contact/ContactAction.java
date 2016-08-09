@@ -32,6 +32,9 @@ public class ContactAction implements Action {
 
 		String responseId = "1";
 		String param = request.getParameter(ActionConstants.PARAM);
+		
+		// Result JSON Object
+		JSONObject paramObject = new JSONObject();
 
 		if (param != null) {
 			JSONObject input = new JSONObject(param);
@@ -60,14 +63,53 @@ public class ContactAction implements Action {
 			}
 
 			boolean result = sendMessage(userName, mailAddress, message);
+			
+			if(result){
+				createMessageSentSuccessObject(paramObject);
+			} else {
+				createMessageSentFailObject(paramObject);
+			}
 
 		} else {
 			// param is null
+			LogUtil.d(TAG, "param is null");
+			createMessageSentFailObject(paramObject);
 		}
 
 		ActionUtil util = new ActionUtil();
+		JSONObject resultJson = util.createResultJsonObject(paramObject, responseId);
 
-		return null;
+		return resultJson.toString();
+	}
+	
+	private void createMessageSentSuccessObject(JSONObject param){
+		LogUtil.d(TAG, "createMessageSentSuccessObject");
+		
+		if(param == null){
+			return;
+		}
+		
+		try {
+			param.put(ActionConstants.CONTACT_RESULT, ActionConstants.CONTACT_SUCCESS);
+		} catch (JSONException e){
+			LogUtil.d(TAG, e.getMessage());
+		}
+		
+	}
+	
+	private void createMessageSentFailObject(JSONObject param){
+		LogUtil.d(TAG, "createMessageSentFailObject");
+		
+		if(param == null){
+			return;
+		}
+		
+		try {
+			param.put(ActionConstants.CONTACT_RESULT, ActionConstants.CONTACT_FAIL);
+		} catch (JSONException e){
+			LogUtil.d(TAG, e.getMessage());
+		}
+		
 	}
 
 	private boolean sendMessage(String userName, String address, String message) {

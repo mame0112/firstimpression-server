@@ -38,4 +38,11 @@ impressionApp.directive('headerDirective', function(){
 		restrict: 'A',
 		templateUrl: 'directive/contact-note-directive.html'
 	};
+})
+
+.directive('toasterDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/toaster-directive.html'
+	};
 });

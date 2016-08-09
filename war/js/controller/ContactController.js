@@ -1,5 +1,5 @@
-impressionApp.controller('contactController', ['$scope', 'log', '$translate', 'contactAPIService',
-	function($scope, log, $translate, contactAPIService){
+impressionApp.controller('contactController', ['$scope', 'log', '$translate', 'contactAPIService', 'toasterService', '$state', 
+	function($scope, log, $translate, contactAPIService, toasterService, $state){
 	log.d("contactController");
 
  	var name = null;
@@ -47,11 +47,17 @@ impressionApp.controller('contactController', ['$scope', 'log', '$translate', 'c
  		log.d("result/ " + " name: " + param.name + " email: " + param.email + " message: " + param.message);
 
 		contactAPIService.mail({param : param}, function(response){
-	 		log.d("latest received");
+	 		log.d("message sent");
 
 	 		if(response !== null && response !== undefined){
-				toasterService.showSuccessToasterLong(message_send_result, successfully_sent);
-				$state.go('/');
+	 			if(isMessageSentSuccessfully(response)){
+	 				log.d("aaaa");
+					toasterService.showSuccessToasterLong(message_send_result, successfully_sent);
+					// $state.go('/');
+	 			} else {
+					toasterService.showErrorToasterLong(message_send_result, send_failed);
+	 			}
+
 	 		} else {
 	 			//Error handling
 				toasterService.showErrorToasterLong(message_send_result, send_failed);
@@ -72,6 +78,11 @@ impressionApp.controller('contactController', ['$scope', 'log', '$translate', 'c
  	$scope.$watch('message', function(newValue, oldValue) {
 		param.message = newValue;
 	});
+
+	isMessageSentSuccessfully = function(response){
+		log.d("isMessageSentSuccessfully");
+		return true;
+	};
 
 
 

@@ -3,7 +3,8 @@ var impressionApp = angular.module('impressionApp', [
 	// 'ngCookies', 
 	'ui.bootstrap',
 	'ui.router',
-	'pascalprecht.translate'
+	'pascalprecht.translate',
+	'toaster'
 	])
 .controller('ImpressionController', ['$scope', 'log', function($scope, log){
 	log.d("ImpressionController");

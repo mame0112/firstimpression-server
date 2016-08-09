@@ -59,7 +59,7 @@ public class ActionConstants {
 	public static final String VERSION = "version";
 
 	/**
-	 * Filed names (Output)
+	 * field names (Output)
 	 */
 	public static final String ERROR = "error";
 
@@ -81,7 +81,7 @@ public class ActionConstants {
 	public final static String USER_GENDER = "gender";
 
 	public final static String USER_CREATED_QUESTION_ID = "created_question_ids";
-	
+
 	public final static String USER_DEVICE_ID = "deviceid";
 
 	/**
@@ -92,6 +92,12 @@ public class ActionConstants {
 	public final static String CONTACT_EMAIL = "email";
 
 	public final static String CONTACT_MESSAGE = "message";
+
+	public final static String CONTACT_RESULT = "contact_result";
+
+	public final static String CONTACT_SUCCESS = "success";
+
+	public final static String CONTACT_FAIL = "fail";
 
 	/**
 	 * Parameter fields for QuestionData
@@ -147,7 +153,7 @@ public class ActionConstants {
 	public final static String QUESTION_AGE_FROM60_70 = "from60_70";
 
 	public final static String QUESTION_AGE_OVER70 = "over70";
-	
+
 	public final static String QUESTION_AGE_UNKNOWN = "generation_unknown";
 
 	public final static String QUESTION_CHOICE_ITEM_A = "item_a";
