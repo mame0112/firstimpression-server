@@ -2,7 +2,6 @@ package com.mame.impression.manager;
 
 import java.util.List;
 
-import com.ibm.icu.text.IDNA.Error;
 import com.mame.impression.Result;
 import com.mame.impression.Result.ActionResult;
 import com.mame.impression.constant.Constants;
