@@ -16,16 +16,6 @@
     <servlet-name>pushServlet</servlet-name>
     <url-pattern>/push</url-pattern>
   </servlet-mapping>
-
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.mame.impression.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/firstimpression_backend/greet</url-pattern>
-  </servlet-mapping>
   
 	<!-- Main controller class for First impression backend -->
 	<servlet>

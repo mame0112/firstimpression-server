@@ -46,6 +46,10 @@ var impressionApp = angular.module('impressionApp', [
 		state('contact', {
 			url: '/contact',
 			templateUrl: 'view/contact.html'
+		}).
+		state('debug', {
+			url: '/debug',
+			templateUrl: 'view/debug.html'
 		});
 	
 }]);
