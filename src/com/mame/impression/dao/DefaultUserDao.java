@@ -138,10 +138,13 @@ public class DefaultUserDao implements UserDao {
 
 		Key key = DatastoreKeyFactory.getUserIdKey(userName, userId);
 		Entity e = DatastoreHandler.get(result, key);
-
-		// Update Device.
-		e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, deviceId);
-		DatastoreHandler.put(result, e);
+		
+		// If key based ID is found
+		if(e != null){
+			// Update Device.
+			e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, deviceId);
+			DatastoreHandler.put(result, e);
+		}
 
 	}
 

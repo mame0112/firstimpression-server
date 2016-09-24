@@ -59,6 +59,28 @@ public class DefaultQuestionDao implements QuestionDao {
 		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
 		helper.putQuestionDataToEntity(result, data, entity);
 
+		// Update Memcache
+		ArrayList<QuestionData> questions = (ArrayList<QuestionData>) MemcacheHandler
+				.get(DbConstant.KIND_QUESTION, MemcacheConstant.LATEST_QUESTION);
+
+		if (questions != null) {
+			
+			int questionNum = questions.size();
+			
+			// If quetsion num reaches to maximum number of question list
+			if(questionNum >= Constants.LATEST_QUESTION_LIST_NUM){
+				// Remove oldest question (Question is descending order)
+				questions.remove(questions.size() - 1);
+			}
+			
+			// Add new question to memcache list
+			questions.add(0, data);
+			
+			// Update memcache
+			MemcacheHandler.put(DbConstant.KIND_QUESTION,
+					MemcacheConstant.LATEST_QUESTION, questions);
+		}
+
 		DatastoreHandler.put(result, entity);
 
 	}
@@ -67,7 +89,7 @@ public class DefaultQuestionDao implements QuestionDao {
 
 		LogUtil.d(TAG, "getLatestQuestionData");
 
-		List<QuestionData> questions = (List<QuestionData>) MemcacheHandler
+		ArrayList<QuestionData> questions = (ArrayList<QuestionData>) MemcacheHandler
 				.get(DbConstant.KIND_QUESTION, MemcacheConstant.LATEST_QUESTION);
 
 		// If memcache already exists, return it.
@@ -101,7 +123,7 @@ public class DefaultQuestionDao implements QuestionDao {
 	public List<QuestionData> getOlderQuestionData(Result result) {
 		LogUtil.d(TAG, "getOlderQuestionData");
 
-		List<QuestionData> questions = (List<QuestionData>) MemcacheHandler
+		ArrayList<QuestionData> questions = (ArrayList<QuestionData>) MemcacheHandler
 				.get(DbConstant.KIND_QUESTION, MemcacheConstant.OLDER_QUESTION);
 
 		// If memcache already exists, return it.
