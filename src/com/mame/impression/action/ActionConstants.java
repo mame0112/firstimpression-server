@@ -37,6 +37,11 @@ public class ActionConstants {
 	 * URL pattern for contact
 	 */
 	public static final String KEY_CONTACT = "/contact";
+	
+	/**
+	 * URL pattern for contact
+	 */
+	public static final String KEY_DEBUG = "/debug";
 
 	/**
 	 * Methods for RESTful APIs

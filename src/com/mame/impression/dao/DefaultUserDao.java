@@ -33,11 +33,10 @@ public class DefaultUserDao implements UserDao {
 			.getDatastoreService();
 
 	private final static String ASCII_FIRST = "0";
-	
-	public boolean isUserNameExist(Result result,
-			String userName) {
+
+	public boolean isUserNameExist(Result result, String userName) {
 		LogUtil.d(TAG, "isUserNameExist");
-		
+
 		Key firstKey = DatastoreKeyFactory.getUserNameKey(userName);
 		Key lastKey = DatastoreKeyFactory
 				.getUserNameKey(userName + ASCII_FIRST);
@@ -54,10 +53,10 @@ public class DefaultUserDao implements UserDao {
 
 		PreparedQuery pq = mDS.prepare(q);
 		List<Entity> eList = pq.asList(FetchOptions.Builder.withOffset(0));
-		if(eList != null && eList.size() != 0){
+		if (eList != null && eList.size() != 0) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -97,8 +96,14 @@ public class DefaultUserDao implements UserDao {
 
 		Key key = DatastoreKeyFactory.getUserIdKey(userName, userId);
 		Entity entity = DatastoreHandler.get(result, key);
-		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
-		return helper.createUserDataFromEntity(entity);
+
+		if (entity != null) {
+			ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
+			return helper.createUserDataFromEntity(entity);
+		}
+
+		return null;
+
 	}
 
 	public void storeNewUserData(Result result, UserData data) {
@@ -119,7 +124,7 @@ public class DefaultUserDao implements UserDao {
 
 		Key key = DatastoreKeyFactory.getUserIdKey(data.getUserName(),
 				data.getUserId());
-//		Entity entity = new Entity(key);
+		// Entity entity = new Entity(key);
 		Entity entity = DatastoreHandler.get(result, key);
 
 		ImpressionDatastoreHelper helper = new ImpressionDatastoreHelper();
@@ -138,9 +143,9 @@ public class DefaultUserDao implements UserDao {
 
 		Key key = DatastoreKeyFactory.getUserIdKey(userName, userId);
 		Entity e = DatastoreHandler.get(result, key);
-		
+
 		// If key based ID is found
-		if(e != null){
+		if (e != null) {
 			// Update Device.
 			e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, deviceId);
 			DatastoreHandler.put(result, e);

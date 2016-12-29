@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.mame.impression.action.answer.ReplyToQuestionAction;
 import com.mame.impression.action.answer.RequestAnswerAction;
 import com.mame.impression.action.contact.ContactAction;
+import com.mame.impression.action.debug.DebugCreateNewQuestionAction;
 import com.mame.impression.action.list.RequestQuestionListAction;
 import com.mame.impression.action.question.CreateNewQuestionAction;
 import com.mame.impression.action.question.DeleteQuestionAction;
@@ -74,6 +75,10 @@ public class ActionFactory {
 		//Contact action
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_CONTACT,
 				new ContactAction());
+		
+		//Debug action
+		mAction.put(ActionConstants.POST + ActionConstants.KEY_DEBUG,
+				new DebugCreateNewQuestionAction());
 		
 	}
 
