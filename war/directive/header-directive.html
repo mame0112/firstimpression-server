@@ -15,11 +15,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" collapse="navbarCollapsed">
       <ul class="nav navbar-nav">
-        <li ng-click="switchNavivarStatus()"><a ui-sref="privacy" translate="header.privacy">Privacy policy</a></li>
-        <li ng-click="switchNavivarStatus()"><a ui-sref="tos" translate="header.tos">Terms</a></li>
-        <li ng-click="switchNavivarStatus()"><a ui-sref="contact" translate="header.contact">Contact</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="privacy" translate="header.privacy" analytics-on="click" analytics-event="Privacy Policy">Privacy policy</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="tos" translate="header.tos" analytics-on="click" analytics-event="Terms">Terms</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="contact" translate="header.contact" analytics-on="click" analytics-event="Contacts">Contact</a></li>
         <!-- <li ng-click="switchNavivarStatus()"><a ui-sref="contact" translate="header.contact">Contact</a></li> -->
-        <li ng-click="switchNavivarStatus()"><a href="http://mame0112.hatenablog.com/" translate="header.blog">Blog</a></li>
+        <li ng-click="switchNavivarStatus()"><a href="http://mame0112.hatenablog.com/" translate="header.blog" analytics-on="click" analytics-event="Blog">Blog</a></li>
       </ul>
     </div>
 

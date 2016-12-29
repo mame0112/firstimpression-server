@@ -4,14 +4,19 @@ var impressionApp = angular.module('impressionApp', [
 	'ui.bootstrap',
 	'ui.router',
 	'pascalprecht.translate',
-	'toaster'
+	'toaster',
+	'angulartics',
+	'angulartics.google.analytics'
 	])
 .controller('ImpressionController', ['$scope', 'log', function($scope, log){
 	log.d("ImpressionController");
 }])
 
-.config(['$stateProvider', '$urlRouterProvider', '$translateProvider',
- function($stateProvider, $urlRouterProvider, $translateProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$analyticsProvider',
+ function($stateProvider, $urlRouterProvider, $translateProvider, $analyticsProvider) {
+
+	// turn off automatic tracking
+	$analyticsProvider.virtualPageviews(false);
 
 	// Translate setting
 	$translateProvider.useStaticFilesLoader({
