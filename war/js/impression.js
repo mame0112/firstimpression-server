@@ -16,7 +16,7 @@ var impressionApp = angular.module('impressionApp', [
  function($stateProvider, $urlRouterProvider, $translateProvider, $analyticsProvider) {
 
 	// turn off automatic tracking
-	$analyticsProvider.virtualPageviews(false);
+	// $analyticsProvider.virtualPageviews(false);
 
 	// Translate setting
 	$translateProvider.useStaticFilesLoader({
