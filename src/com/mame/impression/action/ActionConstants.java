@@ -37,7 +37,12 @@ public class ActionConstants {
 	 * URL pattern for contact
 	 */
 	public static final String KEY_CONTACT = "/contact";
-	
+
+	/**
+	 * URL pattern for GCM Push
+	 */
+	public static final String KEY_PUSH = "/push";
+
 	/**
 	 * URL pattern for contact
 	 */
@@ -168,5 +173,7 @@ public class ActionConstants {
 	public final static String QUESTION_LAST_COMMENT_DATE = "last_comment_date";
 
 	public final static String QUESTION_NUM_OF_ADDITIONAL_COMMENT = "additional_comment_num";
+
+	public final static String QUESTION_REQUEST_NUM = "request_num";
 
 }

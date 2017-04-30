@@ -16,6 +16,8 @@ public class GCMPushSender {
 	private static final String API_KEY = "AIzaSyBqd3I6JieGeK34NE6u25Jjm0I_ToTaHhI";
 	private static final int RETRY_COUNT = 5;
 
+	private final static boolean IS_DEBUG_NOTIFICATION = true;
+
 	private final static String TAG = Constants.TAG
 			+ GCMPushSender.class.getSimpleName();
 
@@ -34,6 +36,7 @@ public class GCMPushSender {
 			try {
 				result = sender.send(message, deviceId, RETRY_COUNT);
 				LogUtil.d(TAG, "result: " + result);
+
 			} catch (IOException e) {
 				LogUtil.d(TAG, "IOException: " + e.getMessage());
 			}

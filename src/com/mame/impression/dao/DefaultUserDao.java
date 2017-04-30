@@ -23,6 +23,7 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 public class DefaultUserDao implements UserDao {
 
@@ -150,6 +151,30 @@ public class DefaultUserDao implements UserDao {
 			e.setProperty(DbConstant.ENTITY_USER_DEVICE_ID, deviceId);
 			DatastoreHandler.put(result, e);
 		}
+
+	}
+
+	@Override
+	public List<String> getDeviveIds(Result result) {
+		LogUtil.d(TAG, "getDeviveIds");
+
+		Query q = new Query(DbConstant.KIND_USER);
+		q.addSort(DbConstant.ENTITY_USER_ID, SortDirection.DESCENDING);
+		FetchOptions fetchOptions = FetchOptions.Builder
+				.withLimit(Constants.MAX_NUMBER_OF_USER_NUM_FOR_PUSH);
+		PreparedQuery pq = mDS.prepare(q);
+
+		List<String> deviceIds = new ArrayList<String>();
+
+		for (Entity entity : pq.asIterable(fetchOptions)) {
+			String deviceId = (String) entity
+					.getProperty(DbConstant.ENTITY_USER_DEVICE_ID);
+			if (deviceId != null) {
+				deviceIds.add(deviceId);
+			}
+		}
+
+		return deviceIds;
 
 	}
 

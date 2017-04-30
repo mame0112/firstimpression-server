@@ -11,7 +11,10 @@ import com.mame.impression.action.ActionConstants;
 import com.mame.impression.action.ActionUtil;
 import com.mame.impression.action.ParameterRetriver;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.GcmPushData;
 import com.mame.impression.data.QuestionData;
+import com.mame.impression.gcm.GCMPushSender;
+import com.mame.impression.gcm.GCMPushTargetManager;
 import com.mame.impression.manager.ImpressionDataManager;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.TimeUtil;
@@ -58,6 +61,12 @@ public class CreateNewQuestionAction implements Action {
 		JSONObject paramObject = null;
 		if (result.isSuccess()) {
 			paramObject = createSuccessResponseJson(data);
+
+			// Distribute latest question to selected users.
+			// TODO Need to elaborate this logic more.
+			new GCMPushTargetManager().pushNewQuestionCreatedNotification(
+					data.getQuestionId(), data.getDescription());
+
 		} else {
 			paramObject = createFailedResponseJson(result);
 		}
@@ -76,7 +85,8 @@ public class CreateNewQuestionAction implements Action {
 		if (data != null) {
 			try {
 				result.put(ActionConstants.ID, data.getQuestionId());
-				result.put(ActionConstants.QUESTION_DESCRIPTION, data.getDescription());
+				result.put(ActionConstants.QUESTION_DESCRIPTION,
+						data.getDescription());
 			} catch (JSONException e) {
 				LogUtil.d(TAG, "JSONException: " + e.getMessage());
 			}

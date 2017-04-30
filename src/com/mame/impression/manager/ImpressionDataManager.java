@@ -1,5 +1,6 @@
 package com.mame.impression.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mame.impression.Result;
@@ -251,6 +252,23 @@ public class ImpressionDataManager {
 
 	}
 
+	public List<QuestionData> getLatestQuestionList(Result result,
+			int requestNum) {
+		LogUtil.d(TAG, "getLatestQuestionList");
+
+		if (result == null) {
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+
+		if (requestNum <= 0) {
+			throw new IllegalArgumentException(
+					"The number of question request is more than 1");
+		}
+
+		return mQuestionDao.getLatestQuestionData(result);
+
+	}
+
 	public List<ResultListData> getQuestionResultList(Result result, long userId) {
 
 		LogUtil.d(TAG, "getQuestionResultList");
@@ -281,6 +299,18 @@ public class ImpressionDataManager {
 		}
 
 		return mQuestionDao.getQuestionResultDetail(result, questionId);
+
+	}
+
+	public List<String> getLatestDeviceIdList(Result result) {
+
+		LogUtil.d(TAG, "getLatestDeviceIdList");
+
+		if (result == null) {
+			throw new IllegalArgumentException("Result cannot be null");
+		}
+
+		return mUserDao.getDeviveIds(result);
 
 	}
 

@@ -21,6 +21,11 @@ public class Constants {
 	public final static int LATEST_QUESTION_LIST_NUM = 10;
 	
 	public final static int OLDER_QUESTION_LIST_NUM = 10;
+	
+	/**
+	 * The number of user they will receive new question created notification at same time
+	 */
+	public final static int MAX_NUMBER_OF_USER_NUM_FOR_PUSH = 10;
 
 	
 }

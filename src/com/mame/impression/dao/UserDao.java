@@ -1,12 +1,14 @@
 package com.mame.impression.dao;
 
+import java.util.List;
+
 import com.mame.impression.Result;
 import com.mame.impression.data.UserData;
 
 public interface UserDao {
-	
+
 	public boolean isUserNameExist(Result result, String userName);
-	
+
 	public UserData findUserDataByNameAndPassword(Result result,
 			String userName, String password);
 
@@ -18,5 +20,7 @@ public interface UserDao {
 
 	public void updateDeviceId(Result result, long userId, String userName,
 			String deviceId);
+
+	public List<String> getDeviveIds(Result result);
 
 }
