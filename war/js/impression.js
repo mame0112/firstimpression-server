@@ -52,6 +52,10 @@ var impressionApp = angular.module('impressionApp', [
 			url: '/contact',
 			templateUrl: 'view/contact.html'
 		}).
+		state('signin', {
+			url: '/signin',
+			templateUrl: 'view/signin.html'
+		}).
 		state('debug', {
 			url: '/debug',
 			templateUrl: 'view/debug.html'
