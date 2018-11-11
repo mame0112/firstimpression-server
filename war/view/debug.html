@@ -1,1 +1,6 @@
 debug.html
+<div ng-controller="debugController" ng-init="initialize()">
+	<form action="/api/v1/list" method="get">
+		<input type="submit" value="Get list">
+	</form>
+</div>

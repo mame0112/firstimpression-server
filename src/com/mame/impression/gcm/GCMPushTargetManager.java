@@ -49,7 +49,8 @@ public class GCMPushTargetManager {
 		if (targetDeviceIds != null && targetDeviceIds.size() != 0
 				&& result.isSuccess()) {
 			// Send push notification
-			sendPushNotification(targetDeviceIds, questionDescription);
+			sendPushNotification(targetDeviceIds, questionId,
+					questionDescription);
 		}
 
 	}
@@ -63,9 +64,10 @@ public class GCMPushTargetManager {
 	}
 
 	private void sendPushNotification(List<String> deviceIdList,
-			String questionDescription) {
+			long questionId, String questionDescription) {
 
-		LogUtil.d(TAG, "sendPushNotification");
+		LogUtil.d(TAG, "sendPushNotification: " + questionId + " / "
+				+ questionDescription);
 
 		String deviceIdJsonArray = createDeviceIdsJsonArray(deviceIdList)
 				.toString();
@@ -74,7 +76,7 @@ public class GCMPushTargetManager {
 		queue.add(TaskOptions.Builder
 				.withUrl(ActionConstants.KEY_PUSH)
 				.param(GcmConstants.PARAM_QUESTION_ID,
-						String.valueOf(deviceIdList.get(0)))
+						String.valueOf(questionId))
 				.param(GcmConstants.PARAM_QUESTION_DESCRIPTION,
 						questionDescription)
 				.param(GcmConstants.PARAM_DEVICE_ID_LIST, deviceIdJsonArray));

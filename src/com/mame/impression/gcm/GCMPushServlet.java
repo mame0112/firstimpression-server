@@ -2,9 +2,7 @@ package com.mame.impression.gcm;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
@@ -12,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
@@ -42,16 +41,39 @@ public class GCMPushServlet extends HttpServlet {
 		List<String> deviceIdList = convertDeviceIdJsonArray2StringList(deviceIds);
 
 		Sender sender = new Sender(API_KEY);
-		Message message = new Message.Builder()
-				.addData(GcmConstants.PARAM_QUESTION_ID, questionId)
-				.addData(GcmConstants.PARAM_QUESTION_DESCRIPTION, description)
-				.build();
 
-		for (String deviceId : deviceIdList) {
-			Result result = sender.send(message, deviceId, RETRY_COUNT);
-			res.setContentType("text/plain");
-			res.getWriter().println("Result=" + result);
-		}
+		String content = createMessageCreatedContentJson(questionId,
+				description).toString();
+		
+		LogUtil.d(TAG, "content: " + content);
+
+		Message message = new Message.Builder()
+				.addData(GcmConstants.PUSH_MESSAGE_CATEGORY,
+						GcmConstants.PUSH_CATEGORY.MESSAGE_CREATED.name())
+				.addData(GcmConstants.MESSAGE, content).build();
+
+		MulticastResult multiResult = sender.send(message, deviceIdList,
+				RETRY_COUNT);
+		res.setContentType("text/plain");
+		res.getWriter().println("Result=" + multiResult);
+
+		LogUtil.d(TAG, "total:" + multiResult.toString());
+		
+		LogUtil.d(TAG, "total:" + multiResult.getTotal());
+		LogUtil.d(TAG, "success:" + multiResult.getSuccess());
+		LogUtil.d(TAG, "fail:" + multiResult.getFailure());
+		
+//		LogUtil.d(TAG, "deviceId: " + deviceIdList.get(0));
+//		
+//		 Result result = sender.send(message, deviceIdList.get(0), RETRY_COUNT);
+//		 res.setContentType("text/plain");
+//		 res.getWriter().println("Result=" + result);
+
+		// for (String deviceId : deviceIdList) {
+		// Result result = sender.send(message, deviceId, RETRY_COUNT);
+		// res.setContentType("text/plain");
+		// res.getWriter().println("Result=" + result);
+		// }
 
 	}
 
@@ -62,10 +84,27 @@ public class GCMPushServlet extends HttpServlet {
 		doGet(req, res);
 	}
 
+	private JSONObject createMessageCreatedContentJson(String questionId,
+			String description) {
+
+		LogUtil.d(TAG, "createMessageCreatedContentJson");
+
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put(GcmConstants.PARAM_QUESTION_ID, questionId);
+			obj.put(GcmConstants.PARAM_QUESTION_DESCRIPTION, description);
+		} catch (JSONException e) {
+			LogUtil.w(TAG, "JSONException: " + e.getMessage());
+		}
+
+		return obj;
+	}
+
 	private List<String> convertDeviceIdJsonArray2StringList(
 			String jsonArrayString) {
 
-		LogUtil.d(TAG, "convertDeviceIdJsonArray2StringList");
+		LogUtil.d(TAG, "convertDeviceIdJsonArray2StringList: "
+				+ jsonArrayString.toString());
 
 		List<String> deviceIds = new ArrayList<String>();
 

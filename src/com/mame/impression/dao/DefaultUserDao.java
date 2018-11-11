@@ -155,11 +155,11 @@ public class DefaultUserDao implements UserDao {
 	}
 
 	@Override
-	public List<String> getDeviveIds(Result result) {
-		LogUtil.d(TAG, "getDeviveIds");
+	public List<String> getDeviceIds(Result result) {
+		LogUtil.d(TAG, "getDeviceIds");
 
 		Query q = new Query(DbConstant.KIND_USER);
-		q.addSort(DbConstant.ENTITY_USER_ID, SortDirection.DESCENDING);
+//		q.addSort(DbConstant.ENTITY_USER_ID, SortDirection.DESCENDING);
 		FetchOptions fetchOptions = FetchOptions.Builder
 				.withLimit(Constants.MAX_NUMBER_OF_USER_NUM_FOR_PUSH);
 		PreparedQuery pq = mDS.prepare(q);
@@ -173,6 +173,8 @@ public class DefaultUserDao implements UserDao {
 				deviceIds.add(deviceId);
 			}
 		}
+
+		LogUtil.d(TAG, "device id num: " + deviceIds.size());
 
 		return deviceIds;
 

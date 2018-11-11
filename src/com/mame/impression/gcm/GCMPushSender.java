@@ -29,8 +29,11 @@ public class GCMPushSender {
 			String input = new GcmPushUtil().createPushContent(data).toString();
 
 			Sender sender = new Sender(API_KEY);
-			Message message = new Message.Builder().addData(
-					GcmConstants.MESSAGE, input).build();
+			Message message = new Message.Builder()
+					.addData(GcmConstants.MESSAGE, input)
+					.addData(GcmConstants.PUSH_MESSAGE_CATEGORY,
+							GcmConstants.PUSH_CATEGORY.MESSAGE_REPLIED.name())
+					.build();
 
 			Result result = null;
 			try {

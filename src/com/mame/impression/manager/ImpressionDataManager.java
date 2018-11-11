@@ -310,7 +310,7 @@ public class ImpressionDataManager {
 			throw new IllegalArgumentException("Result cannot be null");
 		}
 
-		return mUserDao.getDeviveIds(result);
+		return mUserDao.getDeviceIds(result);
 
 	}
 

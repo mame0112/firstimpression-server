@@ -4,6 +4,8 @@ impressionApp.constant(
 
 		CONTACT : '/contact',
 
+		LIST : '/list',
+
 		CONTACT_RESULT : 'contact_result',
 
 		CONTACT_SUCCESS : 'success',

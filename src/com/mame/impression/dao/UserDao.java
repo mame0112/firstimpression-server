@@ -21,6 +21,6 @@ public interface UserDao {
 	public void updateDeviceId(Result result, long userId, String userName,
 			String deviceId);
 
-	public List<String> getDeviveIds(Result result);
+	public List<String> getDeviceIds(Result result);
 
 }
